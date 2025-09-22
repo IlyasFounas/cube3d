@@ -16,25 +16,30 @@ void free_map(int **map)
     free(map);
 }
 
-int **hard_coded_2dmap(void)
+int **hard_coded_2dmap(t_player_infos *infos)
 {
     int **res;
 
-    res = malloc(4 * sizeof(int *));
-    if (!res)
-        display_error();
-
-    res[0] = malloc(4 * sizeof(int));
-    res[1] = malloc(4 * sizeof(int));
-    res[2] = malloc(4 * sizeof(int));
-    res[3] = malloc(4 * sizeof(int));
-    if (!res[0] || !res[1] || !res[2] || !res[3])
-        display_error();
-
-    res[0][0] = 1; res[0][1] = 1; res[0][2] = 1; res[0][3] = 1;
-    res[1][0] = 1; res[1][1] = 0; res[1][2] = 0; res[1][3] = 1;
-    res[2][0] = 1; res[2][1] = 0; res[2][2] = 0; res[2][3] = 1;
-    res[3][0] = 1; res[3][1] = 1; res[3][2] = 1; res[3][3] = 1;
-
-    return (res);
+    infos->map_infos->x = 8;
+    infos->map_infos->y = 8;
+    res = malloc(8 * sizeof(int *));
+    for (int i = 0; i < 8; i++) {
+        res[i] = malloc(8 * sizeof(int));
+        for (int j = 0; j < 8; j++) {
+            res[i][j] = 0;
+        }
+    }
+    for (int i = 0; i < 8; i++) {
+        res[0][i] = 1;   // Mur Nord
+        res[7][i] = 1;   // Mur Sud
+        res[i][0] = 1;   // Mur Ouest
+        res[i][7] = 1;   // Mur Est
+    }
+    // res[2][1] = 1;
+    // res[4][1] = 1;
+    // res[4][3] = 1;
+    // res[4][4] = 1;
+    // res[4][5] = 1;
+    return res;
 }
+
