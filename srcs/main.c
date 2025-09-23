@@ -5,7 +5,7 @@ void init_structs(t_player_infos *infos)
     infos->px = 1.2;
     infos->py = 6.4;
 	infos->ray_infos->plane_x = 0.66;
-	infos->ray_infos->dir_x = 0.7;
+	infos->ray_infos->dir_x = 0.0;
 	infos->ray_infos->dir_y = -1;
 	infos->map_infos->x = 8;
     infos->map_infos->y = 8;
