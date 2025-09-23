@@ -1,9 +1,9 @@
 #ifndef CUBE3D_RENDER_H
 # define CUBE3D_RENDER_H
 
+# include "cube3d_structs.h"
 # include "libft.h"
 # include "mlx.h"
-# include "cube3d_structs.h"
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -20,6 +20,7 @@ int	**hard_coded_2dmap(void);
 
 /*___________window_____*/
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
+void	create_image(t_player_infos *infos, t_data *img);
 void	show_window(t_player_infos *infos);
 
 #endif

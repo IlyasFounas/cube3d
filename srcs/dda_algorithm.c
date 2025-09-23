@@ -34,7 +34,7 @@ static double	return_wall_distance(t_player_infos *infos)
 
 	current_x = infos->px;
 	current_y = infos->py;
-	step = 0.1;
+	step = 0.01;
 	while (current_x >= 0 && current_x < infos->map_infos->x && current_y >= 0
 		&& current_y < infos->map_infos->y)
 	{
@@ -44,10 +44,23 @@ static double	return_wall_distance(t_player_infos *infos)
 		{
 			dx = current_x - infos->px;
 			dy = current_y - infos->py;
-			return (sqrt(dx * dx + dy * dy));
+			return (sqrt(dx * dx + dy * dy) * cos(infos->angle_rayon - infos->angle_joueur));
 		}
 	}
 	return (1000.0);
+}
+
+static void	calculs_of_vectors(t_player_infos *infos, int i)
+{
+	double	camera_x;
+
+	infos->angle_rayon = atan2(infos->ray_infos->ray_dir_y,
+			infos->ray_infos->ray_dir_x);
+	camera_x = 2 * i / (double)infos->map_infos->width - 1;
+	infos->ray_infos->ray_dir_x = infos->ray_infos->dir_x
+		+ infos->ray_infos->plane_x * camera_x;
+	infos->ray_infos->ray_dir_y = infos->ray_infos->dir_y
+		+ infos->ray_infos->plane_y * camera_x;
 }
 
 /**
@@ -60,21 +73,15 @@ int	render_algo(void *param)
 	t_player_infos	*infos;
 	int				i;
 	double			distance;
-	double			camera_x;
 	t_data			img;
 
 	infos = (t_player_infos *)param;
+	infos->angle_joueur = atan2(infos->ray_infos->dir_y, infos->ray_infos->dir_x);
 	i = 0;
-	img.img = mlx_new_image(infos->mlx, infos->map_infos->width, infos->map_infos->height);
-	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
-			&img.endian);
+	create_image(infos, &img);
 	while (i < infos->map_infos->width)
 	{
-		camera_x = 2 * i / (double)infos->map_infos->width - 1;
-		infos->ray_infos->ray_dir_x = infos->ray_infos->dir_x + infos->ray_infos->plane_x
-			* camera_x;
-		infos->ray_infos->ray_dir_y = infos->ray_infos->dir_y + infos->ray_infos->plane_y
-			* camera_x;
+		calculs_of_vectors(infos, i);
 		distance = return_wall_distance(infos);
 		draw_walls(distance, &img, i, infos);
 		i++;

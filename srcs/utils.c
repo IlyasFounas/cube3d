@@ -33,8 +33,9 @@ int **hard_coded_2dmap(void)
         res[i][0] = 1;   // Mur Ouest
         res[i][7] = 1;   // Mur Est
     }
-    res[1][3] = 1;
-    // res[2][1] = 1;
+    res[1][2] = 1;
+    res[4][2] = 1;
+    res[4][1] = 1;
     // res[2][2] = 1;
     // res[2][3] = 1;
     // res[2][4] = 1;
