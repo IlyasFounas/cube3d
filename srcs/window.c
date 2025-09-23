@@ -1,4 +1,5 @@
-#include "render.h"
+#include "cube3d_render.h"
+
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -12,7 +13,8 @@ void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 void	show_window(t_player_infos *infos)
 {
 	infos->mlx = mlx_init();
-	infos->mlx_win = mlx_new_window(infos->mlx, 700, 700, "Hello world!");
+	infos->mlx_win = mlx_new_window(infos->mlx, infos->map_infos->width,
+			infos->map_infos->height, "cube3D");
 	mlx_loop_hook(infos->mlx, render_algo, infos);
 	mlx_loop(infos->mlx);
 }

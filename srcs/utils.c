@@ -1,4 +1,4 @@
-#include "render.h"
+#include "cube3d_render.h"
 
 void display_error(void)
 {
@@ -16,12 +16,10 @@ void free_map(int **map)
     free(map);
 }
 
-int **hard_coded_2dmap(t_player_infos *infos)
+int **hard_coded_2dmap(void)
 {
     int **res;
 
-    infos->map_infos->x = 8;
-    infos->map_infos->y = 8;
     res = malloc(8 * sizeof(int *));
     for (int i = 0; i < 8; i++) {
         res[i] = malloc(8 * sizeof(int));
@@ -35,11 +33,12 @@ int **hard_coded_2dmap(t_player_infos *infos)
         res[i][0] = 1;   // Mur Ouest
         res[i][7] = 1;   // Mur Est
     }
+    res[1][3] = 1;
     // res[2][1] = 1;
-    // res[4][1] = 1;
-    // res[4][3] = 1;
-    // res[4][4] = 1;
-    // res[4][5] = 1;
+    // res[2][2] = 1;
+    // res[2][3] = 1;
+    // res[2][4] = 1;
+    // res[2][5] = 1;
     return res;
 }
 

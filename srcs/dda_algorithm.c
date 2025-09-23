@@ -1,64 +1,53 @@
-#include "render.h"
+#include "cube3d_render.h"
 
-static void	draw_walls(double distance, t_data *img, int i)
+static void	draw_walls(double distance, t_data *img, int i,
+		t_player_infos *infos)
 {
 	int	wall_height;
 	int	start_y;
 	int	end_y;
 
-	wall_height = (int)(700 / distance);
-	start_y = (700 - wall_height) / 2;
+	wall_height = (int)(infos->map_infos->height / distance);
+	if (wall_height > infos->map_infos->height)
+		wall_height = infos->map_infos->height;
+	start_y = (infos->map_infos->height - wall_height) / 2;
+	if (start_y < 0)
+		start_y = 0;
 	end_y = start_y + wall_height;
-	for (int y = start_y; y < end_y; y++)
-		my_mlx_pixel_put(img, i, y, 0x00FF0000); // wall
+	if (end_y < 0)
+		end_y = 0;
 	for (int y = 0; y < start_y; y++)
 		my_mlx_pixel_put(img, i, y, 0x00666666); // ceiling
-	for (int y = end_y; y < 700; y++)
+	for (int y = start_y; y < end_y; y++)
+		my_mlx_pixel_put(img, i, y, 0x00FF0000); // wall
+	for (int y = end_y; y < infos->map_infos->height; y++)
 		my_mlx_pixel_put(img, i, y, 0x00333333); // floor
 }
 
-// static double	dda_algo(t_player_infos *infos)
-// {
-// 	int i;
-// 	double	distance;
-// 	double py_cpy;
-
-// 	i = 0;
-// 	distance = 0.0;
-// 	py_cpy = infos->py;
-// 	while (infos->px + i < infos->map_infos->x)
-// 	{
-// 		while (py_cpy >= 0)
-// 		{
-// 			distance++;
-// 			if (infos->map[(int)infos->px][(int)py_cpy--] == 1)
-// 				return (distance);
-// 		}
-// 		i++;
-// 	}
-// 	return (distance);
-// }
-
-static double dda_algo(t_player_infos *infos)
+static double	return_wall_distance(t_player_infos *infos)
 {
-    double current_x = infos->px;
-    double current_y = infos->py;
-    double distance = 0.0;
-    double step = 0.01;  // Précision
-    
-    // Suivre la direction du rayon
-    while (current_x >= 0 && current_x < infos->map_infos->x &&
-           current_y >= 0 && current_y < infos->map_infos->y) {
-        
-        current_x += infos->ray_dir_x * step;
-        current_y += infos->ray_dir_y * step;
-        distance += step;
-        
-        if (infos->map[(int)current_x][(int)current_y] == 1) {
-            return (distance);
-        }
-    }
-    return (distance);
+	double	current_x;
+	double	current_y;
+	double	step;
+	double	dx;
+	double	dy;
+
+	current_x = infos->px;
+	current_y = infos->py;
+	step = 0.1;
+	while (current_x >= 0 && current_x < infos->map_infos->x && current_y >= 0
+		&& current_y < infos->map_infos->y)
+	{
+		current_x += infos->ray_infos->ray_dir_x * step;
+		current_y += infos->ray_infos->ray_dir_y * step;
+		if (infos->map[(int)current_x][(int)current_y] == 1)
+		{
+			dx = current_x - infos->px;
+			dy = current_y - infos->py;
+			return (sqrt(dx * dx + dy * dy));
+		}
+	}
+	return (1000.0);
 }
 
 /**
@@ -76,16 +65,18 @@ int	render_algo(void *param)
 
 	infos = (t_player_infos *)param;
 	i = 0;
-	img.img = mlx_new_image(infos->mlx, 700, 700);
+	img.img = mlx_new_image(infos->mlx, infos->map_infos->width, infos->map_infos->height);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 			&img.endian);
-	while (i < 700)
+	while (i < infos->map_infos->width)
 	{
-		camera_x = 2 * i / (double)700 - 1;
-		infos->ray_dir_x = /* infos->dir_x */ 0 + infos->plane_x * camera_x;
-		infos->ray_dir_y = /* infos->dir_y */ (-1) + infos->plane_y * camera_x;
-		distance = dda_algo(infos);
-		draw_walls(distance, &img, i);
+		camera_x = 2 * i / (double)infos->map_infos->width - 1;
+		infos->ray_infos->ray_dir_x = infos->ray_infos->dir_x + infos->ray_infos->plane_x
+			* camera_x;
+		infos->ray_infos->ray_dir_y = infos->ray_infos->dir_y + infos->ray_infos->plane_y
+			* camera_x;
+		distance = return_wall_distance(infos);
+		draw_walls(distance, &img, i, infos);
 		i++;
 	}
 	mlx_put_image_to_window(infos->mlx, infos->mlx_win, img.img, 0, 0);
