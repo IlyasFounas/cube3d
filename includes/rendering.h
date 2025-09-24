@@ -1,7 +1,7 @@
 #ifndef CUBE3D_RENDER_H
 # define CUBE3D_RENDER_H
 
-# include "cube3d_structs.h"
+# include "structures.h"
 # include "libft.h"
 # include "mlx.h"
 # include <math.h>
@@ -10,12 +10,14 @@
 # include <string.h>
 # include <unistd.h>
 
+/*___________cube3d_free______*/
+void	display_error(void);
+void	free_map(int **map);
+
 /*___________dda_algorithm______*/
 int	render_algo(void *param);
 
 /*___________utils_____*/
-void	display_error(void);
-void	free_map(int **map);
 int	**hard_coded_2dmap(void);
 
 /*___________window_____*/

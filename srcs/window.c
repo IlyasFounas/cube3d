@@ -1,5 +1,16 @@
-#include "cube3d_render.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   window.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/24 12:01:33 by ifounas           #+#    #+#             */
+/*   Updated: 2025/09/24 12:01:33 by ifounas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "rendering.h"
 
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
 {
@@ -21,15 +32,14 @@ void	create_image(t_player_infos *infos, t_data *img)
 int	manage_events(int keycode, t_player_infos *infos)
 {
 	(void)infos;
-	printf("%d\n", keycode);
 	if (keycode == 119)
-		infos->py--;
+		infos->py -= 0.2;
 	if (keycode == 115)
-		infos->py++;
+		infos->py += 0.2;
 	if (keycode == 100)
-		infos->px++;
+		infos->px += 0.2;
 	if (keycode == 97)
-		infos->px--;
+		infos->px -= 0.2;
 	return (1);
 }
 

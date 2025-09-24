@@ -1,4 +1,16 @@
-#include "cube3d_render.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dda_algorithm.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/24 12:01:38 by ifounas           #+#    #+#             */
+/*   Updated: 2025/09/24 12:01:39 by ifounas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rendering.h"
 
 static void	draw_walls(double distance, t_data *img, int i,
 		t_player_infos *infos)
@@ -6,6 +18,7 @@ static void	draw_walls(double distance, t_data *img, int i,
 	int	wall_height;
 	int	start_y;
 	int	end_y;
+	int y = 0;
 
 	wall_height = (int)(infos->map_infos->height / distance);
 	if (wall_height > infos->map_infos->height)
@@ -16,12 +29,16 @@ static void	draw_walls(double distance, t_data *img, int i,
 	end_y = start_y + wall_height;
 	if (end_y < 0)
 		end_y = 0;
-	for (int y = 0; y < start_y; y++)
-		my_mlx_pixel_put(img, i, y, 0x00666666); // ceiling
-	for (int y = start_y; y < end_y; y++)
-		my_mlx_pixel_put(img, i, y, 0x00FF0000); // wall
-	for (int y = end_y; y < infos->map_infos->height; y++)
-		my_mlx_pixel_put(img, i, y, 0x00333333); // floor
+	while (y < infos->map_infos->height)
+	{
+		if (y < start_y)
+			my_mlx_pixel_put(img, i, y, 0x00666666); // ceiling
+		else if (y >= start_y && y < end_y)
+			my_mlx_pixel_put(img, i, y, 0x00FF0000); // wall
+		else
+			my_mlx_pixel_put(img, i, y, 0x00333333); // floor
+		y++;
+	}
 }
 
 static double	return_wall_distance(t_player_infos *infos)
@@ -64,9 +81,10 @@ static void	calculs_of_vectors(t_player_infos *infos, int i)
 }
 
 /**
- * this algo is sending 1 rayon throught the 2d map
- * when the ray find a wall, he return the distance
- * This algo should be optimizate to build 60~144fps
+ * The goal is simple : 
+ * Send x ray with an certain angle in the 2d and 3d map
+ * When the ray touch a wall, he return the distance traveled.
+ * With the distance we know what is a ceiling, wall and floor.
  */
 int	render_algo(void *param)
 {
