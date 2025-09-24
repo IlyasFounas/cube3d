@@ -28,17 +28,17 @@ typedef struct s_ray_infos
 	double		plane_y;
 }				t_ray_infos;
 
-typedef struct s_player_infos
+typedef struct s_global_infos
 {
 	double		px;
 	double		py;
 	void		*mlx;
 	void		*mlx_win;
 	int			**map;
-	double		angle_joueur;
-	double		angle_rayon;
+	double		p_angle;
+	double		ray_angle;
 	t_ray_infos	*ray_infos;
 	t_map_infos	*map_infos;
-}				t_player_infos;
+}				t_global_infos;
 
 #endif

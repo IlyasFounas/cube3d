@@ -1,47 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   dda_algorithm.c                                    :+:      :+:    :+:   */
+/*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:01:38 by ifounas           #+#    #+#             */
-/*   Updated: 2025/09/24 12:01:39 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/09/24 18:25:46 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rendering.h"
+#include "cube3d.h"
 
-static void	draw_walls(double distance, t_data *img, int i,
-		t_player_infos *infos)
-{
-	int	wall_height;
-	int	start_y;
-	int	end_y;
-	int y = 0;
-
-	wall_height = (int)(infos->map_infos->height / distance);
-	if (wall_height > infos->map_infos->height)
-		wall_height = infos->map_infos->height;
-	start_y = (infos->map_infos->height - wall_height) / 2;
-	if (start_y < 0)
-		start_y = 0;
-	end_y = start_y + wall_height;
-	if (end_y < 0)
-		end_y = 0;
-	while (y < infos->map_infos->height)
-	{
-		if (y < start_y)
-			my_mlx_pixel_put(img, i, y, 0x00666666); // ceiling
-		else if (y >= start_y && y < end_y)
-			my_mlx_pixel_put(img, i, y, 0x00FF0000); // wall
-		else
-			my_mlx_pixel_put(img, i, y, 0x00333333); // floor
-		y++;
-	}
-}
-
-static double	return_wall_distance(t_player_infos *infos)
+static double	return_wall_distance(t_global_infos *infos)
 {
 	double	current_x;
 	double	current_y;
@@ -61,17 +32,18 @@ static double	return_wall_distance(t_player_infos *infos)
 		{
 			dx = current_x - infos->px;
 			dy = current_y - infos->py;
-			return (sqrt(dx * dx + dy * dy) * cos(infos->angle_rayon - infos->angle_joueur));
+			return (sqrt(dx * dx + dy * dy) * cos(infos->ray_angle
+					- infos->p_angle));
 		}
 	}
-	return (1000.0);
+	return (0);
 }
 
-static void	calculs_of_vectors(t_player_infos *infos, int i)
+static void	calculs_of_vectors(t_global_infos *infos, int i)
 {
 	double	camera_x;
 
-	infos->angle_rayon = atan2(infos->ray_infos->ray_dir_y,
+	infos->ray_angle = atan2(infos->ray_infos->ray_dir_y,
 			infos->ray_infos->ray_dir_x);
 	camera_x = 2 * i / (double)infos->map_infos->width - 1;
 	infos->ray_infos->ray_dir_x = infos->ray_infos->dir_x
@@ -81,30 +53,31 @@ static void	calculs_of_vectors(t_player_infos *infos, int i)
 }
 
 /**
- * The goal is simple : 
- * Send x ray with an certain angle in the 2d and 3d map
- * When the ray touch a wall, he return the distance traveled.
- * With the distance we know what is a ceiling, wall and floor.
+ * Real-time 3D rendering using raycasting technique:
+ * - Casts multiple rays across the field of view (one per screen column)
+ * - For each ray, calculates intersection distance with walls in the 2D map
+ * - Uses distance to determine wall height and render ceiling/wall/floor segments
+ * - Applies fisheye correction for proper perspective projection
  */
-int	render_algo(void *param)
+int	rendering(void *param)
 {
-	t_player_infos	*infos;
+	t_global_infos	*infos;
 	int				i;
 	double			distance;
 	t_data			img;
 
-	infos = (t_player_infos *)param;
-	infos->angle_joueur = atan2(infos->ray_infos->dir_y, infos->ray_infos->dir_x);
+	infos = (t_global_infos *)param;
+	infos->p_angle = atan2(infos->ray_infos->dir_y,
+			infos->ray_infos->dir_x);
 	i = 0;
 	create_image(infos, &img);
 	while (i < infos->map_infos->width)
 	{
 		calculs_of_vectors(infos, i);
 		distance = return_wall_distance(infos);
-		draw_walls(distance, &img, i, infos);
+		graphic_rendering(distance, &img, i, infos);
 		i++;
 	}
-	mlx_put_image_to_window(infos->mlx, infos->mlx_win, img.img, 0, 0);
-	mlx_destroy_image(infos->mlx, img.img);
+	destroy_image(infos, &img);
 	return (0);
 }

@@ -1,29 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cube3d_free.c                                      :+:      :+:    :+:   */
+/*   free_rendering.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:02:47 by ifounas           #+#    #+#             */
-/*   Updated: 2025/09/24 12:02:58 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/09/24 14:20:26 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rendering.h"
+#include "cube3d.h"
 
-void	display_error(void)
-{
-	write(2, "malloc error\n", ft_strlen("malloc error\n"));
-	exit(1);
-}
-
-void	free_map(int **map)
+void	free_rendering(t_global_infos *infos)
 {
 	int i;
 
 	i = -1;
-	while (++i < 4)
-		free(map[i]);
-	free(map);
+	if (infos->map)
+	{
+		while (++i < 4)
+			free(infos->map[i]);
+		free(infos->map);
+		infos->map = NULL;
+	}
+	if (infos->map_infos)
+	{
+		free(infos->map);
+		infos->map = NULL;
+	}
+	if (infos->ray_infos)
+	{
+		free(infos->ray_infos);
+		infos->ray_infos = NULL;
+	}
 }
