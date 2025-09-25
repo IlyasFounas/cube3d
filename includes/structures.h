@@ -1,14 +1,13 @@
 #ifndef CUBE3D_STRUCTS_H
 # define CUBE3D_STRUCTS_H
 
-typedef struct s_data
+typedef struct s_intersec_calcul
 {
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-}				t_data;
+	double x;
+	double y;
+	double kx;
+	double ky;
+} t_intersec_calcul;
 
 typedef struct s_keys
 {
@@ -49,5 +48,14 @@ typedef struct s_global_infos
 	t_map_infos	*map_infos;
 	t_keys		*keys;
 }				t_global_infos;
+
+typedef struct s_data
+{
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}				t_data;
 
 #endif
