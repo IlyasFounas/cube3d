@@ -10,6 +10,14 @@ typedef struct s_data
 	int			endian;
 }				t_data;
 
+typedef struct s_keys
+{
+	int W;
+	int A;
+	int S;
+	int D;
+}	t_keys;
+
 typedef struct s_map_infos
 {
 	int			height;
@@ -39,6 +47,7 @@ typedef struct s_global_infos
 	double		ray_angle;
 	t_ray_infos	*ray_infos;
 	t_map_infos	*map_infos;
+	t_keys		*keys;
 }				t_global_infos;
 
 #endif

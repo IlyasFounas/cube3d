@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/24 12:01:35 by ifounas           #+#    #+#             */
-/*   Updated: 2025/09/24 12:01:35 by ifounas          ###   ########.fr       */
+/*   Created: 2025/09/25 15:10:02 by ifounas           #+#    #+#             */
+/*   Updated: 2025/09/25 15:10:02 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,17 @@ static void	display_error(t_global_infos *infos)
 
 int	main(void)
 {
-    t_global_infos infos;
+	t_global_infos	infos;
 
-    ft_memset(&infos, 0, sizeof(t_global_infos));
+	ft_memset(&infos, 0, sizeof(t_global_infos));
 	infos.map_infos = malloc(sizeof(t_map_infos));
-	infos.ray_infos = malloc(sizeof(t_ray_infos)); 
-	if (!infos.map_infos || !infos.ray_infos)
+	infos.ray_infos = malloc(sizeof(t_ray_infos));
+	infos.keys = malloc(sizeof(t_keys));
+	if (!infos.map_infos || !infos.ray_infos || !infos.keys)
 		display_error(&infos);
-    ft_memset(infos.map_infos, 0, sizeof(t_map_infos));
-    ft_memset(infos.ray_infos, 0, sizeof(t_ray_infos));
+	ft_memset(infos.map_infos, 0, sizeof(t_map_infos));
+	ft_memset(infos.ray_infos, 0, sizeof(t_ray_infos));
+	ft_memset(infos.keys, 0, sizeof(t_keys));
 	init_structs(&infos);
 	window_handeling(&infos);
 	free_rendering(&infos);

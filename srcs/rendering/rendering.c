@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:01:38 by ifounas           #+#    #+#             */
-/*   Updated: 2025/09/24 18:25:46 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/09/25 15:07:54 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,8 @@ static void	calculs_of_vectors(t_global_infos *infos, int i)
  * Real-time 3D rendering using raycasting technique:
  * - Casts multiple rays across the field of view (one per screen column)
  * - For each ray, calculates intersection distance with walls in the 2D map
- * - Uses distance to determine wall height and render ceiling/wall/floor segments
+ * - Uses distance to determine wall height and render ceiling/wall/floor 
+ * segments
  * - Applies fisheye correction for proper perspective projection
  */
 int	rendering(void *param)
@@ -67,9 +68,10 @@ int	rendering(void *param)
 	t_data			img;
 
 	infos = (t_global_infos *)param;
-	infos->p_angle = atan2(infos->ray_infos->dir_y,
-			infos->ray_infos->dir_x);
+	infos->p_angle = atan2(infos->ray_infos->dir_y, infos->ray_infos->dir_x);
 	i = 0;
+	calcul_the_fps();
+	update_position(infos);
 	create_image(infos, &img);
 	while (i < infos->map_infos->width)
 	{

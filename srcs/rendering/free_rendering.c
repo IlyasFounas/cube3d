@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:02:47 by ifounas           #+#    #+#             */
-/*   Updated: 2025/09/24 14:20:26 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/09/25 15:08:04 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_rendering(t_global_infos *infos)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	if (infos->map)

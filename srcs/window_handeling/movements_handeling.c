@@ -1,38 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   events_handeling.c                                 :+:      :+:    :+:   */
+/*   movements_handeling.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:58:52 by ifounas           #+#    #+#             */
-/*   Updated: 2025/09/24 18:12:13 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/09/25 15:08:36 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int	manage_events(int keycode, t_global_infos *infos)
+void	update_position(t_global_infos *infos)
 {
-	(void)infos;
-	printf("%d\n", keycode);
+	t_keys	*keys;
+
+	keys = infos->keys;
+	if (keys->W == 1)
+		infos->py -= 0.01;
+	if (keys->S == 1)
+		infos->py += 0.01;
+	if (keys->A == 1)
+		infos->px -= 0.01;
+	if (keys->D == 1)
+		infos->px += 0.01;
+}
+
+int	keys_pressed(int keycode, t_global_infos *infos)
+{
+	t_keys	*keys;
+
+	keys = infos->keys;
 	if (keycode == 119)
-		infos->py -= 0.1;
+		keys->W = 1;
 	if (keycode == 115)
-		infos->py += 0.1;
+		keys->S = 1;
 	if (keycode == 100)
-		infos->px += 0.1;
+		keys->D = 1;
 	if (keycode == 97)
-		infos->px -= 0.1;
-	if (keycode == 65361)
-	{
-		if (infos->ray_infos->dir_x > 0)
-			infos->ray_infos->dir_x -= 0.01;
-	}
-	if (keycode == 65363)
-	{
-		if (infos->ray_infos->dir_x < 1)
-			infos->ray_infos->dir_x += 0.01;
-	}
-	return (1);
+		keys->A = 1;
+	return (0);
+}
+
+int	keys_released(int keycode, t_global_infos *infos)
+{
+	t_keys	*keys;
+
+	keys = infos->keys;
+	if (keycode == 119)
+		keys->W = 0;
+	if (keycode == 115)
+		keys->S = 0;
+	if (keycode == 100)
+		keys->D = 0;
+	if (keycode == 97)
+		keys->A = 0;
+	return (0);
 }

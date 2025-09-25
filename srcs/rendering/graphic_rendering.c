@@ -6,11 +6,31 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/09/24 14:20:26 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/09/25 15:07:25 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+void	calcul_the_fps(void)
+{
+	static double			elapsed_seconds;
+	static int				frame_count;
+	static struct timeval	current_time;
+	static struct timeval	last_time;
+
+	frame_count++;
+	gettimeofday(&current_time, NULL);
+	elapsed_seconds = (current_time.tv_sec - last_time.tv_sec)
+		+ (current_time.tv_usec - last_time.tv_usec) / 1000000.0;
+	if (elapsed_seconds >= 1.0)
+	{
+		printf("FPS: %d\n", frame_count);
+		frame_count = 0;
+		last_time = current_time;
+		elapsed_seconds = 0;
+	}
+}
 
 void	graphic_rendering(double distance, t_data *img, int i,
 		t_global_infos *infos)
@@ -33,11 +53,11 @@ void	graphic_rendering(double distance, t_data *img, int i,
 	while (y < infos->map_infos->height)
 	{
 		if (y < start_y)
-			my_mlx_pixel_put(img, i, y, 0x00666666); // ceiling
+			my_mlx_pixel_put(img, i, y, 0x00666666);
 		else if (y >= start_y && y < end_y)
-			my_mlx_pixel_put(img, i, y, 0x00FF0000); // wall
+			my_mlx_pixel_put(img, i, y, 0x00FF0000);
 		else
-			my_mlx_pixel_put(img, i, y, 0x00333333); // floor
+			my_mlx_pixel_put(img, i, y, 0x00333333);
 		y++;
 	}
 }

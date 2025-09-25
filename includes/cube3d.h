@@ -8,6 +8,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <sys/time.h>
 # include <unistd.h>
 
 /*___________hard_coded_parsing_____*/
@@ -18,14 +19,17 @@ int	**hard_coded_2dmap(t_global_infos *infos);
 void	free_rendering(t_global_infos *infos);
 
 /*___________graphic_rendering______*/
+void	calcul_the_fps(void);
 void	graphic_rendering(double distance, t_data *img, int i,
 		t_global_infos *infos);
 
 /*___________rendering______*/
 int	rendering(void *param);
 
-/*___________events_handeling_____*/
-int	manage_events(int keycode, t_global_infos *infos);
+/*___________movements_handeling_____*/
+void	update_position(t_global_infos *infos);
+int	keys_pressed(int keycode, t_global_infos *infos);
+int	keys_released(int keycode, t_global_infos *infos);
 
 /*___________window_handeling_____*/
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
