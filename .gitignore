@@ -3,3 +3,4 @@ cube3d
 *.o
 *.a
 objs
+*.pdf
