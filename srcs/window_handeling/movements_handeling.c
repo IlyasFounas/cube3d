@@ -6,13 +6,13 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:58:52 by ifounas           #+#    #+#             */
-/*   Updated: 2025/09/25 15:08:36 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/09/25 17:54:40 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void	update_position(t_global_infos *infos)
+void	update_player_position(t_global_infos *infos)
 {
 	t_keys	*keys;
 

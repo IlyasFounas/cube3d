@@ -47,9 +47,9 @@ void	window_handeling(t_global_infos *infos)
 	infos->mlx = mlx_init();
 	infos->mlx_win = mlx_new_window(infos->mlx, infos->map_infos->width,
 			infos->map_infos->height, "cube3D");
-	mlx_loop_hook(infos->mlx, rendering, infos);
 	mlx_hook(infos->mlx_win, 2, 1L << 0, keys_pressed, infos);
 	mlx_hook(infos->mlx_win, 3, 1L << 1, keys_released, infos);
 	mlx_hook(infos->mlx_win, 17, 0, close_window, infos);
+	mlx_loop_hook(infos->mlx, rendering, infos);
 	mlx_loop(infos->mlx);
 }
