@@ -1,6 +1,16 @@
 #ifndef CUBE3D_STRUCTS_H
 # define CUBE3D_STRUCTS_H
 
+# define EMPTY_SPACE '0'
+# define WALL '1'
+# define PLAYER_START "NSEW"
+
+typedef enum e_bool
+{
+	false,
+	true
+}				t_bool;
+
 typedef struct s_data
 {
 	void		*img;
@@ -10,13 +20,14 @@ typedef struct s_data
 	int			endian;
 }				t_data;
 
-typedef struct s_map_infos
+typedef struct s_map
 {
 	int			height;
 	int			width;
 	int			x;
 	int			y;
-}				t_map_infos;
+	int			start_angle;
+}				t_map;
 
 typedef struct s_ray_infos
 {
@@ -38,7 +49,7 @@ typedef struct s_global_infos
 	double		p_angle;
 	double		ray_angle;
 	t_ray_infos	*ray_infos;
-	t_map_infos	*map_infos;
+	t_map		*map_infos;
 }				t_global_infos;
 
 #endif
