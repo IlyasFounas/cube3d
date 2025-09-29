@@ -3,19 +3,22 @@
 
 typedef struct s_intersec_calcul
 {
-	double x;
-	double y;
-	double kx;
-	double ky;
-} t_intersec_calcul;
+	double		sideV_x;
+	double		sideH_y;
+	double		tv_x;
+	double		tv_y;
+	int			deltadist_x;
+	int			deltadist_y;
+
+}				t_intersec_calcul;
 
 typedef struct s_keys
 {
-	int W;
-	int A;
-	int S;
-	int D;
-}	t_keys;
+	int			W;
+	int			A;
+	int			S;
+	int			D;
+}				t_keys;
 
 typedef struct s_map_infos
 {

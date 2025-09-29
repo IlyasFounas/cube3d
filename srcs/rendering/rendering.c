@@ -6,99 +6,11 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:01:38 by ifounas           #+#    #+#             */
-/*   Updated: 2025/09/25 18:16:41 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/09/29 17:33:07 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
-
-static double	return_wall_distance(t_global_infos *infos)
-{
-	double	current_x;
-	double	current_y;
-	double	step;
-	double	dx;
-	double	dy;
-
-	current_x = infos->px;
-	current_y = infos->py;
-	step = 0.01;
-	while (current_x >= 0 && current_x < infos->map_infos->x && current_y >= 0
-		&& current_y < infos->map_infos->y)
-	{
-		current_x += infos->ray_infos->ray_dir_x * step;
-		current_y += infos->ray_infos->ray_dir_y * step;
-		if (infos->map[(int)current_x][(int)current_y] == 1)
-		{
-			dx = current_x - infos->px;
-			dy = current_y - infos->py;
-			return (sqrt(dx * dx + dy * dy) * cos(infos->ray_angle
-					- infos->p_angle));
-		}
-	}
-	return (0);
-}
-
-// static void	calculs_intersec_calculs(t_global_infos *infos,
-// 		t_intersec_calcul *time, double new_x, double new_y)
-// {
-// 	if (infos->ray_infos->ray_dir_x > 0)
-// 		time->kx = floor(new_x) + 1;
-// 	else
-// 		time->kx = ceil(new_x) - 1;
-// 	if (infos->ray_infos->ray_dir_y > 0)
-// 		time->ky = floor(new_y) + 1;
-// 	else
-// 		time->ky = ceil(new_y) - 1;
-// 	if (fabs(infos->ray_infos->ray_dir_x) < 0.0001)
-// 		time->x = 1e30;
-// 	else
-// 		time->x = (time->kx - new_x) / infos->ray_infos->ray_dir_x;
-// 	if (fabs(infos->ray_infos->ray_dir_y) < 0.0001)
-// 		time->y = 1e30;
-// 	else
-// 		time->y = (time->ky - new_y) / infos->ray_infos->ray_dir_y;
-// }
-
-// /**
-//  * DDA algorithm for ray-wall intersection detection.
-//  * Finds next grid intersections and returns distance
-//  * to first wall with fisheye correction.
-//  */
-// static double	return_wall_distance(t_global_infos *infos)
-// {
-// 	double				new_x;
-// 	double				new_y;
-// 	double				dx;
-// 	double				dy;
-// 	t_intersec_calcul	time;
-
-// 	new_x = infos->px;
-// 	new_y = infos->py;
-// 	while (new_x >= 0 && new_x < infos->map_infos->x && new_y >= 0
-// 		&& new_y < infos->map_infos->y)
-// 	{
-// 		calculs_intersec_calculs(infos, &time, new_x, new_y);
-// 		if (time.x < time.y)
-// 		{
-// 			new_x = time.kx;
-// 			new_y = new_y + infos->ray_infos->ray_dir_y * time.x;
-// 		}
-// 		else
-// 		{
-// 			new_x = new_x + infos->ray_infos->ray_dir_x * time.y;
-// 			new_y = time.ky;
-// 		}
-// 		if (infos->map[(int)new_x][(int)new_y] == 1)
-// 		{
-// 			dx = new_x - infos->px;
-// 			dy = new_y - infos->py;
-// 			return (sqrt(dx * dx + dy * dy) * cos(infos->ray_angle
-// 					- infos->p_angle));
-// 		}
-// 	}
-// 	return (0);
-// }
 
 static void	calculs_of_vectors(t_global_infos *infos, int i)
 {
@@ -137,7 +49,7 @@ int	rendering(void *param)
 	while (i < infos->map_infos->width)
 	{
 		calculs_of_vectors(infos, i);
-		distance = return_wall_distance(infos);
+		distance = dda_intersection_algo(infos);
 		graphic_rendering(distance, &img, i, infos);
 		i++;
 	}

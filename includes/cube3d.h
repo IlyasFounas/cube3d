@@ -15,6 +15,10 @@
 void	init_structs(t_global_infos *infos);
 int	**hard_coded_2dmap(t_global_infos *infos);
 
+
+/*___________dda_algorithm______*/
+double	dda_intersection_algo(t_global_infos *infos);
+
 /*___________free_rendering______*/
 void	free_rendering(t_global_infos *infos);
 

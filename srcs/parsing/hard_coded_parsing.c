@@ -49,5 +49,7 @@ int	**hard_coded_2dmap(t_global_infos *infos)
 	res[1][2] = 1;
 	res[4][2] = 1;
 	res[4][1] = 1;
+	res[7][5] = 1;
+	res[8][4] = 1;
 	return (res);
 }
