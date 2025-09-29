@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   dda_algorithm.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:32:09 by ifounas           #+#    #+#             */
-/*   Updated: 2025/09/29 19:15:33 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/09/30 00:04:55 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cube3d.h"
 
@@ -34,7 +34,7 @@ static double	return_distance(t_global_infos *infos, t_intersec_calcul *ray,
 	}
 	if (((int)(current_x + step_x) < 0) || ((int)(current_y + step_y) < 0))
 		return (-1);
-	if (infos->map[(int)(current_x + step_x)][(int)(current_y + step_y)] == 1)
+	if (infos->map[(int)(current_y + step_y)][(int)(current_x + step_x)]== 1)
 	{
 		dx = current_x - infos->px;
 		dy = current_y - infos->py;
