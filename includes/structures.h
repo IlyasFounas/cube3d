@@ -3,13 +3,12 @@
 
 typedef struct s_intersec_calcul
 {
-	double		sideV_x;
-	double		sideH_y;
-	double		tv_x;
-	double		tv_y;
-	int			deltadist_x;
-	int			deltadist_y;
-
+	int			start_x;
+	int			start_y;
+	int			step_x;
+	int			step_y;
+	int			map_x;
+	int			map_y;
 }				t_intersec_calcul;
 
 typedef struct s_keys

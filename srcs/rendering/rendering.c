@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   rendering.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:01:38 by ifounas           #+#    #+#             */
-/*   Updated: 2025/09/29 23:51:22 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/30 16:52:31 by ifounas          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cube3d.h"
 
@@ -49,7 +49,7 @@ int	rendering(void *param)
 	while (i < infos->map_infos->width)
 	{
 		calculs_of_vectors(infos, i);
-		distance = dda_intersection_algo(infos);
+		distance = esk_algo(infos);
 		graphic_rendering(distance, &img, i, infos);
 		i++;
 	}

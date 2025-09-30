@@ -15,10 +15,6 @@
 void	init_structs(t_global_infos *infos);
 int	**hard_coded_2dmap(t_global_infos *infos);
 
-
-/*___________dda_algorithm______*/
-double	dda_intersection_algo(t_global_infos *infos);
-
 /*___________free_rendering______*/
 void	free_rendering(t_global_infos *infos);
 
@@ -26,6 +22,9 @@ void	free_rendering(t_global_infos *infos);
 void	calcul_the_fps(void);
 void	graphic_rendering(double distance, t_data *img, int i,
 		t_global_infos *infos);
+
+/*___________esk_algo______*/
+double	esk_algo(t_global_infos *infos);
 
 /*___________rendering______*/
 int	rendering(void *param);
