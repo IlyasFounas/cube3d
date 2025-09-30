@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:32:09 by ifounas           #+#    #+#             */
-/*   Updated: 2025/09/30 16:57:56 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/09/30 17:21:20 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,13 @@ static void	init_linear_ray(t_global_infos *infos,
 	}
 }
 
-static double	return_t(t_global_infos *infos, t_intersec_calcul *linear_ray,
-		double t)
+static int	return_t(t_global_infos *infos, t_intersec_calcul *linear_ray)
 {
 	if (linear_ray->map_y >= 0 && linear_ray->map_y < infos->map_infos->y
 		&& linear_ray->map_x >= 0 && linear_ray->map_x < infos->map_infos->x)
 	{
 		if (infos->map[linear_ray->map_y][linear_ray->map_x] == 1)
-			return (t);
+			return (1);
 	}
 	return (-1);
 }
@@ -75,7 +74,7 @@ static double	vertical_linear_equa(t_global_infos *infos,
 					linear_ray->map_x = x;
 				else
 					linear_ray->map_x = x - 1;
-				if (return_t(infos, linear_ray, t) > -1)
+				if (return_t(infos, linear_ray) > -1)
 					return (t);
 			}
 		}
@@ -105,13 +104,13 @@ static double	horizontal_linear_equa(t_global_infos *infos,
 					linear_ray->map_y = y;
 				else
 					linear_ray->map_y = y - 1;
-				if (return_t(infos, linear_ray, t) > -1)
+				if (return_t(infos, linear_ray) > -1)
 					return (t);
 			}
 		}
 		y += linear_ray->step_y;
 	}
-	return (0);
+	return (-1);
 }
 
 /**
@@ -134,6 +133,10 @@ double	esk_algo(t_global_infos *infos)
 	t_vertical = vertical_linear_equa(infos, &linear_ray);
 	t_horizontal = horizontal_linear_equa(infos, &linear_ray);
 	shortest_t = fmin(t_vertical, t_horizontal);
+	if (t_vertical == -1)
+		shortest_t = t_horizontal;
+	if (t_horizontal == -1)
+		shortest_t = t_vertical;
 	if (shortest_t != -1)
 	{
 		fisheye_correc = infos->ray_infos->ray_dir_x * infos->ray_infos->dir_x
