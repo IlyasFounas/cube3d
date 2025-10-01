@@ -30,6 +30,7 @@ double	esk_algo(t_global_infos *infos);
 int	rendering(void *param);
 
 /*___________movements_handeling_____*/
+void	update_player_rotation(t_global_infos *infos);
 void	update_player_position(t_global_infos *infos);
 int	keys_pressed(int keycode, t_global_infos *infos);
 int	keys_released(int keycode, t_global_infos *infos);

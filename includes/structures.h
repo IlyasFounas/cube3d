@@ -17,6 +17,8 @@ typedef struct s_keys
 	int			A;
 	int			S;
 	int			D;
+	int			left;
+	int			right;
 }				t_keys;
 
 typedef struct s_map_infos

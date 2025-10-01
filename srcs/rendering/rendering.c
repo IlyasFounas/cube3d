@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:01:38 by ifounas           #+#    #+#             */
-/*   Updated: 2025/09/30 16:52:31 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/01 16:50:40 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,11 @@ int	rendering(void *param)
 	t_data			img;
 
 	infos = (t_global_infos *)param;
-	infos->p_angle = atan2(infos->ray_infos->dir_y, infos->ray_infos->dir_x);
 	i = 0;
 	calcul_the_fps();
 	update_player_position(infos);
+	update_player_rotation(infos);
+	infos->p_angle = atan2(infos->ray_infos->dir_y, infos->ray_infos->dir_x);
 	create_image(infos, &img);
 	while (i < infos->map_infos->width)
 	{
