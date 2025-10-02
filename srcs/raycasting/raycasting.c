@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rendering.c                                        :+:      :+:    :+:   */
+/*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:01:38 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/01 16:50:40 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/02 13:17:00 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void	calculs_of_vectors(t_global_infos *infos, int i)
  * segments
  * - Applies fisheye correction for proper perspective projection
  */
-int	rendering(void *param)
+int	raycasting(void *param)
 {
 	t_global_infos	*infos;
 	int				i;
@@ -50,7 +50,7 @@ int	rendering(void *param)
 	while (i < infos->map_infos->width)
 	{
 		calculs_of_vectors(infos, i);
-		distance = esk_algo(infos);
+		distance = solving_linear_equa(infos);
 		graphic_rendering(distance, &img, i, infos);
 		i++;
 	}

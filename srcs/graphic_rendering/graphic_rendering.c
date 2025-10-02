@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/01 16:50:56 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/02 13:28:20 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	graphic_rendering(double distance, t_data *img, int i,
 		if (y < start_y)
 			my_mlx_pixel_put(img, i, y, 0x00666666);
 		else if (y >= start_y && y < end_y)
-			my_mlx_pixel_put(img, i, y, 0x00FF0000);
+			wall_rendering(infos, img,i, y);
 		else
 			my_mlx_pixel_put(img, i, y, 0x00333333);
 		y++;

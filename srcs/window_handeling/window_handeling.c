@@ -50,6 +50,6 @@ void	window_handeling(t_global_infos *infos)
 	mlx_hook(infos->mlx_win, 2, 1L << 0, keys_pressed, infos);
 	mlx_hook(infos->mlx_win, 3, 1L << 1, keys_released, infos);
 	mlx_hook(infos->mlx_win, 17, 0, close_window, infos);
-	mlx_loop_hook(infos->mlx, rendering, infos);
+	mlx_loop_hook(infos->mlx, raycasting, infos);
 	mlx_loop(infos->mlx);
 }

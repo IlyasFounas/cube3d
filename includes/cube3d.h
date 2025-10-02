@@ -3,7 +3,9 @@
 
 # include "libft.h"
 # include "mlx.h"
+# include "get_next_line.h"
 # include "structures.h"
+# include <fcntl.h>
 # include <math.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -11,31 +13,38 @@
 # include <sys/time.h>
 # include <unistd.h>
 
-/*___________hard_coded_parsing_____*/
-void	init_structs(t_global_infos *infos);
-int	**hard_coded_2dmap(t_global_infos *infos);
-
-/*___________free_rendering______*/
+/*____________________________GRAPHIC_RENDERING__________________________*/
+/*---free_rendering---*/
 void	free_rendering(t_global_infos *infos);
 
-/*___________graphic_rendering______*/
+/*---graphic_rendering---*/
 void	calcul_the_fps(void);
 void	graphic_rendering(double distance, t_data *img, int i,
 		t_global_infos *infos);
 
-/*___________esk_algo______*/
-double	esk_algo(t_global_infos *infos);
+/*---texture_rendering---*/
+void	wall_rendering(t_global_infos *infos, t_data *img, int i, int y);
 
-/*___________rendering______*/
-int	rendering(void *param);
+/*____________________________PARSING__________________________________*/
+/*---hard_coded_parsing---*/
+void	init_structs(t_global_infos *infos);
+int	**hard_coded_2dmap(t_global_infos *infos);
 
-/*___________movements_handeling_____*/
+/*____________________________RAYCASTING_______________________________*/
+/*---solving_linear_equa---*/
+double	solving_linear_equa(t_global_infos *infos);
+
+/*---raycasting---*/
+int	raycasting(void *param);
+
+/*____________________________WINDOW HANDELING_________________________*/
+/*---movements_handeling---*/
 void	update_player_rotation(t_global_infos *infos);
 void	update_player_position(t_global_infos *infos);
 int	keys_pressed(int keycode, t_global_infos *infos);
 int	keys_released(int keycode, t_global_infos *infos);
 
-/*___________window_handeling_____*/
+/*---window_handeling---*/
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	create_image(t_global_infos *infos, t_data *img);
 void	destroy_image(t_global_infos *infos, t_data *img);

@@ -27,11 +27,13 @@ int	main(void)
 	infos.map_infos = malloc(sizeof(t_map_infos));
 	infos.ray_infos = malloc(sizeof(t_ray_infos));
 	infos.keys = malloc(sizeof(t_keys));
-	if (!infos.map_infos || !infos.ray_infos || !infos.keys)
+	infos.textures = malloc(sizeof(t_textures));
+	if (!infos.map_infos || !infos.ray_infos || !infos.keys || !infos.textures)
 		display_error(&infos);
 	ft_memset(infos.map_infos, 0, sizeof(t_map_infos));
 	ft_memset(infos.ray_infos, 0, sizeof(t_ray_infos));
 	ft_memset(infos.keys, 0, sizeof(t_keys));
+	ft_memset(infos.textures, 0, sizeof(t_textures));
 	init_structs(&infos);
 	window_handeling(&infos);
 	free_rendering(&infos);

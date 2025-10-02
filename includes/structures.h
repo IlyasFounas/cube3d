@@ -1,7 +1,15 @@
 #ifndef CUBE3D_STRUCTS_H
 # define CUBE3D_STRUCTS_H
 
-typedef struct s_intersec_calcul
+typedef struct s_textures
+{
+	char		*north_t;
+	char		*south_t;
+	char		*east_t;
+	char		*west_t;
+}				t_textures;
+
+typedef struct s_linear_equa
 {
 	int			start_x;
 	int			start_y;
@@ -9,7 +17,7 @@ typedef struct s_intersec_calcul
 	int			step_y;
 	int			map_x;
 	int			map_y;
-}				t_intersec_calcul;
+}				t_linear_equa;
 
 typedef struct s_keys
 {
@@ -50,6 +58,7 @@ typedef struct s_global_infos
 	double		ray_angle;
 	t_ray_infos	*ray_infos;
 	t_map_infos	*map_infos;
+	t_textures	*textures;
 	t_keys		*keys;
 }				t_global_infos;
 

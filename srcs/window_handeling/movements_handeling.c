@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:58:52 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/01 16:56:56 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/02 13:04:45 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	update_player_rotation(t_global_infos *infos)
 
 	keys = infos->keys;
 	ray = infos->ray_infos;
-	angle = 0.002;
+	angle = 0.009;
 	if (keys->right == 1)
 		angle *= -1;
 	if (keys->left == 1 || keys->right == 1)
@@ -46,7 +46,7 @@ void	update_player_position(t_global_infos *infos)
 	double	speed;
 
 	keys = infos->keys;
-	speed = 0.01;
+	speed = 0.03;
 	if (keys->W == 1)
 	{
 		infos->px += (infos->ray_infos->dir_x) * speed;

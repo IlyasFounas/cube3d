@@ -21,8 +21,9 @@ void	init_structs(t_global_infos *infos)
 	infos->ray_infos->dir_y = -1.0;
 	infos->map_infos->x = 14;
 	infos->map_infos->y = 14;
-	infos->map_infos->width = 640;
-	infos->map_infos->height = 480;
+	infos->map_infos->width = 1920;
+	infos->map_infos->height = 1080;
+	infos->textures->north_t = "textures/cobblestone_01.xpm";
 	infos->map = hard_coded_2dmap(infos);
 }
 

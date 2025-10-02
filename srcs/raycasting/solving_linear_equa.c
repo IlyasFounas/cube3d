@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   esk_algo.c                                         :+:      :+:    :+:   */
+/*   solving_linear_equa.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:32:09 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/01 16:51:08 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/02 13:24:24 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-static void	init_linear_ray(t_global_infos *infos,
-		t_intersec_calcul *linear_ray)
+static void	init_linear_ray(t_global_infos *infos, t_linear_equa *linear_ray)
 {
 	t_ray_infos	*rays;
 
@@ -42,7 +41,7 @@ static void	init_linear_ray(t_global_infos *infos,
 	}
 }
 
-static int	return_t(t_global_infos *infos, t_intersec_calcul *linear_ray)
+static int	return_t(t_global_infos *infos, t_linear_equa *linear_ray)
 {
 	if (linear_ray->map_y >= 0 && linear_ray->map_y < infos->map_infos->y
 		&& linear_ray->map_x >= 0 && linear_ray->map_x < infos->map_infos->x)
@@ -54,7 +53,7 @@ static int	return_t(t_global_infos *infos, t_intersec_calcul *linear_ray)
 }
 
 static double	vertical_linear_equa(t_global_infos *infos,
-		t_intersec_calcul *linear_ray)
+		t_linear_equa *linear_ray)
 {
 	int		x;
 	double	t;
@@ -84,7 +83,7 @@ static double	vertical_linear_equa(t_global_infos *infos,
 }
 
 static double	horizontal_linear_equa(t_global_infos *infos,
-		t_intersec_calcul *linear_ray)
+		t_linear_equa *linear_ray)
 {
 	int		y;
 	double	t;
@@ -120,15 +119,15 @@ static double	horizontal_linear_equa(t_global_infos *infos,
  * grid lines. Returns the smallest valid 't' distance to wall collision.
  * Mathematical alternative to DDA stepping.
  */
-double	esk_algo(t_global_infos *infos)
+double	solving_linear_equa(t_global_infos *infos)
 {
-	t_intersec_calcul	linear_ray;
-	double				t_vertical;
-	double				t_horizontal;
-	double				shortest_t;
-	double				fisheye_correc;
+	t_linear_equa	linear_ray;
+	double			t_vertical;
+	double			t_horizontal;
+	double			shortest_t;
+	double			fisheye_correc;
 
-	ft_memset(&linear_ray, 0, sizeof(t_intersec_calcul));
+	ft_memset(&linear_ray, 0, sizeof(t_linear_equa));
 	init_linear_ray(infos, &linear_ray);
 	t_vertical = vertical_linear_equa(infos, &linear_ray);
 	t_horizontal = horizontal_linear_equa(infos, &linear_ray);
