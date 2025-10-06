@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:01:38 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/02 13:17:00 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/06 17:47:02 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	raycasting(void *param)
 	update_player_rotation(infos);
 	infos->p_angle = atan2(infos->ray_infos->dir_y, infos->ray_infos->dir_x);
 	create_image(infos, &img);
+	init_textures(infos, &img);
 	while (i < infos->map_infos->width)
 	{
 		calculs_of_vectors(infos, i);

@@ -2,15 +2,31 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   hard_coded_parsing.c                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+
+	+:+     */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+
+	+#+        */
+/*                                                +#+#+#+#+#+
+	+#+           */
 /*   Created: 2025/09/25 15:11:17 by ifounas           #+#    #+#             */
 /*   Updated: 2025/09/25 15:11:17 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+void	init_textures(t_global_infos *infos, t_data *img)
+{
+	if (!infos->textures->north_t)
+		infos->textures->north_t = "textures/cobblestone_01.xpm";
+	if (!infos->textures->north_img)
+		infos->textures->north_img = mlx_xpm_file_to_image(infos->mlx,
+				infos->textures->north_t, &infos->textures->t_width,
+				&infos->textures->t_height);
+	if (!infos->textures->north_data)
+		infos->textures->north_data = mlx_get_data_addr(infos->textures->north_img, &img->bits_per_pixel,
+				&img->line_length, &img->endian);
+}
 
 void	init_structs(t_global_infos *infos)
 {
@@ -21,9 +37,8 @@ void	init_structs(t_global_infos *infos)
 	infos->ray_infos->dir_y = -1.0;
 	infos->map_infos->x = 14;
 	infos->map_infos->y = 14;
-	infos->map_infos->width = 1920;
-	infos->map_infos->height = 1080;
-	infos->textures->north_t = "textures/cobblestone_01.xpm";
+	infos->map_infos->width = 640;
+	infos->map_infos->height = 480;
 	infos->map = hard_coded_2dmap(infos);
 }
 

@@ -4,25 +4,16 @@ void	parse_infos(void)
 {
 }
 
+/**
+ * The goal is to take the right color for each pixels.
+ */
 void	wall_rendering(t_global_infos *infos, t_data *img, int i, int y)
 {
-	// int		fd;
-	// char	*s;
+	int	position;
+	int	color;
 
-    // (void)i;
-    // (void)img;
-    // (void)y;
-	(void)infos;
-	my_mlx_pixel_put(img, i, y, 0x00FF0000);
-	// fd = open(infos->textures->north_t, O_RDONLY);
-	// if (!fd)
-	// 	free_rendering(infos);
-	// do
-	// {
-	// 	s = get_next_line(fd);
-	// 	printf("%s\n", s);
-	// 	if (s)
-	// 		free(s);
-	// } while (s);
-	// exit(1);
+	position = (infos->tex_y * img->line_length) + (infos->tex_x
+			* (img->bits_per_pixel / 8));
+	color = *(int *)(infos->textures->north_data + position);
+	my_mlx_pixel_put(img, i, y, color);
 }

@@ -3,10 +3,14 @@
 
 typedef struct s_textures
 {
-	char		*north_t;
 	char		*south_t;
 	char		*east_t;
 	char		*west_t;
+	char		*north_t;
+	char		*north_data;
+	void		*north_img;
+	int			t_width;
+	int			t_height;
 }				t_textures;
 
 typedef struct s_linear_equa
@@ -17,6 +21,8 @@ typedef struct s_linear_equa
 	int			step_y;
 	int			map_x;
 	int			map_y;
+	double		ix;
+	double		iy;
 }				t_linear_equa;
 
 typedef struct s_keys
@@ -56,6 +62,8 @@ typedef struct s_global_infos
 	int			**map;
 	double		p_angle;
 	double		ray_angle;
+	int			tex_x;
+	int			tex_y;
 	t_ray_infos	*ray_infos;
 	t_map_infos	*map_infos;
 	t_textures	*textures;

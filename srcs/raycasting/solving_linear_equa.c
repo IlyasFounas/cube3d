@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:32:09 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/02 13:24:24 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/06 18:16:16 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ static double	vertical_linear_equa(t_global_infos *infos,
 {
 	int		x;
 	double	t;
-	double	iy;
 
 	x = linear_ray->start_x;
 	while (x >= 0 && x < infos->map_infos->x)
@@ -65,10 +64,10 @@ static double	vertical_linear_equa(t_global_infos *infos,
 		t = (x - infos->px) / infos->ray_infos->ray_dir_x;
 		if (t > 0)
 		{
-			iy = infos->py + (infos->ray_infos->ray_dir_y * t);
-			if (iy >= 0 && iy < infos->map_infos->y)
+			linear_ray->iy = infos->py + (infos->ray_infos->ray_dir_y * t);
+			if (linear_ray->iy >= 0 && linear_ray->iy < infos->map_infos->y)
 			{
-				linear_ray->map_y = floor(iy);
+				linear_ray->map_y = floor(linear_ray->iy);
 				if (infos->ray_infos->ray_dir_x > 0)
 					linear_ray->map_x = x;
 				else
@@ -87,7 +86,6 @@ static double	horizontal_linear_equa(t_global_infos *infos,
 {
 	int		y;
 	double	t;
-	double	ix;
 
 	y = linear_ray->start_y;
 	while (y >= 0 && y < infos->map_infos->y)
@@ -95,10 +93,10 @@ static double	horizontal_linear_equa(t_global_infos *infos,
 		t = (y - infos->py) / infos->ray_infos->ray_dir_y;
 		if (t > 0)
 		{
-			ix = infos->px + (infos->ray_infos->ray_dir_x * t);
-			if (ix >= 0 && ix < infos->map_infos->x)
+			linear_ray->ix = infos->px + (infos->ray_infos->ray_dir_x * t);
+			if (linear_ray->ix >= 0 && linear_ray->ix < infos->map_infos->x)
 			{
-				linear_ray->map_x = floor(ix);
+				linear_ray->map_x = floor(linear_ray->ix);
 				if (infos->ray_infos->ray_dir_y > 0)
 					linear_ray->map_y = y;
 				else
@@ -140,6 +138,11 @@ double	solving_linear_equa(t_global_infos *infos)
 	{
 		fisheye_correc = infos->ray_infos->ray_dir_x * infos->ray_infos->dir_x
 			+ infos->ray_infos->ray_dir_y * infos->ray_infos->dir_y;
+		if (shortest_t == t_vertical)
+			infos->tex_x = (linear_ray.iy - floor(linear_ray.iy)) * infos->textures->t_width;
+		else
+			infos->tex_x = (linear_ray.ix - floor(linear_ray.ix)) * infos->textures->t_width;
+		infos->tex_y = 0.5 * infos->textures->t_height;
 		return (shortest_t * fisheye_correc);
 	}
 	return (0);
