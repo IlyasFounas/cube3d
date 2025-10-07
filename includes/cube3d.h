@@ -27,7 +27,7 @@ void	wall_rendering(t_global_infos *infos, t_data *img, int i, int y);
 
 /*____________________________PARSING__________________________________*/
 /*---hard_coded_parsing---*/
-void	init_textures(t_global_infos *infos, t_data *img);
+void	init_textures(t_global_infos *infos);
 void	init_structs(t_global_infos *infos);
 int	**hard_coded_2dmap(t_global_infos *infos);
 

@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:32:09 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/06 18:16:16 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/07 13:10:25 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,12 @@ static int	return_t(t_global_infos *infos, t_linear_equa *linear_ray)
 static double	vertical_linear_equa(t_global_infos *infos,
 		t_linear_equa *linear_ray)
 {
-	int		x;
 	double	t;
 
-	x = linear_ray->start_x;
-	while (x >= 0 && x < infos->map_infos->x)
+	linear_ray->x = linear_ray->start_x;
+	while (linear_ray->x >= 0 && linear_ray->x < infos->map_infos->x)
 	{
-		t = (x - infos->px) / infos->ray_infos->ray_dir_x;
+		t = (linear_ray->x - infos->px) / infos->ray_infos->ray_dir_x;
 		if (t > 0)
 		{
 			linear_ray->iy = infos->py + (infos->ray_infos->ray_dir_y * t);
@@ -69,14 +68,14 @@ static double	vertical_linear_equa(t_global_infos *infos,
 			{
 				linear_ray->map_y = floor(linear_ray->iy);
 				if (infos->ray_infos->ray_dir_x > 0)
-					linear_ray->map_x = x;
+					linear_ray->map_x = linear_ray->x;
 				else
-					linear_ray->map_x = x - 1;
+					linear_ray->map_x = linear_ray->x - 1;
 				if (return_t(infos, linear_ray) > -1)
 					return (t);
 			}
 		}
-		x += linear_ray->step_x;
+		linear_ray->x += linear_ray->step_x;
 	}
 	return (-1);
 }
@@ -84,13 +83,12 @@ static double	vertical_linear_equa(t_global_infos *infos,
 static double	horizontal_linear_equa(t_global_infos *infos,
 		t_linear_equa *linear_ray)
 {
-	int		y;
 	double	t;
 
-	y = linear_ray->start_y;
-	while (y >= 0 && y < infos->map_infos->y)
+	linear_ray->y = linear_ray->start_y;
+	while (linear_ray->y >= 0 && linear_ray->y < infos->map_infos->y)
 	{
-		t = (y - infos->py) / infos->ray_infos->ray_dir_y;
+		t = (linear_ray->y - infos->py) / infos->ray_infos->ray_dir_y;
 		if (t > 0)
 		{
 			linear_ray->ix = infos->px + (infos->ray_infos->ray_dir_x * t);
@@ -98,14 +96,14 @@ static double	horizontal_linear_equa(t_global_infos *infos,
 			{
 				linear_ray->map_x = floor(linear_ray->ix);
 				if (infos->ray_infos->ray_dir_y > 0)
-					linear_ray->map_y = y;
+					linear_ray->map_y = linear_ray->y;
 				else
-					linear_ray->map_y = y - 1;
+					linear_ray->map_y = linear_ray->y - 1;
 				if (return_t(infos, linear_ray) > -1)
 					return (t);
 			}
 		}
-		y += linear_ray->step_y;
+		linear_ray->y += linear_ray->step_y;
 	}
 	return (-1);
 }
@@ -139,10 +137,11 @@ double	solving_linear_equa(t_global_infos *infos)
 		fisheye_correc = infos->ray_infos->ray_dir_x * infos->ray_infos->dir_x
 			+ infos->ray_infos->ray_dir_y * infos->ray_infos->dir_y;
 		if (shortest_t == t_vertical)
-			infos->tex_x = (linear_ray.iy - floor(linear_ray.iy)) * infos->textures->t_width;
+			infos->tex_x = (linear_ray.iy - floor(linear_ray.iy))
+				* infos->textures->t_width;
 		else
-			infos->tex_x = (linear_ray.ix - floor(linear_ray.ix)) * infos->textures->t_width;
-		infos->tex_y = 0.5 * infos->textures->t_height;
+			infos->tex_x = (linear_ray.ix - floor(linear_ray.ix))
+				* infos->textures->t_width;
 		return (shortest_t * fisheye_correc);
 	}
 	return (0);

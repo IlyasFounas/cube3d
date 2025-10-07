@@ -1,16 +1,25 @@
 #ifndef CUBE3D_STRUCTS_H
 # define CUBE3D_STRUCTS_H
 
+
+typedef struct s_data
+{
+	void		*img;
+	char		*addr;
+	int			bits_per_pixel;
+	int			line_length;
+	int			endian;
+}				t_data;
+
 typedef struct s_textures
 {
 	char		*south_t;
 	char		*east_t;
 	char		*west_t;
 	char		*north_t;
-	char		*north_data;
-	void		*north_img;
 	int			t_width;
 	int			t_height;
+	t_data		n_t_data;
 }				t_textures;
 
 typedef struct s_linear_equa
@@ -23,6 +32,8 @@ typedef struct s_linear_equa
 	int			map_y;
 	double		ix;
 	double		iy;
+	int			x;
+	int			y;
 }				t_linear_equa;
 
 typedef struct s_keys
@@ -69,14 +80,5 @@ typedef struct s_global_infos
 	t_textures	*textures;
 	t_keys		*keys;
 }				t_global_infos;
-
-typedef struct s_data
-{
-	void		*img;
-	char		*addr;
-	int			bits_per_pixel;
-	int			line_length;
-	int			endian;
-}				t_data;
 
 #endif

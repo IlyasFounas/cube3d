@@ -15,16 +15,19 @@
 
 #include "cube3d.h"
 
-void	init_textures(t_global_infos *infos, t_data *img)
+void	init_textures(t_global_infos *infos)
 {
+	t_data *img;
+
+	img = &infos->textures->n_t_data;
 	if (!infos->textures->north_t)
-		infos->textures->north_t = "textures/cobblestone_01.xpm";
-	if (!infos->textures->north_img)
-		infos->textures->north_img = mlx_xpm_file_to_image(infos->mlx,
+		infos->textures->north_t = "textures/mossy_cobblestone1.xpm";
+	if (!img->img)
+		img->img = mlx_xpm_file_to_image(infos->mlx,
 				infos->textures->north_t, &infos->textures->t_width,
 				&infos->textures->t_height);
-	if (!infos->textures->north_data)
-		infos->textures->north_data = mlx_get_data_addr(infos->textures->north_img, &img->bits_per_pixel,
+	if (!img->addr)
+		img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 				&img->line_length, &img->endian);
 }
 
@@ -35,10 +38,10 @@ void	init_structs(t_global_infos *infos)
 	infos->ray_infos->plane_x = 0.66;
 	infos->ray_infos->dir_x = 0.0;
 	infos->ray_infos->dir_y = -1.0;
-	infos->map_infos->x = 14;
-	infos->map_infos->y = 14;
-	infos->map_infos->width = 640;
-	infos->map_infos->height = 480;
+	infos->map_infos->x = 20;
+	infos->map_infos->y = 20;
+	infos->map_infos->width = 1040;
+	infos->map_infos->height = 880;
 	infos->map = hard_coded_2dmap(infos);
 }
 
@@ -58,9 +61,9 @@ int	**hard_coded_2dmap(t_global_infos *infos)
 	for (int i = 0; i < infos->map_infos->x; i++)
 	{
 		res[0][i] = 1;
-		res[13][i] = 1;
+		res[19][i] = 1;
 		res[i][0] = 1;
-		res[i][13] = 1;
+		res[i][19] = 1;
 	}
 	res[1][2] = 1;
 	res[4][2] = 1;
