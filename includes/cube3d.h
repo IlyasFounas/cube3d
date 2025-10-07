@@ -12,6 +12,8 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
+# define MALLOC_FAILED 1
+# define SUCCESS 0
 
 /*____________________________GRAPHIC_RENDERING__________________________*/
 /*---free_rendering---*/
@@ -23,11 +25,16 @@ void	graphic_rendering(double distance, t_data *img, int i,
 		t_global_infos *infos);
 
 /*---texture_rendering---*/
+t_textures	*new_node_texture(char *s, t_type type);
+t_textures	*last_node(t_textures *textures);
+void	add_back_node(t_textures **textures, t_textures *new,
+		int *malloc_failed);
 void	wall_rendering(t_global_infos *infos, t_data *img, int i, int y);
 
 /*____________________________PARSING__________________________________*/
 /*---hard_coded_parsing---*/
-void	init_textures(t_global_infos *infos);
+void	init_textures(t_global_infos *infos, t_textures *textures);
+void	create_textures(t_global_infos *infos);
 void	init_structs(t_global_infos *infos);
 int	**hard_coded_2dmap(t_global_infos *infos);
 

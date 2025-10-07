@@ -2,33 +2,64 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   hard_coded_parsing.c                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+
-	+:+     */
-/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+
-	+#+        */
-/*                                                +#+#+#+#+#+
-	+#+           */
-/*   Created: 2025/09/25 15:11:17 by ifounas           #+#    #+#             */
-/*   Updated: 2025/09/25 15:11:17 by ifounas          ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/07 16:23:38 by ifounas           #+#    #+#             */
+/*   Updated: 2025/10/07 16:23:38 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void	init_textures(t_global_infos *infos)
+void	init_textures(t_global_infos *infos, t_textures *textures)
 {
 	t_data *img;
 
-	img = &infos->textures->n_t_data;
-	if (!infos->textures->north_t)
-		infos->textures->north_t = "textures/mossy_cobblestone1.xpm";
-	if (!img->img)
-		img->img = mlx_xpm_file_to_image(infos->mlx,
-				infos->textures->north_t, &infos->textures->t_width,
-				&infos->textures->t_height);
-	if (!img->addr)
-		img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
-				&img->line_length, &img->endian);
+	img = &textures->data;
+	img->img = mlx_xpm_file_to_image(infos->mlx, textures->name_texture,
+			&textures->t_width, &textures->t_height);
+	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
+			&img->line_length, &img->endian);
+}
+
+void	create_textures(t_global_infos *infos)
+{
+	int i;
+	int malloc_failed;
+	char *textures[4];
+	t_type types[4];
+	t_textures *ptr;
+
+	i = 0;
+	malloc_failed = 0;
+	textures[0] = "textures/cobblestone_01.xpm";
+	textures[1] = "textures/cobblestone_02.xpm";
+	textures[2] = "textures/cobblestone.xpm";
+	textures[3] = "textures/mossy_cobblestone1.xpm";
+	types[0] = NORTH;
+	types[1] = SOUTH;
+	types[2] = EAST;
+	types[3] = WEST;
+	infos->textures = new_node_texture(textures[i], types[i]);
+	if (!infos->textures)
+	{
+		free_rendering(infos);
+		exit(MALLOC_FAILED);
+	}
+	ptr = infos->textures;
+	while (++i < 5)
+	{
+		init_textures(infos, ptr);
+		add_back_node(&infos->textures, new_node_texture(textures[i], types[i]),
+			&malloc_failed);
+		if (malloc_failed == 1)
+		{
+			free_rendering(infos);
+			exit(MALLOC_FAILED);
+		}
+		ptr = ptr->next;
+	}
 }
 
 void	init_structs(t_global_infos *infos)
