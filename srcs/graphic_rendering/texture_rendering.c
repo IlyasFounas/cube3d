@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 16:26:48 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/08 16:59:08 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/08 18:11:17 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,5 @@ void	wall_rendering(t_global_infos *infos, t_data *img, int i, int y)
 			* (img_texture->bits_per_pixel * 0.125));
 	color = *(int *)(img_texture->addr + position);
 	my_mlx_pixel_put(img, i, y, color);
+	// my_mlx_pixel_put(img, i, y + 1, color);
 }
