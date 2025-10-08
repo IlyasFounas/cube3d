@@ -37,5 +37,5 @@ int	main(void)
 	init_structs(&infos);
 	window_handeling(&infos);
 	free_rendering(&infos);
-	return (0);
+	return (SUCCESS);
 }
