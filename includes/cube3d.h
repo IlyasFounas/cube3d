@@ -39,11 +39,16 @@ void	init_structs(t_global_infos *infos);
 int	**hard_coded_2dmap(t_global_infos *infos);
 
 /*____________________________RAYCASTING_______________________________*/
+/*---raycasting---*/
+int	raycasting(void *param);
+
 /*---solving_linear_equa---*/
 double	solving_linear_equa(t_global_infos *infos);
 
-/*---raycasting---*/
-int	raycasting(void *param);
+/*---solving_linear_utils---*/
+void	init_linear_ray(t_global_infos *infos, t_linear_equa *linear_ray);
+void	setting_the_right_texture(t_global_infos *infos,
+		t_linear_equa *linear_ray);
 
 /*____________________________WINDOW HANDELING_________________________*/
 /*---movements_handeling---*/
