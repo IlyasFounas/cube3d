@@ -8,7 +8,6 @@ GNL_DIR     := gnl
 SRC         := $(shell find $(SRC_DIR) -type f -name "*.c")
 OBJ         := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
 
-# Ajout des fichiers GNL
 GNL_SRC     := $(shell find $(GNL_DIR) -type f -name "*.c")
 GNL_OBJ     := $(patsubst $(GNL_DIR)/%.c,$(OBJ_DIR)/gnl/%.o,$(GNL_SRC))
 
@@ -42,7 +41,6 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-# Nouvelle règle pour compiler les fichiers GNL
 $(OBJ_DIR)/gnl/%.o: $(GNL_DIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
