@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:32:09 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/07 13:10:25 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/08 14:00:09 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,29 @@ static double	horizontal_linear_equa(t_global_infos *infos,
 	return (-1);
 }
 
+void	setting_the_right_texture(t_global_infos *infos,
+		t_linear_equa *linear_ray)
+{
+	if (linear_ray->shortest_t == linear_ray->t_vertical)
+	{
+		infos->tex_x = (linear_ray->iy - floor(linear_ray->iy))
+			* infos->textures->t_width;
+		if (infos->ray_infos->ray_dir_x < 0)
+			infos->actual_orientation = WEST;
+		else if (infos->ray_infos->ray_dir_x > 0)
+			infos->actual_orientation = EAST;
+	}
+	else
+	{
+		infos->tex_x = (linear_ray->ix - floor(linear_ray->ix))
+			* infos->textures->t_width;
+		if (infos->ray_infos->ray_dir_y < 0)
+			infos->actual_orientation = NORTH;
+		else if (infos->ray_infos->ray_dir_y > 0)
+			infos->actual_orientation = SOUTH;
+	}
+}
+
 /**
  * eskDron_algo - Solves linear equations for ray-grid intersections
  *
@@ -118,31 +141,24 @@ static double	horizontal_linear_equa(t_global_infos *infos,
 double	solving_linear_equa(t_global_infos *infos)
 {
 	t_linear_equa	linear_ray;
-	double			t_vertical;
-	double			t_horizontal;
-	double			shortest_t;
 	double			fisheye_correc;
 
 	ft_memset(&linear_ray, 0, sizeof(t_linear_equa));
 	init_linear_ray(infos, &linear_ray);
-	t_vertical = vertical_linear_equa(infos, &linear_ray);
-	t_horizontal = horizontal_linear_equa(infos, &linear_ray);
-	shortest_t = fmin(t_vertical, t_horizontal);
-	if (t_vertical == -1)
-		shortest_t = t_horizontal;
-	if (t_horizontal == -1)
-		shortest_t = t_vertical;
-	if (shortest_t != -1)
+	linear_ray.t_vertical = vertical_linear_equa(infos, &linear_ray);
+	linear_ray.t_horizontal = horizontal_linear_equa(infos, &linear_ray);
+	linear_ray.shortest_t = fmin(linear_ray.t_vertical,
+			linear_ray.t_horizontal);
+	if (linear_ray.t_vertical == -1)
+		linear_ray.shortest_t = linear_ray.t_horizontal;
+	if (linear_ray.t_horizontal == -1)
+		linear_ray.shortest_t = linear_ray.t_vertical;
+	if (linear_ray.shortest_t != -1)
 	{
 		fisheye_correc = infos->ray_infos->ray_dir_x * infos->ray_infos->dir_x
 			+ infos->ray_infos->ray_dir_y * infos->ray_infos->dir_y;
-		if (shortest_t == t_vertical)
-			infos->tex_x = (linear_ray.iy - floor(linear_ray.iy))
-				* infos->textures->t_width;
-		else
-			infos->tex_x = (linear_ray.ix - floor(linear_ray.ix))
-				* infos->textures->t_width;
-		return (shortest_t * fisheye_correc);
+		setting_the_right_texture(infos, &linear_ray);
+		return (linear_ray.shortest_t * fisheye_correc);
 	}
 	return (0);
 }

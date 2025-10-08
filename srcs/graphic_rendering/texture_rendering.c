@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 16:26:48 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/07 17:57:36 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/08 13:51:37 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,8 @@ void	wall_rendering(t_global_infos *infos, t_data *img, int i, int y)
 	t_textures	*ptr;
 
 	ptr = infos->textures;
-	if (infos->ray_infos->ray_dir_x < 0)
-	{
-		while (ptr && ptr->type != WEST)
-			ptr = ptr->next;
-	}
-	// if (infos->ray_infos->ray_dir_y > 0)
-	// 	while (ptr && ptr->type != SOUTH)
-	// 		ptr = ptr->next;
+	while (ptr && ptr->type != infos->actual_orientation)
+		ptr = ptr->next;
 	img_texture = &ptr->data;
 	position = (infos->tex_y * img_texture->line_length) + (infos->tex_x
 			* (img_texture->bits_per_pixel / 8));

@@ -64,8 +64,8 @@ void	create_textures(t_global_infos *infos)
 
 void	init_structs(t_global_infos *infos)
 {
-	infos->px = 1.2;
-	infos->py = 6.4;
+	infos->px = 1.0;
+	infos->py = 6.0;
 	infos->ray_infos->plane_x = 0.66;
 	infos->ray_infos->dir_x = 0.0;
 	infos->ray_infos->dir_y = -1.0;
@@ -96,10 +96,19 @@ int	**hard_coded_2dmap(t_global_infos *infos)
 		res[i][0] = 1;
 		res[i][19] = 1;
 	}
-	res[1][2] = 1;
-	res[4][2] = 1;
 	res[4][1] = 1;
-	res[7][5] = 1;
-	res[8][4] = 1;
+	res[4][2] = 1;
+	res[4][3] = 1;
+	res[4][4] = 1;
+	res[4][5] = 1;
+	res[4][6] = 1;
+	res[4][7] = 1;
+	res[4][8] = 1;
+	res[4][9] = 1;
+	res[4][10] = 1;
+	res[5][10] = 1;
+	res[6][10] = 1;
+	res[7][10] = 1;
+	res[8][10] = 1;
 	return (res);
 }

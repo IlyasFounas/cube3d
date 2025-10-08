@@ -40,6 +40,9 @@ typedef struct s_linear_equa
 	double				iy;
 	int					x;
 	int					y;
+	double				t_vertical;
+	double				t_horizontal;
+	double				shortest_t;
 }						t_linear_equa;
 
 typedef struct s_keys
@@ -81,6 +84,7 @@ typedef struct s_global_infos
 	double				ray_angle;
 	int					tex_x;
 	int					tex_y;
+	t_type				actual_orientation;
 	t_ray_infos			*ray_infos;
 	t_map_infos			*map_infos;
 	t_textures			*textures;
