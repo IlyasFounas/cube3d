@@ -15,7 +15,8 @@ typedef enum e_type
 	NORTH,
 	SOUTH,
 	EAST,
-	WEST
+	WEST,
+	PORTAL
 }						t_type;
 
 typedef struct s_textures
