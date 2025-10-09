@@ -6,11 +6,12 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/08 18:11:14 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/09 10:06:26 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+#include <sys/time.h>
 
 void	calcul_the_fps(void)
 {
