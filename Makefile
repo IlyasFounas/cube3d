@@ -10,7 +10,7 @@ SRC         := $(shell find $(SRC_DIR) -type f -name "*.c")
 OBJ         := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
 
 CC          := cc
-CFLAGS      := -Wall -Wextra -Werror -g3 -std=gnu11 -I$(INC_DIR) -Ilibft -Imlx
+CFLAGS      := -g3 -std=gnu11 -I$(INC_DIR) -Ilibft -Imlx
 
 LIBFT_DIR   := libft
 LIBFT       := $(LIBFT_DIR)/libft.a

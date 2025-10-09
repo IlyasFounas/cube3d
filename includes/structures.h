@@ -11,6 +11,19 @@ typedef enum e_bool
 	true
 }				t_bool;
 
+typedef struct s_color
+{
+	int32_t	r;
+	int32_t	g;
+	int32_t	b;
+}				t_color;
+
+typedef struct s_fd
+{
+	char	*name;
+	int		fd;
+}				t_fd;
+
 typedef struct s_data
 {
 	void		*img;
@@ -20,14 +33,21 @@ typedef struct s_data
 	int			endian;
 }				t_data;
 
-typedef struct s_map
+typedef struct s_map_infos
 {
+	char		**tmp_map;
 	int			height;
 	int			width;
 	int			x;
 	int			y;
 	int			start_angle;
-}				t_map;
+	t_fd		no_path;
+	t_fd		so_path;
+	t_fd		we_path;
+	t_fd		ea_path;
+	t_color		floor_color;
+	t_bool		player_found;
+}				t_map_infos;
 
 typedef struct s_ray_infos
 {
@@ -49,7 +69,7 @@ typedef struct s_global_infos
 	double		p_angle;
 	double		ray_angle;
 	t_ray_infos	*ray_infos;
-	t_map		*map_infos;
+	t_map_infos		*map_infos;
 }				t_global_infos;
 
 #endif
