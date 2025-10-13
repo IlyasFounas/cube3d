@@ -90,6 +90,7 @@ typedef struct s_global_infos
 	t_map_infos			*map_infos;
 	t_textures			*textures;
 	t_keys				*keys;
+	t_data				img;
 }						t_global_infos;
 
 #endif

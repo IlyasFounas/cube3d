@@ -19,8 +19,12 @@ void	init_textures(t_global_infos *infos, t_textures *textures)
 	img = &textures->data;
 	img->img = mlx_xpm_file_to_image(infos->mlx, textures->name_texture,
 			&textures->t_width, &textures->t_height);
+	if (!img->img)
+		malloc_error(infos);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
+	if (!img->addr)
+		malloc_error(infos);
 }
 
 void	create_textures(t_global_infos *infos)
@@ -43,10 +47,7 @@ void	create_textures(t_global_infos *infos)
 	types[3] = WEST;
 	infos->textures = new_node_texture(textures[i], types[i]);
 	if (!infos->textures)
-	{
-		free_rendering(infos);
-		exit(MALLOC_FAILED);
-	}
+		malloc_error(infos);
 	ptr = infos->textures;
 	while (++i < 5)
 	{
@@ -54,10 +55,7 @@ void	create_textures(t_global_infos *infos)
 		add_back_node(&infos->textures, new_node_texture(textures[i], types[i]),
 			&malloc_failed);
 		if (malloc_failed == 1)
-		{
-			free_rendering(infos);
-			exit(MALLOC_FAILED);
-		}
+			malloc_error(infos);
 		ptr = ptr->next;
 	}
 }
@@ -71,8 +69,8 @@ void	init_structs(t_global_infos *infos)
 	infos->ray_infos->dir_y = -1.0;
 	infos->map_infos->x = 20;
 	infos->map_infos->y = 20;
-	infos->map_infos->width = 1920;
-	infos->map_infos->height = 1080;
+	infos->map_infos->width = 1680;
+	infos->map_infos->height = 1200;
 	infos->map = hard_coded_2dmap(infos);
 }
 

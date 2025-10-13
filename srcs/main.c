@@ -12,11 +12,11 @@
 
 #include "cube3d.h"
 
-static void	display_error(t_global_infos *infos)
+void	malloc_error(t_global_infos *infos)
 {
 	write(2, "malloc error\n", ft_strlen("malloc error\n"));
 	free_rendering(infos);
-	exit(1);
+	exit(MALLOC_FAILED);
 }
 
 int	main(void)
@@ -27,13 +27,11 @@ int	main(void)
 	infos.map_infos = malloc(sizeof(t_map_infos));
 	infos.ray_infos = malloc(sizeof(t_ray_infos));
 	infos.keys = malloc(sizeof(t_keys));
-	infos.textures = malloc(sizeof(t_textures));
-	if (!infos.map_infos || !infos.ray_infos || !infos.keys || !infos.textures)
-		display_error(&infos);
+	if (!infos.map_infos || !infos.ray_infos || !infos.keys)
+		malloc_error(&infos);
 	ft_memset(infos.map_infos, 0, sizeof(t_map_infos));
 	ft_memset(infos.ray_infos, 0, sizeof(t_ray_infos));
 	ft_memset(infos.keys, 0, sizeof(t_keys));
-	ft_memset(infos.textures, 0, sizeof(t_textures));
 	init_structs(&infos);
 	window_handeling(&infos);
 	free_rendering(&infos);

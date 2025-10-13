@@ -55,26 +55,3 @@ fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean || true
 
 re: fclean all
-
-BONUS_DIR   := bonus_srcs
-BONUS_OBJ_DIR := objs_bonus
-
-BONUS_SRC    := $(shell find $(BONUS_DIR) -type f -name "*.c")
-BONUS_OBJ    := $(patsubst $(BONUS_DIR)/%.c,$(BONUS_OBJ_DIR)/%.o,$(BONUS_SRC))
-
-BONUS_NAME   := $(NAME)_bonus
-
-.PHONY: bonus
-
-bonus: $(BONUS_NAME)
-
-$(BONUS_NAME): $(BONUS_OBJ) $(GNL_OBJ) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) $(BONUS_OBJ) $(GNL_OBJ) $(LIBFT) $(MLX) $(SYS_LIBS) -o $(BONUS_NAME)
-
-$(BONUS_OBJ_DIR)/%.o: $(BONUS_DIR)/%.c
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-bonus_clean:
-	rm -rf $(BONUS_OBJ_DIR)
-	rm -f $(BONUS_NAME)

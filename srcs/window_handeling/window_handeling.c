@@ -33,11 +33,12 @@ void	destroy_image(t_global_infos *infos, t_data *img)
 {
 	mlx_put_image_to_window(infos->mlx, infos->mlx_win, img->img, 0, 0);
 	mlx_destroy_image(infos->mlx, img->img);
+	img->img = NULL;
 }
 
 static int	close_window(t_global_infos *infos)
 {
-	(void)infos;
+	free_rendering(infos);
 	exit(0);
 	return (0);
 }
@@ -45,8 +46,12 @@ static int	close_window(t_global_infos *infos)
 void	window_handeling(t_global_infos *infos)
 {
 	infos->mlx = mlx_init();
+	if (!infos->mlx)
+		malloc_error(infos);
 	infos->mlx_win = mlx_new_window(infos->mlx, infos->map_infos->width,
-			infos->map_infos->height, "cube3D");
+			infos->map_infos->height, "cub3D");
+	if (!infos->mlx_win)
+		malloc_error(infos);
 	create_textures(infos);
 	mlx_hook(infos->mlx_win, 2, 1L << 0, keys_pressed, infos);
 	mlx_hook(infos->mlx_win, 3, 1L << 1, keys_released, infos);

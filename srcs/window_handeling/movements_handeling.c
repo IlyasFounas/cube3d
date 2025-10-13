@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:58:52 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/08 11:23:26 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/13 09:46:05 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,10 @@ int	keys_pressed(int keycode, t_global_infos *infos)
 	if (keycode == 65361)
 		keys->right = 1;
 	if (keycode == 65307)
-		exit(1);
+	{
+		free_rendering(infos);
+		exit(0);
+	}
 	return (0);
 }
 

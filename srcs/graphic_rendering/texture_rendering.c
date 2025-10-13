@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 16:26:48 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/08 18:11:17 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/13 13:49:36 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,10 @@ t_textures	*new_node_texture(char *s, t_type type)
 		return (NULL);
 	new->type = type;
 	new->name_texture = s;
+	new->data.img = NULL;
+	new->data.addr = NULL;
+	new->t_height = 0;
+	new->t_width = 0;
 	new->next = NULL;
 	return (new);
 }

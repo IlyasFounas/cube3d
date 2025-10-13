@@ -62,4 +62,7 @@ void	create_image(t_global_infos *infos, t_data *img);
 void	destroy_image(t_global_infos *infos, t_data *img);
 void	window_handeling(t_global_infos *infos);
 
+/*---main---*/
+void	malloc_error(t_global_infos *infos);
+
 #endif
