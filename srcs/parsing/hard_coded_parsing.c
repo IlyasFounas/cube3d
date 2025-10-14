@@ -69,8 +69,8 @@ void	init_structs(t_global_infos *infos)
 	infos->ray_infos->dir_y = -1.0;
 	infos->map_infos->x = 20;
 	infos->map_infos->y = 20;
-	infos->map_infos->width = 1680;
-	infos->map_infos->height = 1200;
+	infos->map_infos->width = 640;
+	infos->map_infos->height = 460;
 	infos->map = hard_coded_2dmap(infos);
 }
 
