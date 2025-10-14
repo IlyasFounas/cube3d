@@ -1,0 +1,115 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   movements_handeling.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/09/24 13:58:52 by ifounas           #+#    #+#             */
+/*   Updated: 2025/10/13 09:46:05 by ifounas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "cube3d.h"
+
+void	update_player_rotation(t_global_infos *infos)
+{
+	t_keys		*keys;
+	t_ray_infos	*ray;
+	double		new_x;
+	double		new_y;
+	double		angle;
+	double		new_pl_x;
+	double		new_pl_y;
+
+	keys = infos->keys;
+	ray = infos->ray_infos;
+	angle = 0.022;
+	if (keys->right == 1)
+		angle *= -1;
+	if (keys->left == 1 || keys->right == 1)
+	{
+		new_x = (ray->dir_x * cos(angle)) - (ray->dir_y * sin(angle));
+		new_y = (ray->dir_x * sin(angle)) + (ray->dir_y * cos(angle));
+		new_pl_x = (ray->plane_x * cos(angle)) - (ray->plane_y * sin(angle));
+		new_pl_y = (ray->plane_x * sin(angle)) + (ray->plane_y * cos(angle));
+		ray->dir_x = new_x;
+		ray->dir_y = new_y;
+		ray->plane_x = new_pl_x;
+		ray->plane_y = new_pl_y;
+	}
+}
+
+void	update_player_position(t_global_infos *infos)
+{
+	t_keys	*keys;
+	double	speed;
+
+	keys = infos->keys;
+	speed = 0.07;
+	if (keys->W == 1)
+	{
+		infos->px += (infos->ray_infos->dir_x) * speed;
+		infos->py += (infos->ray_infos->dir_y) * speed;
+	}
+	if (keys->S == 1)
+	{
+		infos->px -= (infos->ray_infos->dir_x) * speed;
+		infos->py -= (infos->ray_infos->dir_y) * speed;
+	}
+	if (keys->A == 1)
+	{
+		infos->px -= (infos->ray_infos->dir_y * -1) * speed;
+		infos->py -= (infos->ray_infos->dir_x) * speed;
+	}
+	if (keys->D == 1)
+	{
+		infos->px += (infos->ray_infos->dir_y * -1) * speed;
+		infos->py += (infos->ray_infos->dir_x) * speed;
+	}
+}
+
+int	keys_pressed(int keycode, t_global_infos *infos)
+{
+	t_keys	*keys;
+
+	keys = infos->keys;
+	if (keycode == 119)
+		keys->W = 1;
+	if (keycode == 115)
+		keys->S = 1;
+	if (keycode == 100)
+		keys->D = 1;
+	if (keycode == 97)
+		keys->A = 1;
+	if (keycode == 65363)
+		keys->left = 1;
+	if (keycode == 65361)
+		keys->right = 1;
+	if (keycode == 65307)
+	{
+		free_rendering(infos);
+		exit(0);
+	}
+	return (0);
+}
+
+int	keys_released(int keycode, t_global_infos *infos)
+{
+	t_keys	*keys;
+
+	keys = infos->keys;
+	if (keycode == 119)
+		keys->W = 0;
+	if (keycode == 115)
+		keys->S = 0;
+	if (keycode == 100)
+		keys->D = 0;
+	if (keycode == 97)
+		keys->A = 0;
+	if (keycode == 65363)
+		keys->left = 0;
+	if (keycode == 65361)
+		keys->right = 0;
+	return (0);
+}
