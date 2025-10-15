@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:01:38 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/13 14:42:44 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/15 16:40:10 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ static void	calculs_of_vectors(t_global_infos *infos, int i)
 {
 	double	camera_x;
 
-	infos->ray_angle = atan2(infos->ray_infos->ray_dir_y,
-			infos->ray_infos->ray_dir_x);
 	camera_x = 2 * i / (double)infos->map_infos->width - 1;
 	infos->ray_infos->ray_dir_x = infos->ray_infos->dir_x
 		+ infos->ray_infos->plane_x * camera_x;
@@ -44,8 +42,6 @@ int	raycasting(void *param)
 	calcul_the_fps();
 	update_player_position(infos);
 	update_player_rotation(infos);
-	infos->p_angle = atan2(infos->ray_infos->dir_y, infos->ray_infos->dir_x);
-	create_image(infos, &infos->img);
 	while (i < infos->map_infos->width)
 	{
 		calculs_of_vectors(infos, i);
@@ -53,6 +49,6 @@ int	raycasting(void *param)
 		graphic_rendering(distance, &infos->img, i, infos);
 		i++;
 	}
-	destroy_image(infos, &infos->img);
+	mlx_put_image_to_window(infos->mlx, infos->mlx_win, infos->img.img, 0, 0);
 	return (0);
 }

@@ -59,7 +59,6 @@ int	keys_released(int keycode, t_global_infos *infos);
 /*---window_handeling---*/
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	create_image(t_global_infos *infos, t_data *img);
-void	destroy_image(t_global_infos *infos, t_data *img);
 void	window_handeling(t_global_infos *infos);
 
 /*---main---*/

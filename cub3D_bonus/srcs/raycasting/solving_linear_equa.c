@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:32:09 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/09 16:35:19 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/15 11:21:53 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ static double	horizontal_linear_equa(t_global_infos *infos,
 double	solving_linear_equa(t_global_infos *infos)
 {
 	t_linear_equa	linear_ray;
-	double			fisheye_correc;
+	double			fisheye_correc = 1;
 
 	ft_memset(&linear_ray, 0, sizeof(t_linear_equa));
 	init_linear_ray(infos, &linear_ray);
