@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:01:38 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/15 16:40:10 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/17 15:03:38 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,9 @@
 static void	calculs_of_vectors(t_global_infos *infos, int i)
 {
 	double	camera_x;
-
+	
+	infos->ray_angle = atan2(infos->ray_infos->ray_dir_y,
+			infos->ray_infos->ray_dir_x);
 	camera_x = 2 * i / (double)infos->map_infos->width - 1;
 	infos->ray_infos->ray_dir_x = infos->ray_infos->dir_x
 		+ infos->ray_infos->plane_x * camera_x;
@@ -39,7 +41,8 @@ int	raycasting(void *param)
 
 	infos = (t_global_infos *)param;
 	i = 0;
-	calcul_the_fps();
+	calcul_the_fps(infos);
+	infos->p_angle = atan2(infos->ray_infos->dir_y, infos->ray_infos->dir_x);
 	update_player_position(infos);
 	update_player_rotation(infos);
 	while (i < infos->map_infos->width)

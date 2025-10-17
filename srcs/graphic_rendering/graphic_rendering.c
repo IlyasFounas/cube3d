@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/17 11:11:56 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/17 16:25:13 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void	graphic_rendering(double distance, t_data *img, int i,
 			wall_rendering(infos, img, i, y);
 		}
 		else
-			my_mlx_pixel_put(img, i, y, 0x00333333);
+			my_mlx_pixel_put(img, i, y, 0x042f09);
 		y++;
 	}
 }
