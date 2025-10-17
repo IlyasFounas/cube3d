@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:58:52 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/17 11:07:18 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/17 12:58:40 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,13 @@ void	update_player_rotation(t_global_infos *infos)
 	}
 }
 
+void	wall_collision(t_global_infos *infos, double y, double x)
+{
+	if (infos->map[y][x] != 1)
+		return (1);
+	return (0);
+}
+
 void	update_player_position(t_global_infos *infos)
 {
 	t_keys	*keys;
@@ -47,22 +54,30 @@ void	update_player_position(t_global_infos *infos)
 
 	keys = infos->keys;
 	speed = 0.01 * (300 / infos->fps);
-	if (keys->W == 1)
+	if (keys->W == 1 && wall_collision(infos, infos->px
+			+ (infos->ray_infos->dir_x) * speed, infos->py
+			+ (infos->ray_infos->dir_y) * speed) == 1)
 	{
 		infos->px += (infos->ray_infos->dir_x) * speed;
 		infos->py += (infos->ray_infos->dir_y) * speed;
 	}
-	if (keys->S == 1)
+	if (keys->S == 1 && wall_collision(infos, infos->px
+			- (infos->ray_infos->dir_x) * speed, infos->py
+			- (infos->ray_infos->dir_y) * speed) == 1)
 	{
 		infos->px -= (infos->ray_infos->dir_x) * speed;
 		infos->py -= (infos->ray_infos->dir_y) * speed;
 	}
-	if (keys->A == 1)
+	if (keys->A == 1 && wall_collision(infos, infos->px
+			- (infos->ray_infos->dir_y * -1) * speed, infos->py
+			- (infos->ray_infos->dir_x) * speed) == 1)
 	{
 		infos->px -= (infos->ray_infos->dir_y * -1) * speed;
 		infos->py -= (infos->ray_infos->dir_x) * speed;
 	}
-	if (keys->D == 1)
+	if (keys->D == 1 && wall_collision(infos, infos->px
+			+ (infos->ray_infos->dir_y * -1) * speed, infos->py
+			+ (infos->ray_infos->dir_x) * speed) == 1)
 	{
 		infos->px += (infos->ray_infos->dir_y * -1) * speed;
 		infos->py += (infos->ray_infos->dir_x) * speed;
