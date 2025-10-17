@@ -1,5 +1,3 @@
 .vscode
-cub3D/cube3d
-cub3D_bonus/cube3d_bonus
-cub3D/objs/
-cub3D_bonus/objs/
+cube3d
+objs/
