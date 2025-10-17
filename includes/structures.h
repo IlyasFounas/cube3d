@@ -91,6 +91,7 @@ typedef struct s_global_infos
 	t_textures			*textures;
 	t_keys				*keys;
 	t_data				img;
+	int					fps;
 }						t_global_infos;
 
 #endif

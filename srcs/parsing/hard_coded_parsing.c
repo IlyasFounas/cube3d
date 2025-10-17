@@ -37,10 +37,10 @@ void	create_textures(t_global_infos *infos)
 
 	i = 0;
 	malloc_failed = 0;
-	textures[0] = "textures/cobblestone_01.xpm";
-	textures[1] = "textures/cobblestone_02.xpm";
-	textures[2] = "textures/cobblestone.xpm";
-	textures[3] = "textures/mossy_cobblestone1.xpm";
+	textures[0] = "textures/respawn_anchor_side0.xpm";
+	textures[1] = "textures/respawn_anchor_side2.xpm";
+	textures[2] = "textures/respawn_anchor_side3.xpm";
+	textures[3] = "textures/respawn_anchor_side4.xpm";
 	types[0] = NORTH;
 	types[1] = SOUTH;
 	types[2] = EAST;

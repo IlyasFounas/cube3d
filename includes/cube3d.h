@@ -19,7 +19,7 @@
 void	free_rendering(t_global_infos *infos);
 
 /*---graphic_rendering---*/
-void	calcul_the_fps(void);
+void	calcul_the_fps(t_global_infos *infos);
 void	graphic_rendering(double distance, t_data *img, int i,
 		t_global_infos *infos);
 

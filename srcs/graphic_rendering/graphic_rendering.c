@@ -6,14 +6,14 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/09 16:34:36 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/17 11:11:56 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 #include <sys/time.h>
 
-void	calcul_the_fps(void)
+void	calcul_the_fps(t_global_infos *infos)
 {
 	static double			elapsed_seconds;
 	static int				frame_count;
@@ -27,9 +27,15 @@ void	calcul_the_fps(void)
 	if (elapsed_seconds >= 1.0)
 	{
 		printf("FPS: %d\n", frame_count);
-		frame_count = 0;
+		if (frame_count == 1)
+			infos->fps = 30;
+		else if (frame_count > 100)
+			infos->fps = 100;
+		else
+			infos->fps = frame_count;
 		last_time = current_time;
 		elapsed_seconds = 0;
+		frame_count = 0;
 	}
 }
 
