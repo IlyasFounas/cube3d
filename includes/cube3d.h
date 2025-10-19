@@ -11,6 +11,7 @@
 # include <unistd.h>
 #include <sys/stat.h>
 #include <fcntl.h>
+#include <stdbool.h>
 
 /*___________hard_coded_parsing_____*/
 void	init_structs(t_global_infos *infos);
@@ -36,11 +37,22 @@ void	destroy_image(t_global_infos *infos, t_data *img);
 void	window_handeling(t_global_infos *infos);
 
 /*___________parsing___________*/
-t_bool	file_map(t_map_infos *map, int fd);
-t_bool	is_surr_by_wall(t_map_infos *map);
-int		get_map_width(int fd);
+bool	safe_open(char *filename, int *fd);
+bool	get_map_width(t_map_infos *map);
+bool	parse_scene(t_map_infos *map);
+void	copy_file(t_map_infos *map);
+bool 	is_surr_by_wall(t_map_infos *map);
+bool	check_map_validity(t_map_infos *map);
 
 void	init_map(t_map_infos *map);
-void	free_map(t_map_infos *map);
+void	init_fd(t_map_infos *map, t_fd *fd, char *name, int fd_i);
+
+bool	is_texture(char *s);
+bool	is_color(char *str);
+bool	is_map(char *s);
+bool	is_null_color(t_color color);
+
+void	exit_if(bool cnd, t_map_infos *map, char *msg, int code);
+void	free_dbl_char(char **tab, int start, int end);
 
 #endif

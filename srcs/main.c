@@ -19,33 +19,19 @@ static void	display_error(t_global_infos *infos)
 	exit(1);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_map_infos	map;
-	int	fd;
 
-	fd = open("mapValid.cub", O_RDONLY);
-	if (fd == -1)
+	if (argc != 2)
 	{
-		printf("Error opening file\n");
-		exit(EXIT_FAILURE);
+		printf("Cub3d: invalid number of arguments\n");
+		printf("Usage: ./cub3d <map_file.cub>\n");
+		return (1);
 	}
 	init_map(&map);
-	map.width = get_map_width(fd);
-	close(fd);
-	exit_if(map.width == 0, map, "No map provided in file", EXIT_FAILURE);
-	fd = open("mapValid.cub", O_RDONLY);
-	if (fd == -1)
-	{
-		printf("Error opening file\n");
-		exit(EXIT_FAILURE);
-	}
-	file_map(&map, fd);
-	if (is_surr_by_wall(&map))
-		printf("Map surrounded by walls\n");
-	else
-		printf("Map invalid\n");
-	free_map(&map);
+	map.fd.name = argv[1];
+	parse_scene(&map);
 	// t_global_infos infos;
 
 	// ft_memset(&infos, 0, sizeof(t_global_infos));

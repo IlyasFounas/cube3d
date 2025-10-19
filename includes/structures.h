@@ -1,15 +1,13 @@
 #ifndef CUBE3D_STRUCTS_H
 # define CUBE3D_STRUCTS_H
 
+#include <stdint.h>
+#include <stdlib.h>
+#include <stdbool.h>
+
 # define EMPTY_SPACE '0'
 # define WALL '1'
 # define PLAYER_START "NSEW"
-
-typedef enum e_bool
-{
-	false,
-	true
-}				t_bool;
 
 typedef struct s_color
 {
@@ -41,12 +39,14 @@ typedef struct s_map_infos
 	int			x;
 	int			y;
 	int			start_angle;
+	t_fd		fd;
 	t_fd		no_path;
 	t_fd		so_path;
 	t_fd		we_path;
 	t_fd		ea_path;
 	t_color		floor_color;
-	t_bool		player_found;
+	t_color		ceiling_color;
+	bool		player_found;
 }				t_map_infos;
 
 typedef struct s_ray_infos
