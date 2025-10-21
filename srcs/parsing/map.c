@@ -6,15 +6,15 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:47:50 by aboumall          #+#    #+#             */
-/*   Updated: 2025/10/19 04:44:43 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/10/21 13:35:16 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-bool is_map(char *s)
+bool	is_map(char *s)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (s[i] && is_space(s[i]))
@@ -26,10 +26,10 @@ bool is_map(char *s)
 	return (false);
 }
 
-bool get_map_width(t_map_infos *map)
+bool	get_map_width(t_map_infos *map)
 {
-	int width;
-	char *line;
+	int		width;
+	char	*line;
 
 	line = NULL;
 	width = 0;
@@ -47,7 +47,7 @@ bool get_map_width(t_map_infos *map)
 	return (true);
 }
 
-void add_tab(char *line, int *i)
+void	add_tab(char *line, int *i)
 {
 	// add 4 spaces for a tab
 	line[*i] = ' ';
@@ -57,11 +57,11 @@ void add_tab(char *line, int *i)
 	*i += 4;
 }
 
-char *append_map(t_map_infos *map, char *line)
+char	*append_map(t_map_infos *map, char *line)
 {
-	int i;
-	int j;
-	char *new_line;
+	int		i;
+	int		j;
+	char	*new_line;
 
 	i = 0;
 	j = 0;
@@ -77,7 +77,7 @@ char *append_map(t_map_infos *map, char *line)
 		{
 			add_tab(new_line, &j);
 			i++;
-			continue;
+			continue ;
 		}
 		new_line[j] = line[i];
 		j++;
@@ -91,9 +91,9 @@ char *append_map(t_map_infos *map, char *line)
 	return (new_line);
 }
 
-char found_first(char *line)
+char	found_first(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i] && line[i] != '1' && line[i] != '0')
@@ -101,9 +101,9 @@ char found_first(char *line)
 	return (line[i]);
 }
 
-char found_last(char *line)
+char	found_last(char *line)
 {
-	int i;
+	int	i;
 
 	i = ft_strlen(line);
 	while (i >= 0 && line[i] != '1' && line[i] != '0')
@@ -111,9 +111,10 @@ char found_last(char *line)
 	return (line[i]);
 }
 
-bool is_surr_floor(t_map_infos *map, int x, int y)
+bool	is_surr_floor(t_map_infos *map, int x, int y)
 {
-	if (is_space(map->tmp_map[x][y + 1]) || is_space(map->tmp_map[x][y - 1]) || is_space(map->tmp_map[x + 1][y]) || is_space(map->tmp_map[x - 1][y]))
+	if (is_space(map->tmp_map[x][y + 1]) || is_space(map->tmp_map[x][y - 1])
+		|| is_space(map->tmp_map[x + 1][y]) || is_space(map->tmp_map[x - 1][y]))
 	{
 		return (false);
 	}
@@ -122,18 +123,20 @@ bool is_surr_floor(t_map_infos *map, int x, int y)
 
 bool	check_map_validity(t_map_infos *map)
 {
-	int x;
-	int y;
-	
+	int	x;
+	int	y;
+
 	x = 0;
 	y = 0;
 	while (map->tmp_map[x])
 	{
 		while (map->tmp_map[x][y])
 		{
-			if (!is_content(map->tmp_map[x][y]) && !is_space(map->tmp_map[x][y]))
+			if (!is_content(map->tmp_map[x][y])
+				&& !is_space(map->tmp_map[x][y]))
 			{
-				printf("Cub3D: invalid character '%c' in map\n", map->tmp_map[x][y]);
+				printf("Cub3D: invalid character '%c' in map\n",
+					map->tmp_map[x][y]);
 				return (false);
 			}
 			if (is_player(map->tmp_map[x][y]))
@@ -160,10 +163,10 @@ bool	check_map_validity(t_map_infos *map)
 	return (true);
 }
 
-bool is_surr_by_wall(t_map_infos *map)
+bool	is_surr_by_wall(t_map_infos *map)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	x = 1;
 	y = 0;
@@ -176,7 +179,8 @@ bool is_surr_by_wall(t_map_infos *map)
 	y = 0;
 	while (map->tmp_map[map->height - 1][y])
 	{
-		if (map->tmp_map[map->height - 1][y] != '1' && !is_space(map->tmp_map[map->height - 1][y]))
+		if (map->tmp_map[map->height - 1][y] != '1'
+			&& !is_space(map->tmp_map[map->height - 1][y]))
 			return (false);
 		y++;
 	}
@@ -198,10 +202,10 @@ bool is_surr_by_wall(t_map_infos *map)
 	return (true);
 }
 
-void free_map(t_map_infos *map)
+void	free_map(t_map_infos *map)
 {
 	if (!map)
-		return;
+		return ;
 	if (map->tmp_map)
 		free_dbl_char(map->tmp_map, 0, dbl_char_len(map->tmp_map));
 	// free_fd(&map->fd);
@@ -212,7 +216,7 @@ void free_map(t_map_infos *map)
 	map = NULL;
 }
 
-void init_map(t_map_infos *map)
+void	init_map(t_map_infos *map)
 {
 	map->tmp_map = NULL;
 	map->height = 0;

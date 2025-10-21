@@ -6,18 +6,18 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 04:32:19 by aboumall          #+#    #+#             */
-/*   Updated: 2025/10/19 04:44:54 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/10/21 13:09:39 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-void free_dbl_char(char **tab, int start, int end)
+void	free_dbl_char(char **tab, int start, int end)
 {
-	int i;
+	int	i;
 
 	if (!tab)
-		return;
+		return ;
 	i = start;
 	while (i < end)
 	{
@@ -29,10 +29,10 @@ void free_dbl_char(char **tab, int start, int end)
 	tab = NULL;
 }
 
-int ft_strlen_trim(const char *tab)
+int	ft_strlen_trim(const char *tab)
 {
-	int i;
-	int len;
+	int	i;
+	int	len;
 
 	len = ft_strlen(tab);
 	i = 0;
@@ -54,7 +54,7 @@ bool	safe_open(char *filename, int *fd)
 	return (true);
 }
 
-void free_fd(t_fd *fd)
+void	free_fd(t_fd *fd)
 {
 	if (fd->name)
 		free(fd->name);
@@ -64,7 +64,7 @@ void free_fd(t_fd *fd)
 	fd->fd = -1;
 }
 
-void init_fd(t_map_infos *map, t_fd *fd, char *name, int fd_i)
+void	init_fd(t_map_infos *map, t_fd *fd, char *name, int fd_i)
 {
 	if (!name)
 		fd->name = NULL;
@@ -84,7 +84,7 @@ void init_fd(t_map_infos *map, t_fd *fd, char *name, int fd_i)
 	fd->fd = fd_i;
 }
 
-void exit_if(bool cnd, t_map_infos *map, char *msg, int code)
+void	exit_if(bool cnd, t_map_infos *map, char *msg, int code)
 {
 	if (cnd == true)
 	{
@@ -97,7 +97,7 @@ void exit_if(bool cnd, t_map_infos *map, char *msg, int code)
 
 int	dbl_char_len(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!tab)

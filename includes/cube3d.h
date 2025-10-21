@@ -37,16 +37,27 @@ void	destroy_image(t_global_infos *infos, t_data *img);
 void	window_handeling(t_global_infos *infos);
 
 /*___________parsing___________*/
-bool	safe_open(char *filename, int *fd);
 bool	get_map_width(t_map_infos *map);
-bool	parse_scene(t_map_infos *map);
-void	copy_file(t_map_infos *map);
 bool 	is_surr_by_wall(t_map_infos *map);
 bool	check_map_validity(t_map_infos *map);
+int		ft_line_len(char *line);
+int		dbl_char_len(char **tab);
+
+void	copy_file(t_map_infos *map);
+bool	parse_scene(t_map_infos *map);
+void	parse_textures(t_map_infos *map);
+bool	safe_open(char *filename, int *fd);
 
 void	init_map(t_map_infos *map);
-void	init_fd(t_map_infos *map, t_fd *fd, char *name, int fd_i);
+char	*append_map(t_map_infos *map, char *line);
+void	parse_colors(t_map_infos *map);
 
+void	init_fd(t_map_infos *map, t_fd *fd, char *name, int fd_i);
+void	free_map(t_map_infos *map);
+
+bool	is_player(char c);
+bool	is_content(char c);
+bool	is_space(char c);
 bool	is_texture(char *s);
 bool	is_color(char *str);
 bool	is_map(char *s);

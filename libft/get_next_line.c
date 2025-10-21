@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 11:05:16 by sgoffaux          #+#    #+#             */
-/*   Updated: 2025/09/25 17:14:08 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/10/21 13:34:52 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ static int	ft_get_next_line(int fd, char **line)
 {
 	static char		buf[1024][10 + 1];
 	int				ret;
+	static int		eof;
 
 	*line = NULL;
 	ret = ft_add_to_line(line, buf[fd]);
@@ -73,18 +74,18 @@ static int	ft_get_next_line(int fd, char **line)
 		ret = read(fd, buf[fd], 10);
 		if (ret < 1)
 		{
-			if (ret < 0)
+			if (ret < 0 || eof)
 			{
 				free(*line);
 				*line = NULL;
 			}
+			eof = 1;
 			return (ret);
 		}
+		eof = 0;
 		buf[fd][ret] = '\0';
 		ret = ft_add_to_line(line, buf[fd]);
 	}
-	if (ret == -1)
-		return (-1);
 	(*line)[ret] = '\0';
 	return (1);
 }
