@@ -1,14 +1,14 @@
-/* ************************************************************************** */
+/******************************************************************************/
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   graphic_rendering.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/22 16:57:33 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/22 22:14:14 by marvin           ###   ########.fr       */
 /*                                                                            */
-/* ************************************************************************** */
+/******************************************************************************/
 
 #include "cube3d.h"
 #include <sys/time.h>
@@ -51,23 +51,22 @@ void	graphic_rendering(double distance, t_data *img, int i,
 
 	y = 0;
 	wall_height = (int)(infos->map_infos->height / distance);
-	if (wall_height >= infos->map_infos->height)
-		wall_height = infos->map_infos->height;
 	start_y = (infos->map_infos->height - wall_height) * 0.5;
 	if (start_y < 0)
 		start_y = 0;
 	end_y = start_y + wall_height;
 	if (end_y < 0)
 		end_y = 0;
+	double step = (double)infos->textures->t_height / wall_height;
+	double tex_pos = (start_y - infos->map_infos->height * 0.5 + wall_height * 0.5) * step;
 	while (y < infos->map_infos->height)
 	{
 		if (y < start_y)
 			my_mlx_pixel_put(img, i, y, 0x00666666);
 		else if (y >= start_y && y < end_y)
 		{
-			infos->tex_y = ((double)(y - start_y) / wall_height)
-				* infos->textures->t_height;
-			// infos->tex_y = 30;
+			infos->tex_y = (int)tex_pos % infos->textures->t_height;
+			tex_pos += step;
 			wall_rendering(infos, img, i, y);
 		}
 		else
