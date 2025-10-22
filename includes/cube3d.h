@@ -13,6 +13,7 @@
 # include <unistd.h>
 # define MALLOC_FAILED 1
 # define SUCCESS 0
+#define M_PI 3.14159265358979323846
 
 /*____________________________GRAPHIC_RENDERING__________________________*/
 /*---free_rendering---*/

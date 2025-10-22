@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:01:38 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/17 15:03:38 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/22 10:11:03 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,20 @@
 
 static void	calculs_of_vectors(t_global_infos *infos, int i)
 {
-	double	camera_x;
+	// double	camera_x;
 	
-	infos->ray_angle = atan2(infos->ray_infos->ray_dir_y,
-			infos->ray_infos->ray_dir_x);
-	camera_x = 2 * i / (double)infos->map_infos->width - 1;
-	infos->ray_infos->ray_dir_x = infos->ray_infos->dir_x
-		+ infos->ray_infos->plane_x * camera_x;
-	infos->ray_infos->ray_dir_y = infos->ray_infos->dir_y
-		+ infos->ray_infos->plane_y * camera_x;
+	double ratio = (double)i / (double)infos->map_infos->width;
+	int fov = 60.0 * M_PI / 180.0; 
+	infos->ray_angle = infos->p_angle - (fov / 2) + (ratio * fov);
+	// infos->ray_angle = atan2(infos->ray_infos->ray_dir_y,
+	// 		infos->ray_infos->ray_dir_x);
+	// camera_x = 2 * i / (double)infos->map_infos->width - 1;
+	// infos->ray_infos->ray_dir_x = infos->ray_infos->dir_x
+	// 	+ infos->ray_infos->plane_x * camera_x;
+	// infos->ray_infos->ray_dir_y = infos->ray_infos->dir_y
+	// 	+ infos->ray_infos->plane_y * camera_x;
+	infos->ray_infos->ray_dir_x = cos(infos->ray_angle);
+	infos->ray_infos->ray_dir_y = sin(infos->ray_angle);
 }
 
 /**

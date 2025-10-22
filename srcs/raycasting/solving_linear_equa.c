@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:32:09 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/17 16:17:04 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/22 10:07:41 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,6 @@ static double	horizontal_linear_equa(t_global_infos *infos,
 double	solving_linear_equa(t_global_infos *infos)
 {
 	t_linear_equa	linear_ray;
-	double			fisheye_correc;
 
 	ft_memset(&linear_ray, 0, sizeof(t_linear_equa));
 	init_linear_ray(infos, &linear_ray);
@@ -103,10 +102,8 @@ double	solving_linear_equa(t_global_infos *infos)
 		linear_ray.shortest_t = linear_ray.t_vertical;
 	if (linear_ray.shortest_t != -1)
 	{
-		fisheye_correc = infos->ray_infos->ray_dir_x * infos->ray_infos->dir_x
-			+ infos->ray_infos->ray_dir_y * infos->ray_infos->dir_y;
 		setting_the_right_texture(infos, &linear_ray);
-		return (linear_ray.shortest_t * fisheye_correc);
+		return (linear_ray.shortest_t * cos(infos->p_angle - infos->ray_angle));
 	}
 	return (0);
 }

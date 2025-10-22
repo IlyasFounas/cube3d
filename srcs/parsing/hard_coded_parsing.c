@@ -64,7 +64,7 @@ void	init_structs(t_global_infos *infos)
 {
 	infos->px = 1.0;
 	infos->py = 6.0;
-	infos->ray_infos->plane_x = 0.66;
+	infos->ray_infos->plane_x = tan((60 * M_PI / 180.0) / 2.0);
 	infos->ray_infos->dir_x = 0.0;
 	infos->ray_infos->dir_y = -1.0;
 	infos->map_infos->x = 20;

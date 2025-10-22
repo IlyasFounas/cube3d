@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/17 16:25:13 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/21 13:14:18 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ void	calcul_the_fps(t_global_infos *infos)
 			infos->fps = 30;
 		else if (frame_count > 100)
 			infos->fps = 100;
+		else if (frame_count > 200)
+			infos->fps = 150;
 		else
 			infos->fps = frame_count;
 		last_time = current_time;
@@ -49,7 +51,7 @@ void	graphic_rendering(double distance, t_data *img, int i,
 
 	y = 0;
 	wall_height = (int)(infos->map_infos->height / distance);
-	if (wall_height > infos->map_infos->height)
+	if (wall_height >= infos->map_infos->height)
 		wall_height = infos->map_infos->height;
 	start_y = (infos->map_infos->height - wall_height) * 0.5;
 	if (start_y < 0)
