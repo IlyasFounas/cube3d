@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/21 13:14:18 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/22 16:57:33 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void	graphic_rendering(double distance, t_data *img, int i,
 		{
 			infos->tex_y = ((double)(y - start_y) / wall_height)
 				* infos->textures->t_height;
+			// infos->tex_y = 30;
 			wall_rendering(infos, img, i, y);
 		}
 		else

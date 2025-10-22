@@ -62,14 +62,13 @@ void	create_textures(t_global_infos *infos)
 
 void	init_structs(t_global_infos *infos)
 {
-	infos->px = 1.0;
+	infos->px = 3.0;
 	infos->py = 6.0;
-	infos->ray_infos->plane_x = tan((60 * M_PI / 180.0) / 2.0);
 	infos->ray_infos->dir_x = 0.0;
 	infos->ray_infos->dir_y = -1.0;
 	infos->map_infos->x = 20;
 	infos->map_infos->y = 20;
-	infos->map_infos->width = 1920;
+	infos->map_infos->width = 1080;
 	infos->map_infos->height = 1080;
 	infos->map = hard_coded_2dmap(infos);
 }

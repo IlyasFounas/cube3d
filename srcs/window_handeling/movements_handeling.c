@@ -6,39 +6,58 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:58:52 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/17 13:37:33 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/22 11:05:15 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
+// void	update_player_rotation(t_global_infos *infos)
+// {
+// 	t_keys		*keys;
+// 	t_ray_infos	*ray;
+// 	double		new_x;
+// 	double		new_y;
+// 	double		angle;
+
+// 	keys = infos->keys;
+// 	ray = infos->ray_infos;
+// 	angle = 0.01 * (300 / infos->fps);
+// 	if (keys->right == 1)
+// 		angle *= -1;
+// 	if (keys->left == 1 || keys->right == 1)
+// 	{
+// 		new_x = (ray->dir_x * cos(angle)) - (ray->dir_y * sin(angle));
+// 		new_y = (ray->dir_x * sin(angle)) + (ray->dir_y * cos(angle));
+// 		ray->dir_x = new_x;
+// 		ray->dir_y = new_y;
+// 	}
+// }
+
 void	update_player_rotation(t_global_infos *infos)
 {
 	t_keys		*keys;
 	t_ray_infos	*ray;
-	double		new_x;
-	double		new_y;
-	double		angle;
-	double		new_pl_x;
-	double		new_pl_y;
+	double		old_dir_x;
+	double		rot_speed;
 
 	keys = infos->keys;
 	ray = infos->ray_infos;
-	angle = 0.01 * (300 / infos->fps);
-	if (keys->right == 1)
-		angle *= -1;
-	if (keys->left == 1 || keys->right == 1)
+	rot_speed = 0.02 * (300.0 / infos->fps);
+
+	old_dir_x = ray->dir_x;
+	if (keys->left)
 	{
-		new_x = (ray->dir_x * cos(angle)) - (ray->dir_y * sin(angle));
-		new_y = (ray->dir_x * sin(angle)) + (ray->dir_y * cos(angle));
-		new_pl_x = (ray->plane_x * cos(angle)) - (ray->plane_y * sin(angle));
-		new_pl_y = (ray->plane_x * sin(angle)) + (ray->plane_y * cos(angle));
-		ray->dir_x = new_x;
-		ray->dir_y = new_y;
-		ray->plane_x = new_pl_x;
-		ray->plane_y = new_pl_y;
+		ray->dir_x = ray->dir_x * cos(rot_speed) - ray->dir_y * sin(rot_speed);
+		ray->dir_y = old_dir_x * sin(rot_speed) + ray->dir_y * cos(rot_speed);
+	}
+	if (keys->right)
+	{
+		ray->dir_x = ray->dir_x * cos(-rot_speed) - ray->dir_y * sin(-rot_speed);
+		ray->dir_y = old_dir_x * sin(-rot_speed) + ray->dir_y * cos(-rot_speed);
 	}
 }
+
 
 int	wall_collision(t_global_infos *infos, double y, double x)
 {
@@ -49,38 +68,40 @@ int	wall_collision(t_global_infos *infos, double y, double x)
 
 void	update_player_position(t_global_infos *infos)
 {
-	t_keys	*keys;
-	double	speed;
+	t_keys		*keys;
+	t_ray_infos	*ray;
+	double		speed;
+	double		straf_x;
+	double		straf_y;
 
 	keys = infos->keys;
-	speed = 0.01 * (300 / infos->fps);
-	if (keys->W == 1 && wall_collision(infos, infos->py
-			+ (infos->ray_infos->dir_y * speed), infos->px
-			+ (infos->ray_infos->dir_x) * speed) == 1)
+	ray = infos->ray_infos;
+	speed = 0.01 * (300.0 / infos->fps);
+	straf_x = -ray->dir_y;
+	straf_y = ray->dir_x;
+	if (keys->W == 1 && wall_collision(infos, infos->py + ray->dir_y * speed,
+			infos->px + ray->dir_x * speed) == 1)
 	{
-		infos->px += (infos->ray_infos->dir_x) * speed;
-		infos->py += (infos->ray_infos->dir_y) * speed;
+		infos->px += ray->dir_x * speed;
+		infos->py += ray->dir_y * speed;
 	}
-	if (keys->S == 1 && wall_collision(infos, infos->py
-			- (infos->ray_infos->dir_y) * speed, infos->px
-			- (infos->ray_infos->dir_x) * speed) == 1)
+	if (keys->S == 1 && wall_collision(infos, infos->py - ray->dir_y * speed,
+			infos->px - ray->dir_x * speed) == 1)
 	{
-		infos->px -= (infos->ray_infos->dir_x) * speed;
-		infos->py -= (infos->ray_infos->dir_y) * speed;
+		infos->px -= ray->dir_x * speed;
+		infos->py -= ray->dir_y * speed;
 	}
-	if (keys->A == 1 && wall_collision(infos, infos->py
-			- (infos->ray_infos->dir_x) * speed, infos->px
-			- (infos->ray_infos->dir_y * -1) * speed) == 1)
+	if (keys->A == 1 && wall_collision(infos, infos->py - straf_y * speed,
+			infos->px + straf_x * speed) == 1)
 	{
-		infos->px -= (infos->ray_infos->dir_y * -1) * speed;
-		infos->py -= (infos->ray_infos->dir_x) * speed;
+		infos->px -= straf_x * speed;
+		infos->py -= straf_y * speed;
 	}
-	if (keys->D == 1 && wall_collision(infos, infos->py
-			+ (infos->ray_infos->dir_x) * speed, infos->px
-			+ (infos->ray_infos->dir_y * -1) * speed) == 1)
+	if (keys->D == 1 && wall_collision(infos, infos->py + straf_y * speed,
+			infos->px - straf_x * speed) == 1)
 	{
-		infos->px += (infos->ray_infos->dir_y * -1) * speed;
-		infos->py += (infos->ray_infos->dir_x) * speed;
+		infos->px += straf_x * speed;
+		infos->py += straf_y * speed;
 	}
 }
 
