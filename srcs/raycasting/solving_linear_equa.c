@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:32:09 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/22 16:32:03 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/23 10:33:02 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ double	solving_linear_equa(t_global_infos *infos)
 	if (linear_ray.shortest_t != -1)
 	{
 		setting_the_right_texture(infos, &linear_ray);
-		return (linear_ray.shortest_t * cos(infos->p_angle - infos->ray_angle ));
+		return (linear_ray.shortest_t);
 	}
 	return (0);
 }

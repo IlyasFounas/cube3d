@@ -1,14 +1,14 @@
-/******************************************************************************/
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   graphic_rendering.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/22 22:14:14 by marvin           ###   ########.fr       */
+/*   Updated: 2025/10/23 10:48:11 by ifounas          ###   ########.fr       */
 /*                                                                            */
-/******************************************************************************/
+/* ************************************************************************** */
 
 #include "cube3d.h"
 #include <sys/time.h>
@@ -44,10 +44,12 @@ void	calcul_the_fps(t_global_infos *infos)
 void	graphic_rendering(double distance, t_data *img, int i,
 		t_global_infos *infos)
 {
-	int	wall_height;
-	int	start_y;
-	int	end_y;
-	int	y;
+	int		wall_height;
+	int		start_y;
+	int		end_y;
+	int		y;
+	double	step;
+	double	tex_pos;
 
 	y = 0;
 	wall_height = (int)(infos->map_infos->height / distance);
@@ -57,8 +59,9 @@ void	graphic_rendering(double distance, t_data *img, int i,
 	end_y = start_y + wall_height;
 	if (end_y < 0)
 		end_y = 0;
-	double step = (double)infos->textures->t_height / wall_height;
-	double tex_pos = (start_y - infos->map_infos->height * 0.5 + wall_height * 0.5) * step;
+	step = (double)infos->textures->t_height / wall_height;
+	tex_pos = (start_y - infos->map_infos->height * 0.5 + wall_height * 0.5)
+		* step;
 	while (y < infos->map_infos->height)
 	{
 		if (y < start_y)
