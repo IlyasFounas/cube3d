@@ -1,19 +1,19 @@
 #ifndef CUBE3D_RENDER_H
 # define CUBE3D_RENDER_H
 
-# include "get_next_line.h"
 # include "libft.h"
 # include "mlx.h"
 # include "structures.h"
 # include <fcntl.h>
 # include <math.h>
+# include <stdbool.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
 # define MALLOC_FAILED 1
 # define SUCCESS 0
-#define M_PI 3.14159265358979323846
+# define M_PI 3.14159265358979323846
 
 /*____________________________GRAPHIC_RENDERING__________________________*/
 /*---free_rendering---*/
@@ -61,6 +61,46 @@ int	keys_released(int keycode, t_global_infos *infos);
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	create_image(t_global_infos *infos, t_data *img);
 void	window_handeling(t_global_infos *infos);
+
+/*___________parsing___________*/
+int	ft_line_len(char *line);
+int	dbl_char_len(char **tab);
+bool	get_map_width(t_map_infos *map);
+bool	is_surr_by_wall(t_map_infos *map);
+bool	check_map_validity(t_map_infos *map);
+
+void	copy_file(t_map_infos *map);
+void	add_tab(char *line, int *i);
+bool	parse_scene(t_map_infos *map);
+void	parse_colors(t_map_infos *map);
+void	parse_textures(t_map_infos *map);
+
+char	found_last(char *line);
+char	found_first(char *line);
+int	**fill_map(t_map_infos *map);
+char	*append_map(t_map_infos *map, char *line);
+void	init_map(t_map_infos *map, char *filename);
+bool	is_surr_floor(t_map_infos *map, int x, int y);
+
+void	free_fd(t_fd *fd);
+void	free_map(t_map_infos *map);
+void	init_fd(t_map_infos *map, t_fd *fd, char *name, int fd_i);
+
+bool	is_map(char *s);
+bool	is_space(char c);
+bool	is_player(char c);
+bool	is_content(char c);
+bool	is_texture(char *s);
+bool	is_color(char *str);
+bool	is_xpm_file(char *filename);
+bool	is_cub_file(char *filename);
+bool	is_null_color(t_color color);
+bool	is_good_color(t_color color);
+
+int	ft_strlen_trim(const char *tab);
+bool	safe_open(char *filename, int *fd);
+void	exit_if(bool cnd, t_map_infos *map, char *msg, int code);
+void	free_dbl_char(char **tab, int start, int end, bool free_all);
 
 /*---main---*/
 void	malloc_error(t_global_infos *infos);

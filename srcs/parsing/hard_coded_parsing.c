@@ -37,10 +37,10 @@ void	create_textures(t_global_infos *infos)
 
 	i = 0;
 	malloc_failed = 0;
-	textures[0] = "textures/respawn_anchor_side0.xpm";
-	textures[1] = "textures/respawn_anchor_side2.xpm";
-	textures[2] = "textures/respawn_anchor_side3.xpm";
-	textures[3] = "textures/respawn_anchor_side4.xpm";
+	textures[0] = infos->map_infos->no_path.name;
+	textures[1] = infos->map_infos->so_path.name;
+	textures[2] = infos->map_infos->ea_path.name;
+	textures[3] = infos->map_infos->we_path.name;
 	types[0] = NORTH;
 	types[1] = SOUTH;
 	types[2] = EAST;
@@ -60,19 +60,67 @@ void	create_textures(t_global_infos *infos)
 	}
 }
 
+void	set_dirs(t_global_infos *infos)
+{
+	t_map_infos *map;
+
+	map = infos->map_infos;
+	if (map->start_angle == 90)
+	{
+		infos->ray_infos->dir_x = 0.0;
+		infos->ray_infos->dir_y = 1.0;
+	}
+	else if (map->start_angle == -90)
+	{
+		infos->ray_infos->dir_x = 0.0;
+		infos->ray_infos->dir_y = -1.0;
+	}
+	else if (map->start_angle == 0)
+	{
+		infos->ray_infos->dir_x = 1.0;
+		infos->ray_infos->dir_y = 0.0;
+	}
+	else if (map->start_angle == 180)
+	{
+		infos->ray_infos->dir_x = -1.0;
+		infos->ray_infos->dir_y = 0.0;
+	}
+	infos->ray_infos->plane_x = (60.0 * M_PI / 180.0) / 2;
+}
+
 void	init_structs(t_global_infos *infos)
 {
-	infos->px = 3.0;
+	t_map_infos *map;
+
+	map = infos->map_infos;
+	infos->px = (double)map->x;
+	infos->py = (double)map->y;
+	set_dirs(infos);
+	printf("dirx: %f\ndiry: %f\n", infos->ray_infos->dir_x, infos->ray_infos->dir_y);
+	// infos->ray_infos->dir_x = 0.0;
+	// infos->ray_infos->dir_y = -1.0;
+	infos->map = fill_map(infos->map_infos);
+	infos->map_infos->x = map->width;
+	infos->map_infos->y = map->height;
+	infos->map_infos->width = 1920;
+	infos->map_infos->height = 1280;
+	printf("px: %f, py: %f\n", infos->px, infos->py);
+	printf("m_x: %d, m_y: %d\n", infos->map_infos->x, infos->map_infos->y);
+}
+
+/* void	init_structs(t_global_infos *infos)
+{
+	infos->px = 1.0;
 	infos->py = 6.0;
-	infos->ray_infos->plane_x = (60.0 * M_PI / 180.0) / 2;
+	infos->ray_infos->plane_x = 0.66;
 	infos->ray_infos->dir_x = 0.0;
 	infos->ray_infos->dir_y = -1.0;
 	infos->map_infos->x = 20;
 	infos->map_infos->y = 20;
-	infos->map_infos->width = 1920;
-	infos->map_infos->height = 1280;
+	infos->map_infos->width = 640;
+	infos->map_infos->height = 460;
 	infos->map = hard_coded_2dmap(infos);
-}
+} */
 
 int	**hard_coded_2dmap(t_global_infos *infos)
 {

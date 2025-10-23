@@ -19,17 +19,25 @@ void	malloc_error(t_global_infos *infos)
 	exit(MALLOC_FAILED);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
 	t_global_infos	infos;
+	t_map_infos map;
 
+	if (argc != 2)
+	{
+		printf("Cub3d: invalid number of arguments\n");
+		printf("Usage: ./cub3d <map_file.cub>\n");
+		return (1);
+	}
 	ft_memset(&infos, 0, sizeof(t_global_infos));
-	infos.map_infos = malloc(sizeof(t_map_infos));
+	init_map(&map, argv[1]);
+	exit_if(!parse_scene(&map), &map, NULL, EXIT_FAILURE);
+	infos.map_infos = &map;
 	infos.ray_infos = malloc(sizeof(t_ray_infos));
 	infos.keys = malloc(sizeof(t_keys));
-	if (!infos.map_infos || !infos.ray_infos || !infos.keys)
+	if (!infos.ray_infos || !infos.keys)
 		malloc_error(&infos);
-	ft_memset(infos.map_infos, 0, sizeof(t_map_infos));
 	ft_memset(infos.ray_infos, 0, sizeof(t_ray_infos));
 	ft_memset(infos.keys, 0, sizeof(t_keys));
 	init_structs(&infos);
