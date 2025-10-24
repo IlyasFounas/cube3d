@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:58:52 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/23 11:38:19 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/23 12:38:14 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,26 +38,15 @@ void	update_player_rotation(t_global_infos *infos)
 	}
 }
 
-int	wall_collision(t_global_infos *infos, double y, double x)
-{
-	if (infos->map[(int)floor(y)][(int)floor(x)] != 1)
-		return (1);
-	return (1);
-}
-
 void	update_player_position(t_global_infos *infos)
 {
 	t_keys		*keys;
 	t_ray_infos	*ray;
 	double		speed;
-	double		straf_x;
-	double		straf_y;
 
 	keys = infos->keys;
 	ray = infos->ray_infos;
 	speed = 0.01 * (300.0 / infos->fps);
-	straf_x = -ray->dir_y;
-	straf_y = ray->dir_x;
 	if (keys->W == 1 && wall_collision(infos, infos->py + ray->dir_y * speed,
 			infos->px + ray->dir_x * speed) == 1)
 	{
@@ -70,18 +59,7 @@ void	update_player_position(t_global_infos *infos)
 		infos->px -= ray->dir_x * speed;
 		infos->py -= ray->dir_y * speed;
 	}
-	if (keys->A == 1 && wall_collision(infos, infos->py - straf_y * speed,
-			infos->px + straf_x * speed) == 1)
-	{
-		infos->px -= straf_x * speed;
-		infos->py -= straf_y * speed;
-	}
-	if (keys->D == 1 && wall_collision(infos, infos->py + straf_y * speed,
-			infos->px - straf_x * speed) == 1)
-	{
-		infos->px += straf_x * speed;
-		infos->py += straf_y * speed;
-	}
+	straf_position(infos, keys, ray, speed);
 }
 
 int	keys_pressed(int keycode, t_global_infos *infos)

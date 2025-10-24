@@ -1,3 +1,5 @@
 .vscode
 cube3d
 objs/
+*.o
+*.a

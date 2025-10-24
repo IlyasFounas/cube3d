@@ -1,5 +1,17 @@
-#ifndef CUBE3D_STRUCTS_H
-# define CUBE3D_STRUCTS_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   structures.h                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/23 14:08:12 by ifounas           #+#    #+#             */
+/*   Updated: 2025/10/23 14:12:45 by ifounas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef STRUCTURES_H
+# define STRUCTURES_H
 
 # define EMPTY_SPACE '0'
 # define WALL '1'
@@ -150,11 +162,11 @@ typedef struct s_global_infos
 {
 	double				px;
 	double				py;
+	double				tex_step;
+	double				tex_pos;
 	void				*mlx;
 	void				*mlx_win;
 	int					**map;
-	double				p_angle;
-	double				ray_angle;
 	int					tex_x;
 	int					tex_y;
 	t_type				actual_orientation;
