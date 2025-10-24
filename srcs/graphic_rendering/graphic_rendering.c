@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/23 10:48:11 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/23 14:07:22 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,15 +41,20 @@ void	calcul_the_fps(t_global_infos *infos)
 	}
 }
 
+void	draw_wall(t_global_infos *infos, t_data *img, int i, int y)
+{
+	infos->tex_y = (int)infos->tex_pos % infos->textures->t_height;
+	infos->tex_pos += infos->tex_step;
+	wall_rendering(infos, img, i, y);
+}
+
 void	graphic_rendering(double distance, t_data *img, int i,
 		t_global_infos *infos)
 {
-	int		wall_height;
-	int		start_y;
-	int		end_y;
-	int		y;
-	double	step;
-	double	tex_pos;
+	int	wall_height;
+	int	start_y;
+	int	end_y;
+	int	y;
 
 	y = 0;
 	wall_height = (int)(infos->map_infos->height / distance);
@@ -57,21 +62,15 @@ void	graphic_rendering(double distance, t_data *img, int i,
 	if (start_y < 0)
 		start_y = 0;
 	end_y = start_y + wall_height;
-	if (end_y < 0)
-		end_y = 0;
-	step = (double)infos->textures->t_height / wall_height;
-	tex_pos = (start_y - infos->map_infos->height * 0.5 + wall_height * 0.5)
-		* step;
+	infos->tex_step = (double)infos->textures->t_height / wall_height;
+	infos->tex_pos = (start_y - infos->map_infos->height * 0.5 + wall_height
+			* 0.5) * infos->tex_step;
 	while (y < infos->map_infos->height)
 	{
 		if (y < start_y)
 			my_mlx_pixel_put(img, i, y, 0x00666666);
 		else if (y >= start_y && y < end_y)
-		{
-			infos->tex_y = (int)tex_pos % infos->textures->t_height;
-			tex_pos += step;
-			wall_rendering(infos, img, i, y);
-		}
+			draw_wall(infos, img, i, y);
 		else
 			my_mlx_pixel_put(img, i, y, 0x042f09);
 		y++;

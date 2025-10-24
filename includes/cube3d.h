@@ -1,5 +1,17 @@
-#ifndef CUBE3D_RENDER_H
-# define CUBE3D_RENDER_H
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cube3d.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/23 16:05:01 by ifounas           #+#    #+#             */
+/*   Updated: 2025/10/23 16:05:01 by ifounas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#ifndef CUBE3D_H
+# define CUBE3D_H
 
 # include "get_next_line.h"
 # include "libft.h"
@@ -13,7 +25,7 @@
 # include <unistd.h>
 # define MALLOC_FAILED 1
 # define SUCCESS 0
-#define M_PI 3.14159265358979323846
+# define M_PI 3.14159265358979323846
 
 /*____________________________GRAPHIC_RENDERING__________________________*/
 /*---free_rendering---*/
@@ -22,13 +34,13 @@ void	free_rendering(t_global_infos *infos);
 /*---graphic_rendering---*/
 void	calcul_the_fps(t_global_infos *infos);
 void	graphic_rendering(double distance, t_data *img, int i,
-		t_global_infos *infos);
+			t_global_infos *infos);
 
 /*---texture_rendering---*/
 t_textures	*new_node_texture(char *s, t_type type);
 t_textures	*last_node(t_textures *textures);
 void	add_back_node(t_textures **textures, t_textures *new,
-		int *malloc_failed);
+			int *malloc_failed);
 void	wall_rendering(t_global_infos *infos, t_data *img, int i, int y);
 
 /*____________________________PARSING__________________________________*/
@@ -36,7 +48,7 @@ void	wall_rendering(t_global_infos *infos, t_data *img, int i, int y);
 void	init_textures(t_global_infos *infos, t_textures *textures);
 void	create_textures(t_global_infos *infos);
 void	init_structs(t_global_infos *infos);
-int	**hard_coded_2dmap(t_global_infos *infos);
+int		**hard_coded_2dmap(t_global_infos *infos);
 
 /*____________________________RAYCASTING_______________________________*/
 /*---raycasting---*/
@@ -48,9 +60,14 @@ double	solving_linear_equa(t_global_infos *infos);
 /*---solving_linear_utils---*/
 void	init_linear_ray(t_global_infos *infos, t_linear_equa *linear_ray);
 void	setting_the_right_texture(t_global_infos *infos,
-		t_linear_equa *linear_ray);
+			t_linear_equa *linear_ray);
 
 /*____________________________WINDOW HANDELING_________________________*/
+/*---movements_handeling_utils---*/
+int	wall_collision(t_global_infos *infos, double y, double x);
+void	straf_position(t_global_infos *infos, t_keys *keys, t_ray_infos *ray,
+			double speed);
+
 /*---movements_handeling---*/
 void	update_player_rotation(t_global_infos *infos);
 void	update_player_position(t_global_infos *infos);
