@@ -28,6 +28,21 @@
 
 # define MSG_ERR_MAP_L "Error\nCub3d: wrong file configuration map should be last"
 
+# define FNT_0_XPM "textures/digits/0.xpm"
+# define FNT_1_XPM "textures/digits/1.xpm"
+# define FNT_2_XPM "textures/digits/2.xpm"
+# define FNT_3_XPM "textures/digits/3.xpm"
+# define FNT_4_XPM "textures/digits/4.xpm"
+# define FNT_5_XPM "textures/digits/5.xpm"
+# define FNT_6_XPM "textures/digits/6.xpm"
+# define FNT_7_XPM "textures/digits/7.xpm"
+# define FNT_8_XPM "textures/digits/8.xpm"
+# define FNT_9_XPM "textures/digits/9.xpm"
+# define FNT_F_XPM "textures/digits/F.xpm"
+# define FNT_P_XPM "textures/digits/P.xpm"
+# define FNT_S_XPM "textures/digits/S.xpm"
+# define FNT_CLN_XPM "textures/digits/colon.xpm"
+
 typedef struct s_color
 {
 	int32_t				r;
@@ -124,6 +139,13 @@ typedef struct s_ray_infos
 	double				plane_y;
 }						t_ray_infos;
 
+typedef struct s_font
+{
+	void				*img[16];
+	int					width;
+	int					height;
+}						t_font;
+
 typedef struct s_global_infos
 {
 	double				px;
@@ -142,6 +164,9 @@ typedef struct s_global_infos
 	t_keys				*keys;
 	t_data				img;
 	int					fps;
+	char				*char_fps;
+	int					***digits;
+	t_font				font;
 }						t_global_infos;
 
 #endif

@@ -102,6 +102,9 @@ bool	safe_open(char *filename, int *fd);
 void	exit_if(bool cnd, t_map_infos *map, char *msg, int code);
 void	free_dbl_char(char **tab, int start, int end, bool free_all);
 
+void	load_font(t_global_infos *infos);
+void	draw_fps(t_global_infos *infos);
+
 /*---main---*/
 void	malloc_error(t_global_infos *infos);
 

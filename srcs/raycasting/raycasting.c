@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:01:38 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/23 10:44:34 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/24 17:34:14 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ int	raycasting(void *param)
 		i++;
 	}
 	mlx_put_image_to_window(infos->mlx, infos->mlx_win, infos->img.img, 0, 0);
+	draw_fps(infos);
 	return (0);
 }
