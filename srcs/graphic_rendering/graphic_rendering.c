@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_rendering.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/24 17:37:14 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/10/25 14:37:35 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	calcul_the_fps(t_global_infos *infos)
 	if (elapsed_seconds >= 1.0)
 	{
 		infos->char_fps = ft_itoa(frame_count);
-		printf("FPS: %s\n", infos->char_fps);
 		if (frame_count == 1)
 			infos->fps = 30;
 		else if (frame_count > 100)

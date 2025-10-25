@@ -48,7 +48,6 @@ void	wall_rendering(t_global_infos *infos, t_data *img, int i, int y);
 void	init_textures(t_global_infos *infos, t_textures *textures);
 void	create_textures(t_global_infos *infos);
 void	init_structs(t_global_infos *infos);
-int		**hard_coded_2dmap(t_global_infos *infos);
 
 /*____________________________RAYCASTING_______________________________*/
 /*---raycasting---*/
