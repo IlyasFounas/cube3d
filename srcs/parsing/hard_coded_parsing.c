@@ -2,15 +2,19 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   hard_coded_parsing.c                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
+/*                                                    +:+ +:+        
+	+:+     */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+      
+	+#+        */
+/*                                                +#+#+#+#+#+  
+	+#+           */
 /*   Created: 2025/10/07 16:23:38 by ifounas           #+#    #+#             */
 /*   Updated: 2025/10/07 16:23:38 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
 
 void	init_textures(t_global_infos *infos, t_textures *textures)
 {
@@ -65,10 +69,12 @@ void	set_dirs(t_global_infos *infos)
 	t_map_infos *map;
 
 	map = infos->map_infos;
+	infos->ray_infos->plane_x = (60.0 * M_PI / 180.0) / 2;
 	if (map->start_angle == 90)
 	{
 		infos->ray_infos->dir_x = 0.0;
 		infos->ray_infos->dir_y = 1.0;
+		infos->ray_infos->plane_x *= -1;
 	}
 	else if (map->start_angle == -90)
 	{
@@ -79,13 +85,14 @@ void	set_dirs(t_global_infos *infos)
 	{
 		infos->ray_infos->dir_x = 1.0;
 		infos->ray_infos->dir_y = 0.0;
+		infos->ray_infos->plane_y = 1;
 	}
 	else if (map->start_angle == 180)
 	{
 		infos->ray_infos->dir_x = -1.0;
 		infos->ray_infos->dir_y = 0.0;
+		infos->ray_infos->plane_y = -1;
 	}
-	infos->ray_infos->plane_x = (60.0 * M_PI / 180.0) / 2;
 }
 
 void	init_structs(t_global_infos *infos)
@@ -96,7 +103,8 @@ void	init_structs(t_global_infos *infos)
 	infos->px = (double)map->x;
 	infos->py = (double)map->y;
 	set_dirs(infos);
-	// printf("dirx: %f\ndiry: %f\n", infos->ray_infos->dir_x, infos->ray_infos->dir_y);
+	// printf("dirx: %f\ndiry: %f\n", infos->ray_infos->dir_x,
+		// infos->ray_infos->dir_y);
 	infos->map = fill_map(infos->map_infos);
 	infos->map_infos->x = map->width;
 	infos->map_infos->y = map->height;
@@ -105,4 +113,3 @@ void	init_structs(t_global_infos *infos)
 	// printf("px: %f, py: %f\n", infos->px, infos->py);
 	printf("m_x: %d, m_y: %d\n", infos->map_infos->x, infos->map_infos->y);
 }
-

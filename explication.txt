@@ -1,0 +1,50 @@
+1 : Tirer les rayons
+
+On projette N_width rayons à travers la map 2D et la fenêtre mlx_window.
+Avant de tirer les rayons, il faut calculer plusieurs éléments importants :
+
+dir_x et dir_y : direction du joueur (orientation du regard).
+
+plane_x et plane_y : vecteur du plan caméra, perpendiculaire à la direction du joueur.
+
+Une fois ces valeurs calculées, on peut commencer à lancer les rayons.
+Pour chaque rayon i, on calcule sa position horizontale normalisée :
+
+double camera_x;
+camera_x = 2 * i / (double)infos->map_infos->width - 1;
+
+
+camera_x représente la position du rayon sur l’écran, allant de -1 (bord gauche) à +1 (bord droit).
+On calcule ensuite la direction du rayon :
+
+infos->ray_infos->ray_dir_x = infos->ray_infos->dir_x
+	+ infos->ray_infos->plane_x * camera_x;
+infos->ray_infos->ray_dir_y = infos->ray_infos->dir_y
+	+ infos->ray_infos->plane_y * camera_x;
+
+
+Chaque rayon a donc une direction légèrement différente, couvrant tout le champ de vision du joueur.
+
+
+
+
+2 : Calculer la distance parcourue par le rayon
+
+Pour chaque rayon, on doit déterminer la distance jusqu’à la première intersection avec un mur.
+Le principe consiste à calculer les intersections du rayon avec les lignes verticales et horizontales de la map 2D.
+
+On utilise pour cela un paramètre t, représentant la distance parcourue le long du rayon.
+La formule est la suivante :
+
+t = (x - infos->px) / infos->ray_infos->ray_dir_x;
+
+
+Une boucle while permet d’avancer progressivement le long du rayon :
+si t > 0, on calcule le point d’intersection :
+
+linear_ray->iy = infos->py + (infos->ray_infos->ray_dir_y * t);
+
+
+Si cette intersection correspond à un mur dans la map, on retourne la distance correspondante.
+if (infos->map[linear_ray->map_y][linear_ray->map_x] == 1)
+Sinon, on continue jusqu’à trouver la prochaine intersection.
