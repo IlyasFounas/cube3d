@@ -71,6 +71,7 @@ int		keys_released(int keycode, t_global_infos *infos);
 /*---window_handeling---*/
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	create_image(t_global_infos *infos, t_data *img);
+int		close_window(t_global_infos *infos);
 void	window_handeling(t_global_infos *infos);
 
 /*____________________________PARSING_________________________________*/
@@ -118,5 +119,10 @@ void	draw_fps(t_global_infos *infos);
 
 /*____________________________MAIN_______________________________*/
 void	malloc_error(t_global_infos *infos);
+
+
+/*____________________________BONUS PART_______________________________*/
+int		raycasting_bonus(void *param);
+void	window_handeling_bonus(t_global_infos *infos);
 
 #endif

@@ -2,28 +2,29 @@
 #                                   CONFIG                                     #
 # **************************************************************************** #
 
-NAME        := cub3d
+NAME              := cube3d
 
-SRC_DIR     := srcs
-OBJ_DIR     := objs
-INC_DIR     := includes
-GNL_DIR     := gnl
+SRC_DIR           := srcs
+DIR_BONUS         := bonus
+OBJ_DIR           := objs
+INC_DIR           := includes
+GNL_DIR           := gnl
 
-LIBFT_DIR   := libft
-MLX_DIR     := mlx
+LIBFT_DIR         := libft
+MLX_DIR           := mlx
 
-LIBFT       := $(LIBFT_DIR)/libft.a
-MLX         := $(MLX_DIR)/libmlx.a
+LIBFT             := $(LIBFT_DIR)/libft.a
+MLX               := $(MLX_DIR)/libmlx.a
 
-CC          := cc
-CFLAGS      := -Wall -Wextra -Werror -g3 -std=gnu11 -I$(INC_DIR) -Ilibft -Imlx -I$(GNL_DIR)
-SYS_LIBS    := -lm -lXext -lX11 -lz
+CC                := cc
+CFLAGS            := -Wall -Wextra -Werror -g3 -std=gnu11 -I$(INC_DIR) -Ilibft -Imlx -I$(GNL_DIR)
+SYS_LIBS          := -lm -lXext -lX11 -lz
 
 # **************************************************************************** #
 #                                  SOURCES                                     #
 # **************************************************************************** #
 
-SRC := \
+SRC_COMMON := \
 	$(SRC_DIR)/main.c \
 	\
 	$(SRC_DIR)/graphic_rendering/draw_fps.c \
@@ -51,34 +52,52 @@ SRC := \
 	$(SRC_DIR)/window_handeling/movements_handeling_utils.c \
 	$(SRC_DIR)/window_handeling/window_handeling.c
 
-OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+SRC_BONUS := \
+	$(DIR_BONUS)/main_bonus.c \
+	$(DIR_BONUS)/raycasting_bonus.c \
+	$(DIR_BONUS)/window_handeling_bonus.c
 
-.PHONY: all clean fclean re force
+ifeq ($(USE_BONUS),1)
+SRC := $(filter-out $(SRC_DIR)/main.c, $(SRC_COMMON)) $(SRC_BONUS)
+else
+SRC := $(SRC_COMMON)
+endif
+
+OBJ := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+
+# **************************************************************************** #
+#                                   TARGETS                                    #
+# **************************************************************************** #
+
+.PHONY: all bonus clean fclean re force
 
 all: $(NAME)
+
+bonus: fclean
+	@$(MAKE) USE_BONUS=1 all --no-print-directory
 
 force:
 
 $(LIBFT): force
-	$(MAKE) -C $(LIBFT_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
 
 $(MLX): force
-	$(MAKE) -C $(MLX_DIR)
+	@$(MAKE) -C $(MLX_DIR) --no-print-directory
 
 $(NAME): $(OBJ) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) $(SYS_LIBS) -o $(NAME)
+	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) $(SYS_LIBS) -o $(NAME)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+$(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf $(OBJ_DIR)
-	$(MAKE) -C $(LIBFT_DIR) clean || true
-	$(MAKE) -C $(MLX_DIR) clean || true
+	@rm -rf $(OBJ_DIR)
+	@$(MAKE) -C $(LIBFT_DIR) clean --no-print-directory || true
+	@$(MAKE) -C $(MLX_DIR) clean --no-print-directory || true
 
 fclean: clean
-	rm -f $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean || true
+	@rm -f $(NAME)
+	@$(MAKE) -C $(LIBFT_DIR) fclean --no-print-directory || true
 
 re: fclean all

@@ -29,7 +29,7 @@ void	create_image(t_global_infos *infos, t_data *img)
 			&img->line_length, &img->endian);
 }
 
-static int	close_window(t_global_infos *infos)
+int	close_window(t_global_infos *infos)
 {
 	free_rendering(infos);
 	exit(0);
