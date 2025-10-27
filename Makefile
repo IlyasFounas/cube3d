@@ -1,26 +1,57 @@
-NAME        := cube3d
+# **************************************************************************** #
+#                                   CONFIG                                     #
+# **************************************************************************** #
+
+NAME        := cub3d
 
 SRC_DIR     := srcs
-INC_DIR     := includes
 OBJ_DIR     := objs
+INC_DIR     := includes
 GNL_DIR     := gnl
 
-SRC         := $(shell find $(SRC_DIR) -type f -name "*.c")
-OBJ         := $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC))
+LIBFT_DIR   := libft
+MLX_DIR     := mlx
 
-GNL_SRC     := $(shell find $(GNL_DIR) -type f -name "*.c")
-GNL_OBJ     := $(patsubst $(GNL_DIR)/%.c,$(OBJ_DIR)/gnl/%.o,$(GNL_SRC))
+LIBFT       := $(LIBFT_DIR)/libft.a
+MLX         := $(MLX_DIR)/libmlx.a
 
 CC          := cc
 CFLAGS      := -Wall -Wextra -Werror -g3 -std=gnu11 -I$(INC_DIR) -Ilibft -Imlx -I$(GNL_DIR)
-
-LIBFT_DIR   := libft
-LIBFT       := $(LIBFT_DIR)/libft.a
-
-MLX_DIR     := mlx
-MLX         := $(MLX_DIR)/libmlx.a
-
 SYS_LIBS    := -lm -lXext -lX11 -lz
+
+# **************************************************************************** #
+#                                  SOURCES                                     #
+# **************************************************************************** #
+
+SRC := \
+	$(SRC_DIR)/main.c \
+	\
+	$(SRC_DIR)/graphic_rendering/draw_fps.c \
+	$(SRC_DIR)/graphic_rendering/free_rendering.c \
+	$(SRC_DIR)/graphic_rendering/graphic_rendering.c \
+	$(SRC_DIR)/graphic_rendering/texture_rendering.c \
+	\
+	$(SRC_DIR)/parsing/color.c \
+	$(SRC_DIR)/parsing/color_utils.c \
+	$(SRC_DIR)/parsing/hard_coded_parsing.c \
+	$(SRC_DIR)/parsing/map.c \
+	$(SRC_DIR)/parsing/map_utils.c \
+	$(SRC_DIR)/parsing/map_valid.c \
+	$(SRC_DIR)/parsing/parse.c \
+	$(SRC_DIR)/parsing/parsing_utils.c \
+	$(SRC_DIR)/parsing/str_utils.c \
+	$(SRC_DIR)/parsing/texture.c \
+	$(SRC_DIR)/parsing/utils.c \
+	\
+	$(SRC_DIR)/raycasting/raycasting.c \
+	$(SRC_DIR)/raycasting/solving_linear_equa.c \
+	$(SRC_DIR)/raycasting/solving_linear_utils.c \
+	\
+	$(SRC_DIR)/window_handeling/movements_handeling.c \
+	$(SRC_DIR)/window_handeling/movements_handeling_utils.c \
+	$(SRC_DIR)/window_handeling/window_handeling.c
+
+OBJ := $(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 .PHONY: all clean fclean re force
 
@@ -34,14 +65,10 @@ $(LIBFT): force
 $(MLX): force
 	$(MAKE) -C $(MLX_DIR)
 
-$(NAME): $(OBJ) $(GNL_OBJ) $(LIBFT) $(MLX)
-	$(CC) $(CFLAGS) $(OBJ) $(GNL_OBJ) $(LIBFT) $(MLX) $(SYS_LIBS) -o $(NAME)
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) $(SYS_LIBS) -o $(NAME)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(OBJ_DIR)/gnl/%.o: $(GNL_DIR)/%.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -c $< -o $@
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw_fps.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:24:10 by aboumall          #+#    #+#             */
-/*   Updated: 2025/10/24 17:34:07 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/10/27 09:35:33 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,4 +82,5 @@ void	draw_fps(t_global_infos *infos)
 			x += infos->font.width / 2;
 		i++;
 	}
+	free(infos->char_fps);
 }

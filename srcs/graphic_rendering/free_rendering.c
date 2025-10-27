@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:02:47 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/27 09:09:54 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/27 09:35:59 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,6 @@ void	free_global_info(t_global_infos *infos)
 	{
 		free(infos->keys);
 		infos->keys = NULL;
-	}
-	if (infos->char_fps)
-	{
-		free(infos->char_fps);
-		infos->char_fps = NULL;
 	}
 }
 

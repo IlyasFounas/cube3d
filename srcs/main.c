@@ -22,7 +22,7 @@ void	malloc_error(t_global_infos *infos)
 int	main(int argc, char **argv)
 {
 	t_global_infos	infos;
-	t_map_infos map;
+	t_map_infos		map;
 
 	if (argc != 2)
 	{

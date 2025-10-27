@@ -23,9 +23,6 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-# define MALLOC_FAILED 1
-# define SUCCESS 0
-# define M_PI 3.14159265358979323846
 
 /*____________________________GRAPHIC_RENDERING__________________________*/
 /*---free_rendering---*/
@@ -37,8 +34,6 @@ void	graphic_rendering(double distance, t_data *img, int i,
 			t_global_infos *infos);
 
 /*---texture_rendering---*/
-t_textures	*new_node_texture(char *s, t_type type);
-t_textures	*last_node(t_textures *textures);
 void	add_back_node(t_textures **textures, t_textures *new,
 			int *malloc_failed);
 void	wall_rendering(t_global_infos *infos, t_data *img, int i, int y);
@@ -51,7 +46,7 @@ void	init_structs(t_global_infos *infos);
 
 /*____________________________RAYCASTING_______________________________*/
 /*---raycasting---*/
-int	raycasting(void *param);
+int		raycasting(void *param);
 
 /*---solving_linear_equa---*/
 double	solving_linear_equa(t_global_infos *infos);
@@ -63,24 +58,24 @@ void	setting_the_right_texture(t_global_infos *infos,
 
 /*____________________________WINDOW HANDELING_________________________*/
 /*---movements_handeling_utils---*/
-int	wall_collision(t_global_infos *infos, double y, double x);
+int		wall_collision(t_global_infos *infos, double y, double x);
 void	straf_position(t_global_infos *infos, t_keys *keys, t_ray_infos *ray,
 			double speed);
 
 /*---movements_handeling---*/
 void	update_player_rotation(t_global_infos *infos);
 void	update_player_position(t_global_infos *infos);
-int	keys_pressed(int keycode, t_global_infos *infos);
-int	keys_released(int keycode, t_global_infos *infos);
+int		keys_pressed(int keycode, t_global_infos *infos);
+int		keys_released(int keycode, t_global_infos *infos);
 
 /*---window_handeling---*/
 void	my_mlx_pixel_put(t_data *data, int x, int y, int color);
 void	create_image(t_global_infos *infos, t_data *img);
 void	window_handeling(t_global_infos *infos);
 
-/*___________parsing___________*/
-int	ft_line_len(char *line);
-int	dbl_char_len(char **tab);
+/*____________________________PARSING_________________________________*/
+int		ft_line_len(char *line);
+int		dbl_char_len(char **tab);
 bool	get_map_width(t_map_infos *map);
 bool	is_surr_by_wall(t_map_infos *map);
 bool	check_map_validity(t_map_infos *map);
@@ -93,7 +88,7 @@ void	parse_textures(t_map_infos *map);
 
 char	found_last(char *line);
 char	found_first(char *line);
-int	**fill_map(t_map_infos *map);
+int		**fill_map(t_map_infos *map);
 char	*append_map(t_map_infos *map, char *line);
 void	init_map(t_map_infos *map, char *filename);
 bool	is_surr_floor(t_map_infos *map, int x, int y);
@@ -113,7 +108,7 @@ bool	is_cub_file(char *filename);
 bool	is_null_color(t_color color);
 bool	is_good_color(t_color color);
 
-int	ft_strlen_trim(const char *tab);
+int		ft_strlen_trim(const char *tab);
 bool	safe_open(char *filename, int *fd);
 void	exit_if(bool cnd, t_map_infos *map, char *msg, int code);
 void	free_dbl_char(char **tab, int start, int end, bool free_all);
@@ -121,7 +116,7 @@ void	free_dbl_char(char **tab, int start, int end, bool free_all);
 void	load_font(t_global_infos *infos);
 void	draw_fps(t_global_infos *infos);
 
-/*---main---*/
+/*____________________________MAIN_______________________________*/
 void	malloc_error(t_global_infos *infos);
 
 #endif

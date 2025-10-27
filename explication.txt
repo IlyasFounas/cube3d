@@ -27,7 +27,6 @@ Chaque rayon a donc une direction légèrement différente, couvrant tout le cha
 
 
 
-
 2 : Calculer la distance parcourue par le rayon
 
 Pour chaque rayon, on doit déterminer la distance jusqu’à la première intersection avec un mur.

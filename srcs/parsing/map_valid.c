@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_valid.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 17:47:21 by aboumall          #+#    #+#             */
-/*   Updated: 2025/10/22 17:47:58 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/10/27 10:21:25 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@ bool	check_map_validity(t_map_infos *map)
 				if (map->player_found)
 					return (printf(MSG_ERR_MP_MP), false);
 				map->player_found = map->tmp_map[x][y];
-				map->x = x;
-				map->y = y;
+				map->x = y;
+				map->y = x;
 			}
 			y++;
 		}

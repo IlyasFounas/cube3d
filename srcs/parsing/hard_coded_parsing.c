@@ -2,23 +2,19 @@
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   hard_coded_parsing.c                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
-	+:+     */
-/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+      
-	+#+        */
-/*                                                +#+#+#+#+#+  
-	+#+           */
-/*   Created: 2025/10/07 16:23:38 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/07 16:23:38 by ifounas          ###   ########.fr       */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/27 09:38:06 by ifounas           #+#    #+#             */
+/*   Updated: 2025/10/27 09:38:06 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-
 void	init_textures(t_global_infos *infos, t_textures *textures)
 {
-	t_data *img;
+	t_data	*img;
 
 	img = &textures->data;
 	img->img = mlx_xpm_file_to_image(infos->mlx, textures->name_texture,
@@ -33,11 +29,11 @@ void	init_textures(t_global_infos *infos, t_textures *textures)
 
 void	create_textures(t_global_infos *infos)
 {
-	int i;
-	int malloc_failed;
-	char *textures[4];
-	t_type types[4];
-	t_textures *ptr;
+	int			i;
+	int			malloc_failed;
+	char		*textures[4];
+	t_type		types[4];
+	t_textures	*ptr;
 
 	i = 0;
 	malloc_failed = 0;
@@ -66,7 +62,7 @@ void	create_textures(t_global_infos *infos)
 
 void	set_dirs(t_global_infos *infos)
 {
-	t_map_infos *map;
+	t_map_infos	*map;
 
 	map = infos->map_infos;
 	if (map->start_angle == 90)
@@ -103,13 +99,10 @@ void	init_structs(t_global_infos *infos)
 	infos->px = (double)map->x;
 	infos->py = (double)map->y;
 	set_dirs(infos);
-	// printf("dirx: %f\ndiry: %f\n", infos->ray_infos->dir_x,
-		// infos->ray_infos->dir_y);
 	infos->map = fill_map(infos->map_infos);
 	infos->map_infos->x = map->width;
 	infos->map_infos->y = map->height;
-	infos->map_infos->width = 640;
-	infos->map_infos->height = 480;
-	// printf("px: %f, py: %f\n", infos->px, infos->py);
-	printf("m_x: %d, m_y: %d\n", infos->map_infos->x, infos->map_infos->y);
+	infos->map_infos->width = 1920;
+	infos->map_infos->height = 1080;
+	printf("%f %f %d %d\n", infos->px, infos->py, infos->map_infos->x, infos->map_infos->y);
 }
