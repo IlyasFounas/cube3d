@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/27 08:58:18 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/27 09:09:32 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ void	calcul_the_fps(t_global_infos *infos)
 		+ (current_time.tv_usec - last_time.tv_usec) / 1000000.0;
 	if (elapsed_seconds >= 1.0)
 	{
+		if (infos->char_fps)
+		{
+			free(infos->char_fps);
+			infos->char_fps = NULL;
+		}
 		infos->char_fps = ft_itoa(frame_count);
 		if (frame_count == 1)
 			infos->fps = 30;
