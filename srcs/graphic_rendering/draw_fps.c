@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:24:10 by aboumall          #+#    #+#             */
-/*   Updated: 2025/10/24 17:34:07 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/10/27 16:06:18 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	draw_fps(t_global_infos *infos)
 	draw_fps_txt(infos, &x);
 	while (infos->char_fps[i])
 	{
+		img = NULL;
 		if (infos->char_fps[i] - '0' > 0 && infos->char_fps[i] - '0' < 9)
 			img = infos->font.img[infos->char_fps[i] - '0'];
 		if (img)

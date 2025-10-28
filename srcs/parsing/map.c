@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:47:50 by aboumall          #+#    #+#             */
-/*   Updated: 2025/10/23 17:27:36 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/10/24 18:09:04 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ int	**fill_map(t_map_infos *map)
 		y = 0;
 		f_map[x] = malloc(map->width * sizeof(int));
 		exit_if(!f_map[x], map, MSG_ERR_ML_ER, EXIT_FAILURE);
+		printf("[%d] ", x);
 		while (y < map->width)
 		{
 			if (is_space(map->tmp_map[x][y]))
@@ -83,8 +84,10 @@ int	**fill_map(t_map_infos *map)
 				f_map[x][y] = 0;
 			else
 				f_map[x][y] = map->tmp_map[x][y] - '0';
+			printf("%d", f_map[x][y]);
 			y++;
 		}
+		printf(" (%d)\n", y);
 		x++;
 	}
 	return (f_map);

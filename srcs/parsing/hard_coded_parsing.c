@@ -93,8 +93,8 @@ void	init_structs(t_global_infos *infos)
 	t_map_infos *map;
 
 	map = infos->map_infos;
-	infos->px = (double)map->x;
-	infos->py = (double)map->y;
+	infos->px = (double)map->y;
+	infos->py = (double)map->x;
 	set_dirs(infos);
 	printf("dirx: %f\ndiry: %f\n", infos->ray_infos->dir_x, infos->ray_infos->dir_y);
 	// infos->ray_infos->dir_x = 0.0;
@@ -102,8 +102,8 @@ void	init_structs(t_global_infos *infos)
 	infos->map = fill_map(infos->map_infos);
 	infos->map_infos->x = map->width;
 	infos->map_infos->y = map->height;
-	infos->map_infos->width = 1920;
-	infos->map_infos->height = 1280;
+	infos->map_infos->width = 640;
+	infos->map_infos->height = 480;
 	printf("px: %f, py: %f\n", infos->px, infos->py);
 	printf("m_x: %d, m_y: %d\n", infos->map_infos->x, infos->map_infos->y);
 }

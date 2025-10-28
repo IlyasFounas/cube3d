@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   structures.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 14:08:12 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/23 14:12:45 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/28 14:13:56 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,34 @@
 # define FNT_P_XPM "textures/digits/P.xpm"
 # define FNT_S_XPM "textures/digits/S.xpm"
 # define FNT_CLN_XPM "textures/digits/colon.xpm"
+
+// Couleurs noires
+#define COLOR_BLACK        0xFF000000
+#define COLOR_BLACK_SEMI   0x88000000
+#define COLOR_BLACK_TRANS  0x00000000
+
+// Gris
+#define COLOR_GRAY_LIGHT   0xFFD3D3D3
+#define COLOR_GRAY_MEDIUM  0xFF808080
+#define COLOR_GRAY_DARK    0xFF404040
+#define COLOR_GRAY_TRANS   0x88404040
+
+// Rouges
+#define COLOR_RED          0xFFFF0000
+#define COLOR_RED_DARK     0xFF800000
+#define COLOR_RED_LIGHT    0xFFFF6666
+#define COLOR_RED_TRANS    0x88FF0000
+
+
+typedef struct s_drawable
+{
+	int32_t				x;
+	int32_t				y;
+	int32_t				padding_x;
+	int32_t				padding_y;
+	unsigned int		color;
+}				t_drawable;
+
 
 typedef struct s_color
 {

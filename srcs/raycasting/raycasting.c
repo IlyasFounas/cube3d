@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:01:38 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/24 17:37:54 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/10/27 18:09:05 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,8 @@ int	raycasting(void *param)
 		graphic_rendering(distance, &infos->img, i, infos);
 		i++;
 	}
+	draw_minimap(infos);
 	mlx_put_image_to_window(infos->mlx, infos->mlx_win, infos->img.img, 0, 0);
-	draw_fps(infos);
+	// draw_fps(infos);
 	return (0);
 }
