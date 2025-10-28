@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:47:50 by aboumall          #+#    #+#             */
-/*   Updated: 2025/10/24 18:09:04 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/10/28 14:41:25 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ char	*append_map(t_map_infos *map, char *line)
 	j = 0;
 	new_line = ft_calloc(map->width + 1, sizeof(char));
 	if (!new_line)
-		return (printf(MSG_ERR_ML_ER "\n"), NULL);
+		return ((void *)error_text(MSG_ERR_ML_ER));
 	while (line[i])
 	{
 		if (line[i] == '\t')
@@ -75,7 +75,6 @@ int	**fill_map(t_map_infos *map)
 		y = 0;
 		f_map[x] = malloc(map->width * sizeof(int));
 		exit_if(!f_map[x], map, MSG_ERR_ML_ER, EXIT_FAILURE);
-		printf("[%d] ", x);
 		while (y < map->width)
 		{
 			if (is_space(map->tmp_map[x][y]))
@@ -84,10 +83,8 @@ int	**fill_map(t_map_infos *map)
 				f_map[x][y] = 0;
 			else
 				f_map[x][y] = map->tmp_map[x][y] - '0';
-			printf("%d", f_map[x][y]);
 			y++;
 		}
-		printf(" (%d)\n", y);
 		x++;
 	}
 	return (f_map);

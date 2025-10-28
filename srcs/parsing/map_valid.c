@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 17:47:21 by aboumall          #+#    #+#             */
-/*   Updated: 2025/10/22 17:47:58 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/10/28 14:40:30 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,14 @@ bool	check_map_validity(t_map_infos *map)
 		{
 			if (!is_content(map->tmp_map[x][y])
 				&& !is_space(map->tmp_map[x][y]))
-				return (printf(MSG_ERR_MP_IC, map->tmp_map[x][y]), false);
+				return (error_text(MSG_ERR_MP_IC));
 			if (is_player(map->tmp_map[x][y]))
 			{
 				if (map->player_found)
-					return (printf(MSG_ERR_MP_MP), false);
+					return (error_text(MSG_ERR_MP_MP));
 				map->player_found = map->tmp_map[x][y];
-				map->x = x;
-				map->y = y;
+				map->x = y;
+				map->y = x;
 			}
 			y++;
 		}

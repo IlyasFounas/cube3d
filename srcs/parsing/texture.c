@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 04:32:55 by aboumall          #+#    #+#             */
-/*   Updated: 2025/10/23 17:33:43 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/10/28 17:13:40 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,25 +38,15 @@ bool	is_texture(char *s)
 
 bool	check_paths(t_map_infos *map)
 {
-	if (!is_xpm_file(map->no_path.name))
-		return (printf("Error\nCub3d: invalid file extension for NO texture `%s'\n", map->no_path.name),
-			false);
-	else if (!is_xpm_file(map->so_path.name))
-		return (printf("Error\nCub3d: invalid file extension for SO texture`%s'\n", map->so_path.name),
-			false);
-	else if (!is_xpm_file(map->we_path.name))
-		return (printf("Error\nCub3d: invalid file extension for WE texture`%s'\n", map->we_path.name),
-			false);
-	else if (!is_xpm_file(map->ea_path.name))
-		return (printf("Error\nCub3d: invalid file extension for EA texture`%s'\n", map->ea_path.name),
-			false);
+	if (!check_xpm_file(map))
+		return (false);
 	if (!safe_open(map->no_path.name, &map->no_path.fd))
 		return (false);
-	else if (!safe_open(map->so_path.name, &map->so_path.fd))
+	if (!safe_open(map->so_path.name, &map->so_path.fd))
 		return (false);
-	else if (!safe_open(map->we_path.name, &map->we_path.fd))
+	if (!safe_open(map->we_path.name, &map->we_path.fd))
 		return (false);
-	else if (!safe_open(map->ea_path.name, &map->ea_path.fd))
+	if (!safe_open(map->ea_path.name, &map->ea_path.fd))
 		return (false);
 	return (true);
 }

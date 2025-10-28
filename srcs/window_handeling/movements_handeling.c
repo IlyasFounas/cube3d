@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:58:52 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/23 12:38:14 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/27 09:49:59 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,17 +47,23 @@ void	update_player_position(t_global_infos *infos)
 	keys = infos->keys;
 	ray = infos->ray_infos;
 	speed = 0.01 * (300.0 / infos->fps);
-	if (keys->W == 1 && wall_collision(infos, infos->py + ray->dir_y * speed,
-			infos->px + ray->dir_x * speed) == 1)
+	if (keys->W == 1)
 	{
-		infos->px += ray->dir_x * speed;
-		infos->py += ray->dir_y * speed;
+		if (wall_collision(infos, infos->py, infos->px + ray->dir_x
+				* speed) == 1)
+			infos->px += ray->dir_x * speed;
+		if (wall_collision(infos, infos->py + ray->dir_y * speed,
+				infos->px) == 1)
+			infos->py += ray->dir_y * speed;
 	}
-	if (keys->S == 1 && wall_collision(infos, infos->py - ray->dir_y * speed,
-			infos->px - ray->dir_x * speed) == 1)
+	if (keys->S == 1)
 	{
-		infos->px -= ray->dir_x * speed;
-		infos->py -= ray->dir_y * speed;
+		if (wall_collision(infos, infos->py, infos->px - ray->dir_x
+				* speed) == 1)
+			infos->px -= ray->dir_x * speed;
+		if (wall_collision(infos, infos->py - ray->dir_y * speed,
+				infos->px) == 1)
+			infos->py -= ray->dir_y * speed;
 	}
 	straf_position(infos, keys, ray, speed);
 }

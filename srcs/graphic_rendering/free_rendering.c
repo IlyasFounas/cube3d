@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   free_rendering.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:02:47 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/13 14:09:26 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/28 14:29:41 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,7 @@
 void	free_global_info(t_global_infos *infos)
 {
 	if (infos->map_infos)
-	{
-		free(infos->map_infos);
 		infos->map_infos = NULL;
-	}
 	if (infos->ray_infos)
 	{
 		free(infos->ray_infos);
@@ -28,6 +25,11 @@ void	free_global_info(t_global_infos *infos)
 	{
 		free(infos->keys);
 		infos->keys = NULL;
+	}
+	if (infos->char_fps)
+	{
+		free(infos->char_fps);
+		infos->char_fps = NULL;
 	}
 }
 
@@ -69,8 +71,6 @@ void	free_rendering(t_global_infos *infos)
 	i = -1;
 	if (infos->map)
 	{
-		while (++i < infos->map_infos->x)
-			free(infos->map[i]);
 		free(infos->map);
 		infos->map = NULL;
 	}

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   raycasting.c                                       :+:      :+:    :+:   */
+/*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/24 12:01:38 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/28 17:16:38 by aboumall         ###   ########.fr       */
+/*   Created: 2025/10/27 13:47:10 by ifounas           #+#    #+#             */
+/*   Updated: 2025/10/27 14:29:39 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,7 @@ static void	calculs_of_vectors(t_global_infos *infos, int i)
 		+ infos->ray_infos->plane_y * camera_x;
 }
 
-/**
- * Real-time 3D rendering using raycasting technique:
- * - Casts multiple rays across the field of view (one per screen column)
- * - For each ray, calculates intersection distance with walls in the 2D map
- * - Uses distance to determine wall height and render ceiling/wall/floor
- * segments
- * - Applies fisheye correction for proper perspective projection
- */
-int	raycasting(void *param)
+int	raycasting_bonus(void *param)
 {
 	t_global_infos	*infos;
 	int				i;
@@ -49,8 +41,6 @@ int	raycasting(void *param)
 		graphic_rendering(distance, &infos->img, i, infos);
 		i++;
 	}
-	// draw_minimap(infos);
 	mlx_put_image_to_window(infos->mlx, infos->mlx_win, infos->img.img, 0, 0);
-	// draw_fps(infos);
 	return (0);
 }

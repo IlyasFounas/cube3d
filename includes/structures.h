@@ -6,13 +6,16 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 14:08:12 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/28 14:13:56 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/10/28 14:19:34 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
 
+# define MALLOC_FAILED 1
+# define SUCCESS 0
+# define M_PI 3.14159265358979323846
 # define EMPTY_SPACE '0'
 # define WALL '1'
 # define PLAYER_START "NSEW"
@@ -208,5 +211,8 @@ typedef struct s_global_infos
 	int					***digits;
 	t_font				font;
 }						t_global_infos;
+
+t_textures	*new_node_texture(char *s, t_type type);
+t_textures	*last_node(t_textures *textures);
 
 #endif
