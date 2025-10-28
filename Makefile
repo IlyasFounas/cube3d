@@ -55,6 +55,7 @@ SRC_COMMON := \
 SRC_BONUS := \
 	$(DIR_BONUS)/main_bonus.c \
 	$(DIR_BONUS)/raycasting_bonus.c \
+	$(DIR_BONUS)/graphic_rendering_bonus.c \
 	$(DIR_BONUS)/window_handeling_bonus.c
 
 ifeq ($(USE_BONUS),1)
@@ -73,7 +74,7 @@ OBJ := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 all: $(NAME)
 
-bonus: fclean
+bonus: 
 	@$(MAKE) USE_BONUS=1 all --no-print-directory
 
 force:

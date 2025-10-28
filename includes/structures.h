@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 14:08:12 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/27 10:03:58 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/28 15:09:44 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,6 +182,7 @@ typedef struct s_global_infos
 	char				*char_fps;
 	int					***digits;
 	t_font				font;
+	int fog_ratio;
 }						t_global_infos;
 
 t_textures	*new_node_texture(char *s, t_type type);

@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 13:47:10 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/27 14:29:39 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/27 16:32:21 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	raycasting_bonus(void *param)
 	{
 		calculs_of_vectors(infos, i);
 		distance = solving_linear_equa(infos);
-		graphic_rendering(distance, &infos->img, i, infos);
+		graphic_rendering_bonus(distance, &infos->img, i, infos);
 		i++;
 	}
 	mlx_put_image_to_window(infos->mlx, infos->mlx_win, infos->img.img, 0, 0);

@@ -30,6 +30,7 @@ void	free_rendering(t_global_infos *infos);
 
 /*---graphic_rendering---*/
 void	calcul_the_fps(t_global_infos *infos);
+void	draw_wall(t_global_infos *infos, t_data *img, int i, int y);
 void	graphic_rendering(double distance, t_data *img, int i,
 			t_global_infos *infos);
 
@@ -124,5 +125,7 @@ void	malloc_error(t_global_infos *infos);
 /*____________________________BONUS PART_______________________________*/
 int		raycasting_bonus(void *param);
 void	window_handeling_bonus(t_global_infos *infos);
+void	graphic_rendering_bonus(double distance, t_data *img, int i,
+		t_global_infos *infos);
 
 #endif
