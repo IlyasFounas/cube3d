@@ -1,30 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   graphic_rendering_bonus.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/29 10:37:55 by ifounas           #+#    #+#             */
+/*   Updated: 2025/10/29 12:53:41 by ifounas          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cube3d.h"
-
-int	darken_color(int color, float factor)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	r = ((color >> 16) & 0xFF) * factor;
-	g = ((color >> 8) & 0xFF) * factor;
-	b = (color & 0xFF) * factor;
-	return ((r << 16) | (g << 8) | b);
-}
-
-int	return_ult_darken_color(t_global_infos *infos, int color, int y, int end_wall)
-{
-	float	factor;
-
-	if (infos->fog_ratio > 2 && (y < end_wall + 50 || end_wall == 0))
-	{
-		factor = 1.0f - (infos->fog_ratio * 0.2f);
-		if (factor < 0.0f)
-			factor = 0.0f;
-		color = darken_color(color, factor);
-	}
-	return (color);
-}
 
 /**
  * The goal is to take the right color for each pixels.
@@ -74,12 +60,13 @@ void	graphic_rendering_bonus(double distance, t_data *img, int i,
 	while (y < infos->map_infos->height)
 	{
 		if (y < start_y)
-			my_mlx_pixel_put(img, i, y, return_ult_darken_color(infos, 0x00666666, y, end_y));
+			my_mlx_pixel_put(img, i, y, return_ult_darken_color(infos,
+					return_color_bonus(infos->map_infos->ceiling_color), y, 1));
 		else if (y >= start_y && y < end_y)
 			draw_wall_bonus(infos, img, i, y);
 		else
 			my_mlx_pixel_put(img, i, y, return_ult_darken_color(infos,
-					0x042f09, y, end_y));
+					return_color_bonus(infos->map_infos->floor_color), y, 1));
 		y++;
 	}
 }

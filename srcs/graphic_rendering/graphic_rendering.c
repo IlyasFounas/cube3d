@@ -6,12 +6,24 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/27 09:36:03 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/29 09:55:19 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 #include <sys/time.h>
+
+static int	return_color(t_color color)
+{
+	int	r;
+	int	g;
+	int	b;
+
+	r = color.r;
+	g = color.g;
+	b = color.b;
+	return ((r << 16) | (g << 8) | (b));
+}
 
 void	calcul_the_fps(t_global_infos *infos)
 {
@@ -68,11 +80,13 @@ void	graphic_rendering(double distance, t_data *img, int i,
 	while (y < infos->map_infos->height)
 	{
 		if (y < start_y)
-			my_mlx_pixel_put(img, i, y, 0x00666666);
+			my_mlx_pixel_put(img, i, y,
+				return_color(infos->map_infos->ceiling_color));
 		else if (y >= start_y && y < end_y)
 			draw_wall(infos, img, i, y);
 		else
-			my_mlx_pixel_put(img, i, y, 0x042f09);
+			my_mlx_pixel_put(img, i, y,
+				return_color(infos->map_infos->floor_color));
 		y++;
 	}
 }

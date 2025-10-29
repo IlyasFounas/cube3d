@@ -127,5 +127,8 @@ int		raycasting_bonus(void *param);
 void	window_handeling_bonus(t_global_infos *infos);
 void	graphic_rendering_bonus(double distance, t_data *img, int i,
 		t_global_infos *infos);
+int		darken_color(int color, float factor);
+int		return_ult_darken_color(t_global_infos *infos, int color, int y, int yes);
+int		return_color_bonus(t_color color);
 
 #endif
