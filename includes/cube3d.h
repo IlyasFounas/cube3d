@@ -122,6 +122,7 @@ void	free_dbl_char(char **tab, int start, int end, bool free_all);
 void	load_font(t_global_infos *infos);
 void	draw_fps(t_global_infos *infos);
 void	draw_minimap(t_global_infos *infos);
+void	draw_minimap2(t_global_infos *infos);
 
 /*____________________________MAIN_______________________________*/
 void	malloc_error(t_global_infos *infos);

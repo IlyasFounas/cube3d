@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:47:47 by aboumall          #+#    #+#             */
-/*   Updated: 2025/10/29 22:28:56 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/10/29 22:47:55 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,47 +34,46 @@ void	draw_scaled(t_data *img, t_drawable drawable, int scale)
 	}
 }
 
+bool	is_in_range(t_global_infos *infos, int x, int y)
+{
+	return (x >= 0 && x < infos->map_infos->x
+		&& y >= 0 && y < infos->map_infos->y);
+}
+
 void	draw_minimap2(t_global_infos *infos)
 {
-	int	x;
 	int	y;
-	int	i;
-	int	j;
+	int	x;
 	int	start_x;
 	int	end_x;
 	int	start_y;
 	int	end_y;
 
-	i = 0;
-	x = infos->px;
-	y = infos->py;
-	start_x = x - 15;
-	end_x = x + 15;
-	start_y = y - 6;
-	end_y = y + 6;
-	while (i < 30)
+	start_x = infos->px - 15;
+	end_x = infos->px + 15;
+	start_y = infos->py - 6;
+	end_y = infos->py + 6;
+	y = start_y;
+	while (y < end_y)
 	{
-		j = 0;
-		while (j < 12)
+		x = start_x;
+		while (x < end_x)
 		{
-			if (start_x < infos->map_infos->x
-				|| start_x > infos->map_infos->x
-				|| start_y < infos->map_infos->y
-				|| start_y > infos->map_infos->y)
+			if (!is_in_range(infos, x, y))
 				draw_scaled(&infos->img, (t_drawable){x, y, 30, 30,
 					COLOR_BROWN_TRANS}, 5);
-			if (!(start_x < infos->map_infos->x
-				|| start_x > infos->map_infos->x) 
-					&& infos->map[y][x] == 1)
+			if (is_in_range(infos, x, y) && infos->map[y][x] == 1)
 				draw_scaled(&infos->img, (t_drawable){x, y, 30, 30,
 					COLOR_BLACK_TRANS}, 5);
-			if (infos->map[y][x] == 0)
+			if (is_in_range(infos, x, y) && infos->map[y][x] == 0)
 				draw_scaled(&infos->img, (t_drawable){x, y, 30, 30,
 					COLOR_GRAY_TRANS}, 5);
-			j++;
+			x++;
 		}
-		i++;
+		y++;
 	}
+	// draw_scaled(&infos->img, (t_drawable){infos->px, infos->py, 30, 30,
+	// 	COLOR_RED_TRANS}, 5);
 }
 
 void	draw_minimap(t_global_infos *infos)
