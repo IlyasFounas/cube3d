@@ -6,13 +6,13 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 09:57:22 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/29 17:07:23 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/30 17:36:56 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
-int return_color_bonus(t_color color)
+int	return_color_bonus(t_color color)
 {
 	int	r;
 	int	g;
@@ -24,7 +24,7 @@ int return_color_bonus(t_color color)
 	return ((r << 16) | (g << 8) | (b));
 }
 
-int	darken_color(int color, float factor)
+int	darken_color(int color, double factor)
 {
 	int	r;
 	int	g;
@@ -38,18 +38,17 @@ int	darken_color(int color, float factor)
 
 int	return_ult_darken_color(t_global_infos *infos, int color, int y, int yes)
 {
-	float	factor;
+	double	factor;
+	int		mid;
 
-	if ((y >= (infos->map_infos->height / 2) - 130
-		&& y < (infos->map_infos->height / 2) + 130) || yes == 0)
+	mid = (infos->map_infos->height / 2);
+	if (((y >= mid - 150 && y < mid + 150) || yes == 0) && infos->fog_ratio > 2)
 	{
-		if (infos->fog_ratio > 5)
-		{
-			factor = 1.0f - ((double)infos->fog_ratio * 0.09f);
-			if (factor < 0.0f)
-				factor = 0.0f;
-			color = darken_color(color, factor);
-		}
+		factor = 1.0 - ((double)infos->fog_ratio * 0.09f);
+		if (factor < 0.0)
+			factor = 0.0;
+		factor += fabs((double)y - (double)mid) / 260.0;
+		return (darken_color(color, factor));
 	}
 	return (color);
 }

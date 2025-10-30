@@ -102,7 +102,7 @@ void	init_structs(t_global_infos *infos)
 	infos->map = fill_map(infos->map_infos);
 	infos->map_infos->x = map->width;
 	infos->map_infos->y = map->height;
-	infos->map_infos->width = 1920;
+	infos->map_infos->width =1920;
 	infos->map_infos->height = 1080;
 	printf("%f %f %d %d\n", infos->px, infos->py, infos->map_infos->x, infos->map_infos->y);
 }

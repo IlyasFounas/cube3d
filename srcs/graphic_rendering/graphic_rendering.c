@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/29 09:55:19 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/10/30 11:24:40 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	calcul_the_fps(t_global_infos *infos)
 	if (elapsed_seconds >= 1.0)
 	{
 		infos->char_fps = ft_itoa(frame_count);
+		// printf("%d\n", frame_count);
 		if (frame_count == 1)
 			infos->fps = 30;
 		else if (frame_count > 100)
