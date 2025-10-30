@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:47:47 by aboumall          #+#    #+#             */
-/*   Updated: 2025/10/29 22:47:55 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/10/30 17:16:13 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ void	draw_minimap2(t_global_infos *infos)
 	int	end_x;
 	int	start_y;
 	int	end_y;
+	int	d_x;
+	int	d_y;
 
 	start_x = infos->px - 15;
 	end_x = infos->px + 15;
@@ -59,6 +61,8 @@ void	draw_minimap2(t_global_infos *infos)
 		x = start_x;
 		while (x < end_x)
 		{
+			d_x = (x + 15);
+			d_y = (y + 6);
 			if (!is_in_range(infos, x, y))
 				draw_scaled(&infos->img, (t_drawable){x, y, 30, 30,
 					COLOR_BROWN_TRANS}, 5);

@@ -68,6 +68,7 @@ void	set_angles(t_global_infos *infos, double angles[3])
 {
 	infos->ray_infos->dir_x = angles[0];
 	infos->ray_infos->dir_y = angles[1];
+	// need to change this
 	infos->ray_infos->plane_x = angles[2];
 }
 
