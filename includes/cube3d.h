@@ -37,13 +37,11 @@ void	graphic_rendering(double distance, t_data *img, int i,
 /*---texture_rendering---*/
 void	add_back_node(t_textures **textures, t_textures *new,
 			int *malloc_failed);
+void	texture_start(t_global_infos *infos, int wall_height, int start_y);
 void	wall_rendering(t_global_infos *infos, t_data *img, int i, int y);
 
 /*____________________________PARSING__________________________________*/
-/*---hard_coded_parsing---*/
-void	init_textures(t_global_infos *infos, t_textures *textures);
-void	create_textures(t_global_infos *infos);
-void	init_structs(t_global_infos *infos);
+
 
 /*____________________________RAYCASTING_______________________________*/
 /*---raycasting---*/
@@ -76,6 +74,13 @@ int		close_window(t_global_infos *infos);
 void	window_handeling(t_global_infos *infos);
 
 /*____________________________PARSING_________________________________*/
+/*---parsing_textures---*/
+void	create_textures(t_global_infos *infos);
+
+/*---parsing---*/
+void	init_textures(t_global_infos *infos, t_textures *textures);
+void	init_structs(t_global_infos *infos);
+
 int		ft_line_len(char *line);
 int		dbl_char_len(char **tab);
 bool	get_map_width(t_map_infos *map);

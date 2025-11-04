@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 16:26:48 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/23 11:15:14 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/04 14:40:04 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ void	add_back_node(t_textures **textures, t_textures *new,
 		*textures = new;
 	else
 		last_node(*textures)->next = new;
+}
+
+void	texture_start(t_global_infos *infos, int wall_height, int start_y)
+{
+	infos->tex_step = (double)infos->textures->t_height / wall_height;
+	infos->tex_pos = (start_y - infos->map_infos->height * 0.5 + wall_height
+			* 0.5) * infos->tex_step;
 }
 
 /**

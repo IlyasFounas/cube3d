@@ -27,73 +27,26 @@ void	init_textures(t_global_infos *infos, t_textures *textures)
 		malloc_error(infos);
 }
 
-void	create_textures(t_global_infos *infos)
-{
-	int			i;
-	int			malloc_failed;
-	char		*textures[4];
-	t_type		types[4];
-	t_textures	*ptr;
-
-	i = 0;
-	malloc_failed = 0;
-	textures[0] = infos->map_infos->no_path.name;
-	textures[1] = infos->map_infos->so_path.name;
-	textures[2] = infos->map_infos->ea_path.name;
-	textures[3] = infos->map_infos->we_path.name;
-	types[0] = NORTH;
-	types[1] = SOUTH;
-	types[2] = EAST;
-	types[3] = WEST;
-	infos->textures = new_node_texture(textures[i], types[i]);
-	if (!infos->textures)
-		malloc_error(infos);
-	ptr = infos->textures;
-	while (++i < 5)
-	{
-		init_textures(infos, ptr);
-		add_back_node(&infos->textures, new_node_texture(textures[i], types[i]),
-			&malloc_failed);
-		if (malloc_failed == 1)
-			malloc_error(infos);
-		ptr = ptr->next;
-	}
-}
-
 void	set_dirs(t_global_infos *infos)
 {
 	t_map_infos	*map;
 
 	map = infos->map_infos;
+	infos->ray_infos->dir_x = cos(map->start_angle * M_PI / 180.0);
+	infos->ray_infos->dir_y = sin(map->start_angle * M_PI / 180.0);
 	if (map->start_angle == 90)
-	{
-		infos->ray_infos->dir_x = 0.0;
-		infos->ray_infos->dir_y = 1.0;
 		infos->ray_infos->plane_x = ((60.0 * M_PI / 180.0) / 2) * -1;
-	}
 	else if (map->start_angle == -90)
-	{
-		infos->ray_infos->dir_x = 0.0;
-		infos->ray_infos->dir_y = -1.0;
 		infos->ray_infos->plane_x = (60.0 * M_PI / 180.0) / 2;
-	}
 	else if (map->start_angle == 0)
-	{
-		infos->ray_infos->dir_x = 1.0;
-		infos->ray_infos->dir_y = 0.0;
 		infos->ray_infos->plane_y = (60.0 * M_PI / 180.0) / 2;
-	}
 	else if (map->start_angle == 180)
-	{
-		infos->ray_infos->dir_x = -1.0;
-		infos->ray_infos->dir_y = 0.0;
 		infos->ray_infos->plane_y = ((60.0 * M_PI / 180.0) / 2) * -1;
-	}
 }
 
 void	init_structs(t_global_infos *infos)
 {
-	t_map_infos *map;
+	t_map_infos	*map;
 
 	map = infos->map_infos;
 	infos->px = (double)map->x;
@@ -102,7 +55,6 @@ void	init_structs(t_global_infos *infos)
 	infos->map = fill_map(infos->map_infos);
 	infos->map_infos->x = map->width;
 	infos->map_infos->y = map->height;
-	infos->map_infos->width =1920;
+	infos->map_infos->width = 1920;
 	infos->map_infos->height = 1080;
-	printf("%f %f %d %d\n", infos->px, infos->py, infos->map_infos->x, infos->map_infos->y);
 }

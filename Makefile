@@ -34,12 +34,13 @@ SRC_COMMON := \
 	\
 	$(SRC_DIR)/parsing/color.c \
 	$(SRC_DIR)/parsing/color_utils.c \
-	$(SRC_DIR)/parsing/hard_coded_parsing.c \
 	$(SRC_DIR)/parsing/map.c \
 	$(SRC_DIR)/parsing/map_utils.c \
 	$(SRC_DIR)/parsing/map_valid.c \
 	$(SRC_DIR)/parsing/parse.c \
+	$(SRC_DIR)/parsing/parsing_textures.c \
 	$(SRC_DIR)/parsing/parsing_utils.c \
+	$(SRC_DIR)/parsing/parsing.c \
 	$(SRC_DIR)/parsing/str_utils.c \
 	$(SRC_DIR)/parsing/texture.c \
 	$(SRC_DIR)/parsing/utils.c \

@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/30 11:24:40 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/04 14:38:17 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ void	calcul_the_fps(t_global_infos *infos)
 	if (elapsed_seconds >= 1.0)
 	{
 		infos->char_fps = ft_itoa(frame_count);
-		// printf("%d\n", frame_count);
 		if (frame_count == 1)
 			infos->fps = 30;
 		else if (frame_count > 100)
@@ -75,9 +74,7 @@ void	graphic_rendering(double distance, t_data *img, int i,
 	if (start_y < 0)
 		start_y = 0;
 	end_y = start_y + wall_height;
-	infos->tex_step = (double)infos->textures->t_height / wall_height;
-	infos->tex_pos = (start_y - infos->map_infos->height * 0.5 + wall_height
-			* 0.5) * infos->tex_step;
+	texture_start(infos, wall_height, start_y);
 	while (y < infos->map_infos->height)
 	{
 		if (y < start_y)
