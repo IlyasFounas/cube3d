@@ -6,12 +6,16 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 14:08:12 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/29 22:24:41 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/05 14:30:47 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef STRUCTURES_H
 # define STRUCTURES_H
+
+# include <stdbool.h>
+
+# define DEG_TO_RAD(a) ((a)*M_PI / 180.0)
 
 # define MALLOC_FAILED 1
 # define SUCCESS 0
@@ -58,29 +62,36 @@
 # define FNT_S_XPM "textures/digits/S.xpm"
 # define FNT_CLN_XPM "textures/digits/colon.xpm"
 
+# define MINIMAP_X 16.0
+# define MINIMAP_Y 9.0
+
 // Couleurs noires
-#define COLOR_BLACK_TRANS  0x00000000
+# define COLOR_BLACK_TRANS 0x00000000
 
 // Gris
-#define COLOR_GRAY_TRANS   0x88404040
+# define COLOR_GRAY_TRANS 0x88404040
+# define COLOR_GRAY_LIGHT 0x88A0A0A0
 
 // Rouges
-#define COLOR_RED_TRANS    0x88FF0000
+# define COLOR_RED_TRANS 0x88FF0000
 
 // Marrons
-#define COLOR_BROWN_TRANS   0x88A52A2A
+# define COLOR_BROWN_TRANS 0x88A52A2A
 
-
+typedef struct s_point
+{
+	double x;
+	double y;
+}				t_point;
 
 typedef struct s_drawable
 {
-	int32_t				x;
-	int32_t				y;
-	int32_t				padding_x;
-	int32_t				padding_y;
+	double				x;
+	double				y;
+	double				padding_x;
+	double				padding_y;
 	unsigned int		color;
-}				t_drawable;
-
+}						t_drawable;
 
 typedef struct s_color
 {
@@ -206,9 +217,10 @@ typedef struct s_global_infos
 	char				*char_fps;
 	int					***digits;
 	t_font				font;
+	bool				draw_minimap;
 }						t_global_infos;
 
-t_textures	*new_node_texture(char *s, t_type type);
-t_textures	*last_node(t_textures *textures);
+t_textures				*new_node_texture(char *s, t_type type);
+t_textures				*last_node(t_textures *textures);
 
 #endif

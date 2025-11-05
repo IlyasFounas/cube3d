@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   movements_handeling.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:58:52 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/27 09:49:59 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/05 13:40:39 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,5 +110,13 @@ int	keys_released(int keycode, t_global_infos *infos)
 		keys->left = 0;
 	if (keycode == 65361)
 		keys->right = 0;
+	if (keycode == 109)
+	{
+		infos->draw_minimap = !infos->draw_minimap;
+		if (!infos->draw_minimap)
+			write(1, "hidding map\n", 13);
+		else
+			write(1, "showing map\n", 13);
+	}
 	return (0);
 }

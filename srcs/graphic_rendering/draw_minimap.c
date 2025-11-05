@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:47:47 by aboumall          #+#    #+#             */
-/*   Updated: 2025/10/30 17:16:13 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/05 14:33:41 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	draw_scaled(t_data *img, t_drawable drawable, int scale)
 {
-	int	i;
-	int	j;
-	int	m_x;
-	int	m_y;
+	int		i;
+	int		j;
+	double	m_x;
+	double	m_y;
 
 	j = 0;
 	while (j < scale)
@@ -36,71 +36,50 @@ void	draw_scaled(t_data *img, t_drawable drawable, int scale)
 
 bool	is_in_range(t_global_infos *infos, int x, int y)
 {
-	return (x >= 0 && x < infos->map_infos->x
-		&& y >= 0 && y < infos->map_infos->y);
+	return (x >= 0 && x < infos->map_infos->x && y >= 0
+		&& y < infos->map_infos->y);
 }
 
-void	draw_minimap2(t_global_infos *infos)
+void	draw_square(t_global_infos *infos, t_point d_p, t_point i_p)
 {
-	int	y;
-	int	x;
-	int	start_x;
-	int	end_x;
-	int	start_y;
-	int	end_y;
-	int	d_x;
-	int	d_y;
-
-	start_x = infos->px - 15;
-	end_x = infos->px + 15;
-	start_y = infos->py - 6;
-	end_y = infos->py + 6;
-	y = start_y;
-	while (y < end_y)
-	{
-		x = start_x;
-		while (x < end_x)
-		{
-			d_x = (x + 15);
-			d_y = (y + 6);
-			if (!is_in_range(infos, x, y))
-				draw_scaled(&infos->img, (t_drawable){x, y, 30, 30,
-					COLOR_BROWN_TRANS}, 5);
-			if (is_in_range(infos, x, y) && infos->map[y][x] == 1)
-				draw_scaled(&infos->img, (t_drawable){x, y, 30, 30,
-					COLOR_BLACK_TRANS}, 5);
-			if (is_in_range(infos, x, y) && infos->map[y][x] == 0)
-				draw_scaled(&infos->img, (t_drawable){x, y, 30, 30,
-					COLOR_GRAY_TRANS}, 5);
-			x++;
-		}
-		y++;
-	}
-	// draw_scaled(&infos->img, (t_drawable){infos->px, infos->py, 30, 30,
-	// 	COLOR_RED_TRANS}, 5);
+	if (!is_in_range(infos, i_p.x, i_p.y))
+		draw_scaled(&infos->img, (t_drawable){d_p.x, d_p.y, 30, 30,
+			COLOR_GRAY_LIGHT}, 7);
+	else if (is_in_range(infos, i_p.x, i_p.y)
+		&& infos->map[(int)i_p.y][(int)i_p.x] == 1)
+		draw_scaled(&infos->img, (t_drawable){d_p.x, d_p.y, 30, 30,
+			COLOR_BLACK_TRANS}, 7);
+	else if (is_in_range(infos, i_p.x, i_p.y)
+		&& infos->map[(int)i_p.y][(int)i_p.x] == 0)
+		draw_scaled(&infos->img, (t_drawable){d_p.x, d_p.y, 30, 30,
+			COLOR_GRAY_TRANS}, 7);
+	else
+		draw_scaled(&infos->img, (t_drawable){d_p.x, d_p.y, 30, 30,
+			COLOR_GRAY_LIGHT}, 7);
 }
 
 void	draw_minimap(t_global_infos *infos)
 {
-	int	x;
 	int	y;
+	int	x;
+	int	d_x;
+	int	d_y;
 
-	y = 0;
-	while (y < infos->map_infos->y)
+	y = floor(infos->py) - MINIMAP_Y;
+	d_y = 0.0;
+	while (y < floor(infos->py) + MINIMAP_Y)
 	{
-		x = 0;
-		while (x < infos->map_infos->x)
+		x = floor(infos->px) - MINIMAP_X;
+		d_x = 0.0;
+		while (x < floor(infos->px) + MINIMAP_X)
 		{
-			if (infos->map[y][x] == 1)
-				draw_scaled(&infos->img, (t_drawable){x, y, 30, 30,
-					COLOR_BLACK_TRANS}, 5);
-			if (infos->map[y][x] == 0)
-				draw_scaled(&infos->img, (t_drawable){x, y, 30, 30,
-					COLOR_GRAY_TRANS}, 5);
+			draw_square(infos, (t_point){d_x, d_y}, (t_point){x, y});
 			x++;
+			d_x++;
 		}
+		d_y++;
 		y++;
 	}
-	draw_scaled(&infos->img, (t_drawable){infos->px, infos->py, 30, 30,
-		COLOR_RED_TRANS}, 5);
+	draw_scaled(&infos->img, (t_drawable){MINIMAP_X, MINIMAP_Y, 30, 30,
+		COLOR_RED_TRANS}, 7);
 }
