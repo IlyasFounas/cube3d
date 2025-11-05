@@ -6,11 +6,28 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:24:10 by aboumall          #+#    #+#             */
-/*   Updated: 2025/10/28 17:15:50 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/05 14:56:59 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+bool	font_crashed(t_global_infos *infos)
+{
+	int	i;
+
+	i = 0;
+	while (i < 14)
+	{
+		if (!infos->font.img[i])
+		{
+			printf("Warning\nCan't open font for fps display\n");
+			return (true);
+		}
+		i++;
+	}
+	return (false);
+}
 
 void	load_font(t_global_infos *infos)
 {
@@ -32,6 +49,8 @@ void	load_font(t_global_infos *infos)
 	infos->font.img[12] = mlx_xpm_file_to_image(infos->mlx, FNT_S_XPM, &w, &h);
 	infos->font.img[13] = mlx_xpm_file_to_image(infos->mlx, FNT_CLN_XPM, &w,
 			&h);
+	if (font_crashed(infos))
+		infos->font_crashed = true;
 	infos->font.width = w;
 	infos->font.height = h;
 }

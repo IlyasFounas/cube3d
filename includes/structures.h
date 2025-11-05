@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 14:08:12 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/05 14:30:47 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/05 14:44:04 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -217,7 +217,9 @@ typedef struct s_global_infos
 	char				*char_fps;
 	int					***digits;
 	t_font				font;
+	bool				font_crashed;
 	bool				draw_minimap;
+	bool				draw_fps;
 }						t_global_infos;
 
 t_textures				*new_node_texture(char *s, t_type type);

@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:58:52 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/05 13:40:39 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/05 14:46:30 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,12 +111,8 @@ int	keys_released(int keycode, t_global_infos *infos)
 	if (keycode == 65361)
 		keys->right = 0;
 	if (keycode == 109)
-	{
 		infos->draw_minimap = !infos->draw_minimap;
-		if (!infos->draw_minimap)
-			write(1, "hidding map\n", 13);
-		else
-			write(1, "showing map\n", 13);
-	}
+	if (keycode == 102)
+		infos->draw_fps = !infos->draw_fps;
 	return (0);
 }

@@ -94,6 +94,8 @@ void	init_structs(t_global_infos *infos)
 	t_map_infos *map;
 
 	infos->draw_minimap = false;
+	infos->draw_fps = false;
+	infos->font_crashed = false;
 	map = infos->map_infos;
 	infos->px = (double)map->y;
 	infos->py = (double)map->x;
