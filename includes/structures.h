@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 14:08:12 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/05 14:44:04 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/05 16:58:54 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,17 +65,10 @@
 # define MINIMAP_X 16.0
 # define MINIMAP_Y 9.0
 
-// Couleurs noires
 # define COLOR_BLACK_TRANS 0x00000000
-
-// Gris
 # define COLOR_GRAY_TRANS 0x88404040
 # define COLOR_GRAY_LIGHT 0x88A0A0A0
-
-// Rouges
 # define COLOR_RED_TRANS 0x88FF0000
-
-// Marrons
 # define COLOR_BROWN_TRANS 0x88A52A2A
 
 typedef struct s_point

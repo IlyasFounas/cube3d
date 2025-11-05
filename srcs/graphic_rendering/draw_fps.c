@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:24:10 by aboumall          #+#    #+#             */
-/*   Updated: 2025/11/05 14:56:59 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/05 17:00:21 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,20 @@ bool	font_crashed(t_global_infos *infos)
 	return (false);
 }
 
-void	load_font(t_global_infos *infos)
+void	free_fonts(t_global_infos *infos)
+{
+	int	i;
+
+	i = 0;
+	while (i < 14)
+	{
+		if (infos->font.img[i])
+			mlx_destroy_image(infos->mlx, infos->font.img[i]);
+		i++;
+	}
+}
+
+void	load_fonts(t_global_infos *infos)
 {
 	int	w;
 	int	h;

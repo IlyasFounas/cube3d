@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   window_handeling_bonus.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 13:48:57 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/27 14:00:03 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/05 15:18:17 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	window_handeling_bonus(t_global_infos *infos)
 	if (!infos->mlx_win)
 		malloc_error(infos);
 	create_textures(infos);
-	load_font(infos);
+	load_fonts(infos);
 	create_image(infos, &infos->img);
 	mlx_hook(infos->mlx_win, 2, 1L << 0, keys_pressed, infos);
 	mlx_hook(infos->mlx_win, 3, 1L << 1, keys_released, infos);

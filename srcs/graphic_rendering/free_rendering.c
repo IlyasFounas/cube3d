@@ -6,16 +6,30 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:02:47 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/28 14:29:41 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/05 17:01:51 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 
+void	free_2d_map(t_global_infos *infos)
+{
+	int	i;
+
+	i = 0;
+	if (!infos->map)
+		return ;
+	while (i < infos->map_infos->y)
+	{
+		free(infos->map[i]);
+		i++;
+	}
+	free(infos->map);
+	infos->map = NULL;
+}
+
 void	free_global_info(t_global_infos *infos)
 {
-	if (infos->map_infos)
-		infos->map_infos = NULL;
 	if (infos->ray_infos)
 	{
 		free(infos->ray_infos);
@@ -25,11 +39,6 @@ void	free_global_info(t_global_infos *infos)
 	{
 		free(infos->keys);
 		infos->keys = NULL;
-	}
-	if (infos->char_fps)
-	{
-		free(infos->char_fps);
-		infos->char_fps = NULL;
 	}
 }
 
@@ -69,12 +78,12 @@ void	free_rendering(t_global_infos *infos)
 	int	i;
 
 	i = -1;
-	if (infos->map)
-	{
-		free(infos->map);
-		infos->map = NULL;
-	}
 	free_global_info(infos);
 	free_textures(infos, infos->textures);
+	free_fonts(infos);
 	free_mlx(infos);
+	free_2d_map(infos);
+	free_map(infos->map_infos);
+	if (infos->char_fps)
+		free(infos->char_fps);
 }

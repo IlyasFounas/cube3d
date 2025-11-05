@@ -46,7 +46,7 @@ void	window_handeling(t_global_infos *infos)
 	if (!infos->mlx_win)
 		malloc_error(infos);
 	create_textures(infos);
-	load_font(infos);
+	load_fonts(infos);
 	create_image(infos, &infos->img);
 	mlx_hook(infos->mlx_win, 2, 1L << 0, keys_pressed, infos);
 	mlx_hook(infos->mlx_win, 3, 1L << 1, keys_released, infos);
