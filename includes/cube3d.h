@@ -40,9 +40,6 @@ void	add_back_node(t_textures **textures, t_textures *new,
 void	texture_start(t_global_infos *infos, int wall_height, int start_y);
 void	wall_rendering(t_global_infos *infos, t_data *img, int i, int y);
 
-/*____________________________PARSING__________________________________*/
-
-
 /*____________________________RAYCASTING_______________________________*/
 /*---raycasting---*/
 int		raycasting(void *param);
@@ -58,8 +55,7 @@ void	setting_the_right_texture(t_global_infos *infos,
 /*____________________________WINDOW HANDELING_________________________*/
 /*---movements_handeling_utils---*/
 int		wall_collision(t_global_infos *infos, double y, double x);
-void	straf_position(t_global_infos *infos, t_keys *keys, t_ray_infos *ray,
-			double speed);
+void	straf_position(t_global_infos *infos);
 
 /*---movements_handeling---*/
 void	update_player_rotation(t_global_infos *infos);
@@ -126,14 +122,14 @@ void	draw_fps(t_global_infos *infos);
 /*____________________________MAIN_______________________________*/
 void	malloc_error(t_global_infos *infos);
 
-
 /*____________________________BONUS PART_______________________________*/
 int		raycasting_bonus(void *param);
 void	window_handeling_bonus(t_global_infos *infos);
 void	graphic_rendering_bonus(double distance, t_data *img, int i,
-		t_global_infos *infos);
+			t_global_infos *infos);
 int		darken_color(int color, double factor);
-int		return_ult_darken_color(t_global_infos *infos, int color, int y, int yes);
+int		return_ult_darken_color(t_global_infos *infos, int color, int y,
+			int yes);
 int		return_color_bonus(t_color color);
 
 #endif

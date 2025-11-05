@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 10:37:55 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/30 14:47:08 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/05 14:12:36 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,7 @@ void	graphic_rendering_bonus(double distance, t_data *img, int i,
 	if (start_y < 0)
 		start_y = 0;
 	end_y = start_y + wall_height;
-	infos->tex_step = (double)infos->textures->t_height / wall_height;
-	infos->tex_pos = (start_y - infos->map_infos->height * 0.5 + wall_height
-			* 0.5) * infos->tex_step;
+	texture_start(infos, wall_height, start_y);
 	infos->fog_ratio = distance;
 	while (y < infos->map_infos->height)
 	{

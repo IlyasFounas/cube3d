@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:01:38 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/30 16:57:42 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/05 09:34:13 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int	raycasting(void *param)
 	calcul_the_fps(infos);
 	update_player_rotation(infos);
 	update_player_position(infos);
+	straf_position(infos);
 	while (i < infos->map_infos->width)
 	{
 		calculs_of_vectors(infos, i);
