@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/29 09:57:22 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/30 17:36:56 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/05 17:22:20 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,14 @@ int	return_ult_darken_color(t_global_infos *infos, int color, int y, int yes)
 	int		mid;
 
 	mid = (infos->map_infos->height / 2);
-	if (((y >= mid - 150 && y < mid + 150) || yes == 0) && infos->fog_ratio > 2)
+	if (((y >= mid - 60 && y < mid + 60) || yes == 0) && infos->fog_ratio > 8)
 	{
+		// if (infos->fog_ratio > 20)
+		// 	return (0x000000);
 		factor = 1.0 - ((double)infos->fog_ratio * 0.09f);
 		if (factor < 0.0)
 			factor = 0.0;
-		factor += fabs((double)y - (double)mid) / 260.0;
+		factor += fabs((double)y - (double)mid) / 250.0;
 		return (darken_color(color, factor));
 	}
 	return (color);
