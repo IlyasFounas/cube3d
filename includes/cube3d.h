@@ -30,19 +30,15 @@ void	free_rendering(t_global_infos *infos);
 
 /*---graphic_rendering---*/
 void	calcul_the_fps(t_global_infos *infos);
+void	draw_wall(t_global_infos *infos, t_data *img, int i, int y);
 void	graphic_rendering(double distance, t_data *img, int i,
 			t_global_infos *infos);
 
 /*---texture_rendering---*/
 void	add_back_node(t_textures **textures, t_textures *new,
 			int *malloc_failed);
+void	texture_start(t_global_infos *infos, int wall_height, int start_y);
 void	wall_rendering(t_global_infos *infos, t_data *img, int i, int y);
-
-/*____________________________PARSING__________________________________*/
-/*---hard_coded_parsing---*/
-void	init_textures(t_global_infos *infos, t_textures *textures);
-void	create_textures(t_global_infos *infos);
-void	init_structs(t_global_infos *infos);
 
 /*____________________________RAYCASTING_______________________________*/
 /*---raycasting---*/
@@ -59,8 +55,7 @@ void	setting_the_right_texture(t_global_infos *infos,
 /*____________________________WINDOW HANDELING_________________________*/
 /*---movements_handeling_utils---*/
 int		wall_collision(t_global_infos *infos, double y, double x);
-void	straf_position(t_global_infos *infos, t_keys *keys, t_ray_infos *ray,
-			double speed);
+void	straf_position(t_global_infos *infos);
 
 /*---movements_handeling---*/
 void	update_player_rotation(t_global_infos *infos);
@@ -75,6 +70,13 @@ int		close_window(t_global_infos *infos);
 void	window_handeling(t_global_infos *infos);
 
 /*____________________________PARSING_________________________________*/
+/*---parsing_textures---*/
+void	create_textures(t_global_infos *infos);
+
+/*---parsing---*/
+void	init_textures(t_global_infos *infos, t_textures *textures);
+void	init_structs(t_global_infos *infos);
+
 int		ft_line_len(char *line);
 int		dbl_char_len(char **tab);
 bool	get_map_width(t_map_infos *map);
@@ -120,9 +122,14 @@ void	draw_fps(t_global_infos *infos);
 /*____________________________MAIN_______________________________*/
 void	malloc_error(t_global_infos *infos);
 
-
 /*____________________________BONUS PART_______________________________*/
 int		raycasting_bonus(void *param);
 void	window_handeling_bonus(t_global_infos *infos);
+void	graphic_rendering_bonus(double distance, t_data *img, int i,
+			t_global_infos *infos);
+int		darken_color(int color, double factor);
+int		return_ult_darken_color(t_global_infos *infos, int color, int y,
+			int yes);
+int		return_color_bonus(t_color color);
 
 #endif

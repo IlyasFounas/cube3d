@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 13:47:13 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/27 14:28:44 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/05 14:10:36 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ void	malloc_error(t_global_infos *infos)
 	exit(MALLOC_FAILED);
 }
 
-
 int	main(int argc, char **argv)
 {
 	t_global_infos	infos;
@@ -31,7 +30,6 @@ int	main(int argc, char **argv)
 		printf("Usage: ./cub3d <map_file.cub>\n");
 		return (1);
 	}
-    printf("BONUS\n");
 	ft_memset(&infos, 0, sizeof(t_global_infos));
 	init_map(&map, argv[1]);
 	exit_if(!parse_scene(&map), &map, NULL, EXIT_FAILURE);
