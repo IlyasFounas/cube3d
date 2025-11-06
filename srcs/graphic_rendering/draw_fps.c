@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:24:10 by aboumall          #+#    #+#             */
-/*   Updated: 2025/11/05 17:00:21 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/06 14:41:34 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,8 +98,6 @@ void	draw_fps(t_global_infos *infos)
 	i = 0;
 	x = 10;
 	y = 10;
-	if (!infos->char_fps)
-		return ;
 	draw_fps_txt(infos, &x);
 	while (infos->char_fps[i])
 	{

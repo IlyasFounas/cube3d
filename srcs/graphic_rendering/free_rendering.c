@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 12:02:47 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/05 17:01:51 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/06 14:40:53 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,4 @@ void	free_rendering(t_global_infos *infos)
 	free_mlx(infos);
 	free_2d_map(infos);
 	free_map(infos->map_infos);
-	if (infos->char_fps)
-		free(infos->char_fps);
 }

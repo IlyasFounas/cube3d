@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 14:08:12 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/05 16:58:54 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/06 14:25:40 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,7 +207,7 @@ typedef struct s_global_infos
 	t_keys				*keys;
 	t_data				img;
 	int					fps;
-	char				*char_fps;
+	char				char_fps[10];
 	int					***digits;
 	t_font				font;
 	bool				font_crashed;

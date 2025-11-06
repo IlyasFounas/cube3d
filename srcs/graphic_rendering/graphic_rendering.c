@@ -6,12 +6,42 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/05 14:50:57 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/06 14:44:03 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 #include <sys/time.h>
+
+int	digit_len(int n)
+{
+	int	len;
+
+	len = 0;
+	if (n < 0)
+		n = -n;
+	while (n >= 10)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
+}
+
+void	fps_to_char(t_global_infos *infos, int frame_count)
+{
+	int	digits;
+	int	result;
+
+	digits = digit_len(frame_count);
+	while (digits >= 0)
+	{
+		result = frame_count % 10;
+		frame_count /= 10;
+		infos->char_fps[digits] = result + '0';
+		digits--;
+	}
+}
 
 void	calcul_the_fps(t_global_infos *infos)
 {
@@ -26,7 +56,8 @@ void	calcul_the_fps(t_global_infos *infos)
 		+ (current_time.tv_usec - last_time.tv_usec) / 1000000.0;
 	if (elapsed_seconds >= 1.0)
 	{
-		infos->char_fps = ft_itoa(frame_count);
+		ft_bzero(infos->char_fps, 10);
+		fps_to_char(infos, frame_count);
 		if (frame_count == 1)
 			infos->fps = 30;
 		else if (frame_count > 100)
