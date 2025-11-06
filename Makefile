@@ -55,6 +55,7 @@ SRC_COMMON := \
 
 SRC_BONUS := \
 	$(DIR_BONUS)/main_bonus.c \
+	$(DIR_BONUS)/mouse_bonus.c \
 	$(DIR_BONUS)/raycasting_bonus.c \
 	$(DIR_BONUS)/graphic_rendering_bonus.c \
 	$(DIR_BONUS)/graphic_rendering_utils.c \

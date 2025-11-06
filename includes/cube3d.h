@@ -131,5 +131,6 @@ int		darken_color(int color, double factor);
 int		return_ult_darken_color(t_global_infos *infos, int color, int y,
 			int yes);
 int		return_color_bonus(t_color color);
+int		handle_mouse_movements(t_global_infos *infos);
 
 #endif
