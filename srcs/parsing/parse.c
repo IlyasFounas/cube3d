@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:56:42 by aboumall          #+#    #+#             */
-/*   Updated: 2025/10/23 17:27:40 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:06:18 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void	parse_map(t_map_infos *map)
 	if (!is_surr_by_wall(map))
 		exit_if(true, map, MSG_ERR_MP_WL, EXIT_FAILURE);
 	if (map->player_found == 'N')
-		map->start_angle = 90;
-	else if (map->player_found == 'S')
 		map->start_angle = -90;
+	else if (map->player_found == 'S')
+		map->start_angle = 90;
 	else if (map->player_found == 'E')
 		map->start_angle = 0;
 	else

@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/06 10:01:42 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/07 11:31:59 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/07 15:11:57 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int	handle_mouse_movements(t_global_infos *infos)
 	offset = old_x - x;
 	if (offset < 0 && offset > -(infos->map_infos->width - 30)
 		&& offset < (infos->map_infos->width - 30))
-		update_player_rotation_bonus(infos, -offset * 0.002);
+		update_player_rotation_bonus(infos, -offset * 0.001);
 	else if (offset > -(infos->map_infos->width - 30)
 		&& offset < (infos->map_infos->width - 30))
-		update_player_rotation_bonus(infos, -offset * 0.002);
+		update_player_rotation_bonus(infos, -offset * 0.001);
 	old_x = x;
 	replace_y(infos, y, x);
 	if (x >= infos->map_infos->width || x > infos->map_infos->width - 5)
