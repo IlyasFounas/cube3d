@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 14:08:12 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/05 14:41:11 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/07 10:19:14 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,6 +122,8 @@ typedef struct s_keys
 	int					a;
 	int					s;
 	int					d;
+	int					f;
+	int					k;
 	int					left;
 	int					right;
 }						t_keys;
@@ -183,6 +185,8 @@ typedef struct s_global_infos
 	int					***digits;
 	t_font				font;
 	int					fog_ratio;
+	int					mouse_left;
+	int					mouse_right;
 }						t_global_infos;
 
 t_textures	*new_node_texture(char *s, t_type type);

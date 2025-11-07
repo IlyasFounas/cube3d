@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:58:52 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/05 14:40:17 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/07 11:04:29 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,10 @@ int	keys_pressed(int keycode, t_global_infos *infos)
 		keys->d = 1;
 	if (keycode == 97)
 		keys->a = 1;
+	if (keycode == 107)
+		keys->f = 0;
+	if (keycode == 102)
+		keys->f = 1;
 	if (keycode == 65363)
 		keys->left = 1;
 	if (keycode == 65361)
