@@ -2,7 +2,7 @@
 #                                   CONFIG                                     #
 # **************************************************************************** #
 
-NAME              := cube3d
+NAME              := cub3D
 
 SRC_DIR           := srcs
 DIR_BONUS         := bonus
@@ -86,17 +86,17 @@ bonus:
 force:
 
 $(LIBFT): force
-	@$(MAKE) -C $(LIBFT_DIR) --no-print-directory
+	$(MAKE) -C $(LIBFT_DIR) --no-print-directory
 
 $(MLX): force
-	@$(MAKE) -C $(MLX_DIR) --no-print-directory
+	$(MAKE) -C $(MLX_DIR) --no-print-directory
 
-$(NAME): $(OBJ) $(LIBFT) $(MLX)
-	@$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) $(SYS_LIBS) -o $(NAME)
+$(NAME): $(OBJ) includes/cube3d.h $(LIBFT) $(MLX)
+	$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(MLX) $(SYS_LIBS) -o $(NAME)
 
-$(OBJ_DIR)/%.o: %.c
+$(OBJ_DIR)/%.o: %.c includes/cube3d.h
 	@mkdir -p $(dir $@)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	@rm -rf $(OBJ_DIR)

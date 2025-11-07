@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_rendering.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/07 15:44:34 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/07 16:57:29 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ void	calcul_the_fps(t_global_infos *infos)
 		+ (current_time.tv_usec - last_time.tv_usec) / 1000000.0;
 	if (elapsed_seconds >= 1.0)
 	{
-		ft_bzero(infos->char_fps, 10);
-		fps_to_char(infos, frame_count);
 		if (frame_count == 1)
 			infos->fps = 30;
 		else if (frame_count > 100)
@@ -63,6 +61,8 @@ void	calcul_the_fps(t_global_infos *infos)
 			infos->fps = 150;
 		else
 			infos->fps = frame_count;
+		ft_bzero(infos->char_fps, 10);
+		fps_to_char(infos, infos->fps);
 		last_time = current_time;
 		elapsed_seconds = 0;
 		frame_count = 0;
