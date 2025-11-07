@@ -6,11 +6,26 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/24 17:47:47 by aboumall          #+#    #+#             */
-/*   Updated: 2025/11/06 14:19:45 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:44:07 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+int	digit_len(int n)
+{
+	int	len;
+
+	len = 0;
+	if (n < 0)
+		n = -n;
+	while (n >= 10)
+	{
+		n /= 10;
+		len++;
+	}
+	return (len);
+}
 
 void	draw_scaled(t_data *img, t_drawable drawable, int scale)
 {

@@ -35,12 +35,13 @@ SRC_COMMON := \
 	\
 	$(SRC_DIR)/parsing/color.c \
 	$(SRC_DIR)/parsing/color_utils.c \
-	$(SRC_DIR)/parsing/hard_coded_parsing.c \
 	$(SRC_DIR)/parsing/map.c \
 	$(SRC_DIR)/parsing/map_utils.c \
 	$(SRC_DIR)/parsing/map_valid.c \
 	$(SRC_DIR)/parsing/parse.c \
+	$(SRC_DIR)/parsing/parsing_textures.c \
 	$(SRC_DIR)/parsing/parsing_utils.c \
+	$(SRC_DIR)/parsing/parsing.c \
 	$(SRC_DIR)/parsing/str_utils.c \
 	$(SRC_DIR)/parsing/texture.c \
 	$(SRC_DIR)/parsing/texture_utils.c \
@@ -57,7 +58,10 @@ SRC_COMMON := \
 
 SRC_BONUS := \
 	$(DIR_BONUS)/main_bonus.c \
+	$(DIR_BONUS)/mouse_bonus.c \
 	$(DIR_BONUS)/raycasting_bonus.c \
+	$(DIR_BONUS)/graphic_rendering_bonus.c \
+	$(DIR_BONUS)/graphic_rendering_utils.c \
 	$(DIR_BONUS)/window_handeling_bonus.c
 
 ifeq ($(USE_BONUS),1)
@@ -76,7 +80,7 @@ OBJ := $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 
 all: $(NAME)
 
-bonus: fclean
+bonus: 
 	@$(MAKE) USE_BONUS=1 all --no-print-directory
 
 force:

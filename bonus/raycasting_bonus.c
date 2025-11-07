@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 13:47:10 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/29 17:40:15 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:40:16 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,21 @@ int	raycasting_bonus(void *param)
 	infos = (t_global_infos *)param;
 	i = 0;
 	calcul_the_fps(infos);
+	handle_mouse_movements(infos);
 	update_player_rotation(infos);
 	update_player_position(infos);
+	straf_position(infos);
 	while (i < infos->map_infos->width)
 	{
 		calculs_of_vectors(infos, i);
 		distance = solving_linear_equa(infos);
-		graphic_rendering(distance, &infos->img, i, infos);
+		graphic_rendering_bonus(distance, &infos->img, i, infos);
 		i++;
 	}
+	if (infos->draw_minimap)
+		draw_minimap(infos);
 	mlx_put_image_to_window(infos->mlx, infos->mlx_win, infos->img.img, 0, 0);
+	if (infos->draw_fps && !infos->font_crashed)
+		draw_fps(infos);
 	return (0);
 }

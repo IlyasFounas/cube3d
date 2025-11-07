@@ -6,26 +6,23 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/06 14:44:03 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:44:34 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
 #include <sys/time.h>
 
-int	digit_len(int n)
+static int	return_color(t_color color)
 {
-	int	len;
+	int	r;
+	int	g;
+	int	b;
 
-	len = 0;
-	if (n < 0)
-		n = -n;
-	while (n >= 10)
-	{
-		n /= 10;
-		len++;
-	}
-	return (len);
+	r = color.r;
+	g = color.g;
+	b = color.b;
+	return ((r << 16) | (g << 8) | (b));
 }
 
 void	fps_to_char(t_global_infos *infos, int frame_count)
@@ -93,17 +90,17 @@ void	graphic_rendering(double distance, t_data *img, int i,
 	if (start_y < 0)
 		start_y = 0;
 	end_y = start_y + wall_height;
-	infos->tex_step = (double)infos->textures->t_height / wall_height;
-	infos->tex_pos = (start_y - infos->map_infos->height * 0.5 + wall_height
-			* 0.5) * infos->tex_step;
+	texture_start(infos, wall_height, start_y);
 	while (y < infos->map_infos->height)
 	{
 		if (y < start_y)
-			my_mlx_pixel_put(img, i, y, 0x00666666);
+			my_mlx_pixel_put(img, i, y,
+				return_color(infos->map_infos->ceiling_color));
 		else if (y >= start_y && y < end_y)
 			draw_wall(infos, img, i, y);
 		else
-			my_mlx_pixel_put(img, i, y, 0x042f09);
+			my_mlx_pixel_put(img, i, y,
+				return_color(infos->map_infos->floor_color));
 		y++;
 	}
 }

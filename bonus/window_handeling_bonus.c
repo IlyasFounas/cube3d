@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 13:48:57 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/05 15:18:17 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:22:39 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	window_handeling_bonus(t_global_infos *infos)
 	mlx_hook(infos->mlx_win, 2, 1L << 0, keys_pressed, infos);
 	mlx_hook(infos->mlx_win, 3, 1L << 1, keys_released, infos);
 	mlx_hook(infos->mlx_win, 17, 0, close_window, infos);
+	mlx_mouse_move(infos->mlx, infos->mlx_win, infos->map_infos->width / 2,
+		infos->map_infos->height / 2);
 	mlx_loop_hook(infos->mlx, raycasting_bonus, infos);
 	mlx_loop(infos->mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 13:58:52 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/05 14:46:30 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:36:43 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,8 @@ void	update_player_position(t_global_infos *infos)
 
 	keys = infos->keys;
 	ray = infos->ray_infos;
-	speed = 0.01 * (300.0 / infos->fps);
-	if (keys->W == 1)
+	speed = 0.02 * (300.0 / infos->fps);
+	if (keys->w == 1)
 	{
 		if (wall_collision(infos, infos->py, infos->px + ray->dir_x
 				* speed) == 1)
@@ -56,7 +56,7 @@ void	update_player_position(t_global_infos *infos)
 				infos->px) == 1)
 			infos->py += ray->dir_y * speed;
 	}
-	if (keys->S == 1)
+	if (keys->s == 1)
 	{
 		if (wall_collision(infos, infos->py, infos->px - ray->dir_x
 				* speed) == 1)
@@ -65,7 +65,6 @@ void	update_player_position(t_global_infos *infos)
 				infos->px) == 1)
 			infos->py -= ray->dir_y * speed;
 	}
-	straf_position(infos, keys, ray, speed);
 }
 
 int	keys_pressed(int keycode, t_global_infos *infos)
@@ -74,13 +73,17 @@ int	keys_pressed(int keycode, t_global_infos *infos)
 
 	keys = infos->keys;
 	if (keycode == 119)
-		keys->W = 1;
+		keys->w = 1;
 	if (keycode == 115)
-		keys->S = 1;
+		keys->s = 1;
 	if (keycode == 100)
-		keys->D = 1;
+		keys->d = 1;
 	if (keycode == 97)
-		keys->A = 1;
+		keys->a = 1;
+	if (keycode == 107)
+		keys->f = 0;
+	if (keycode == 106)
+		keys->f = 1;
 	if (keycode == 65363)
 		keys->left = 1;
 	if (keycode == 65361)
@@ -99,13 +102,13 @@ int	keys_released(int keycode, t_global_infos *infos)
 
 	keys = infos->keys;
 	if (keycode == 119)
-		keys->W = 0;
+		keys->w = 0;
 	if (keycode == 115)
-		keys->S = 0;
+		keys->s = 0;
 	if (keycode == 100)
-		keys->D = 0;
+		keys->d = 0;
 	if (keycode == 97)
-		keys->A = 0;
+		keys->a = 0;
 	if (keycode == 65363)
 		keys->left = 0;
 	if (keycode == 65361)
