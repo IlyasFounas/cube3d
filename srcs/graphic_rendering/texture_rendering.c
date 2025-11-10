@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture_rendering.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/07 16:26:48 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/07 15:25:32 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/10 16:50:27 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,14 @@ void	wall_rendering(t_global_infos *infos, t_data *img, int i, int y)
 	while (ptr && ptr->type != infos->actual_orientation)
 		ptr = ptr->next;
 	img_texture = &ptr->data;
+	if (infos->tex_x < 0)
+		infos->tex_x = 0;
+	if (infos->tex_y < 0)
+		infos->tex_y = 0;
+	if (infos->tex_x >= ptr->t_width)
+		infos->tex_x = ptr->t_width - 1;
+	if (infos->tex_y >= ptr->t_height)
+		infos->tex_y = ptr->t_height - 1;
 	position = (infos->tex_y * img_texture->line_length) + (infos->tex_x
 			* (img_texture->bits_per_pixel * 0.125));
 	color = *(int *)(img_texture->addr + position);
