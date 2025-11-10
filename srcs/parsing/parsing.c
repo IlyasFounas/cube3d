@@ -52,8 +52,8 @@ void	init_structs(t_global_infos *infos)
 	t_map_infos	*map;
 
 	map = infos->map_infos;
-	infos->px = (double)map->x;
-	infos->py = (double)map->y;
+	infos->px = (double)map->x + (double)map->x * 0.5;
+	infos->py = (double)map->y + (double)map->y * 0.5;
 	set_dirs(infos);
 	infos->map = fill_map(infos->map_infos);
 	infos->map_infos->x = map->width;
