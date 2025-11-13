@@ -193,13 +193,6 @@ typedef struct s_ray_infos
 	double				plane_y;
 }						t_ray_infos;
 
-typedef struct s_font
-{
-	void				*img[16];
-	int					width;
-	int					height;
-}						t_font;
-
 typedef struct s_global_infos
 {
 	double				px;
@@ -218,13 +211,10 @@ typedef struct s_global_infos
 	t_keys				*keys;
 	t_data				img;
 	int					fps;
-	char				char_fps[10];
 	int					***digits;
-	t_font				font;
 	int					fog_ratio;
 	int					mouse_left;
 	int					mouse_right;
-	bool				font_crashed;
 	bool				draw_minimap;
 	bool				draw_fps;
 }						t_global_infos;
@@ -336,9 +326,6 @@ void					exit_if(bool cnd, t_map_infos *map, char *msg,
 void					free_dbl_char(char **tab, int start, int end,
 							bool free_all);
 
-void					free_fonts(t_global_infos *infos);
-void					load_fonts(t_global_infos *infos);
-void					draw_fps(t_global_infos *infos);
 void					draw_minimap(t_global_infos *infos);
 int						digit_len(int n);
 

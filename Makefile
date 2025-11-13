@@ -27,7 +27,6 @@ SYS_LIBS          := -lm -lXext -lX11 -lz
 SRC_COMMON := \
 	$(SRC_DIR)/main.c \
 	\
-	$(SRC_DIR)/graphic_rendering/draw_fps.c \
 	$(SRC_DIR)/graphic_rendering/draw_minimap.c \
 	$(SRC_DIR)/graphic_rendering/free_rendering.c \
 	$(SRC_DIR)/graphic_rendering/graphic_rendering.c \

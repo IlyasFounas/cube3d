@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 13:47:10 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/07 15:40:16 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/13 16:28:19 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,5 @@ int	raycasting_bonus(void *param)
 	if (infos->draw_minimap)
 		draw_minimap(infos);
 	mlx_put_image_to_window(infos->mlx, infos->mlx_win, infos->img.img, 0, 0);
-	if (infos->draw_fps && !infos->font_crashed)
-		draw_fps(infos);
 	return (0);
 }

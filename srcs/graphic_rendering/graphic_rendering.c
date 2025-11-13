@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_rendering.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/07 16:57:29 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/13 17:18:19 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,21 +23,6 @@ static int	return_color(t_color color)
 	g = color.g;
 	b = color.b;
 	return ((r << 16) | (g << 8) | (b));
-}
-
-void	fps_to_char(t_global_infos *infos, int frame_count)
-{
-	int	digits;
-	int	result;
-
-	digits = digit_len(frame_count);
-	while (digits >= 0)
-	{
-		result = frame_count % 10;
-		frame_count /= 10;
-		infos->char_fps[digits] = result + '0';
-		digits--;
-	}
 }
 
 void	calcul_the_fps(t_global_infos *infos)
@@ -61,8 +46,8 @@ void	calcul_the_fps(t_global_infos *infos)
 			infos->fps = 150;
 		else
 			infos->fps = frame_count;
-		ft_bzero(infos->char_fps, 10);
-		fps_to_char(infos, infos->fps);
+		if (infos->draw_fps)
+			printf("fps: %d\n", infos->fps);
 		last_time = current_time;
 		elapsed_seconds = 0;
 		frame_count = 0;

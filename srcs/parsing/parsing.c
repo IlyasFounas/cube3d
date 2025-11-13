@@ -60,4 +60,6 @@ void	init_structs(t_global_infos *infos)
 	infos->map_infos->y = map->height;
 	infos->map_infos->width = 1920;
 	infos->map_infos->height = 1080;
+	infos->draw_fps = false;
+	infos->draw_minimap = false;
 }
