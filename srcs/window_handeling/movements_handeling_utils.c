@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 12:40:30 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/05 14:39:53 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/12 11:21:24 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,10 @@
 
 int	wall_collision(t_global_infos *infos, double y, double x)
 {
+	if ((int)floor(y) > infos->map_infos->y || (int)floor(y) < 0)
+		return (0);
+	if ((int)floor(x) > infos->map_infos->x || (int)floor(x) < 0)
+		return (0);
 	if (infos->map[(int)floor(y)][(int)floor(x)] != 1)
 		return (1);
 	return (0);
