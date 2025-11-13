@@ -33,18 +33,14 @@ void	init_textures(t_global_infos *infos, t_textures *textures)
 void	set_dirs(t_global_infos *infos)
 {
 	t_map_infos	*map;
+	double fov;
 
 	map = infos->map_infos;
+	fov = 63.0 * M_PI / 180.0;
 	infos->ray_infos->dir_x = cos(map->start_angle * M_PI / 180.0);
 	infos->ray_infos->dir_y = sin(map->start_angle * M_PI / 180.0);
-	if (map->start_angle == 90)
-		infos->ray_infos->plane_x = ((60.0 * M_PI / 180.0) / 2) * -1;
-	else if (map->start_angle == -90)
-		infos->ray_infos->plane_x = (60.0 * M_PI / 180.0) / 2;
-	else if (map->start_angle == 0)
-		infos->ray_infos->plane_y = (60.0 * M_PI / 180.0) / 2;
-	else if (map->start_angle == 180)
-		infos->ray_infos->plane_y = ((60.0 * M_PI / 180.0) / 2) * -1;
+	infos->ray_infos->plane_x = -infos->ray_infos->dir_y * tan(fov / 2);
+	infos->ray_infos->plane_y = infos->ray_infos->dir_x * tan(fov / 2);
 }
 
 void	init_structs(t_global_infos *infos)
