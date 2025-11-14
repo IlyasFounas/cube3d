@@ -1,15 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   hard_coded_parsing.c                               :+:      :+:    :+:   */
-/*                                                    +:+ +:+        
-	+:+     */
-/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+      
-	+#+        */
-/*                                                +#+#+#+#+#+  
-	+#+           */
-/*   Created: 2025/10/27 09:38:06 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/27 09:38:06 by ifounas          ###   ########.fr       */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/11/14 09:41:38 by ifounas           #+#    #+#             */
+/*   Updated: 2025/11/14 09:41:38 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +30,7 @@ void	init_textures(t_global_infos *infos, t_textures *textures)
 void	set_dirs(t_global_infos *infos)
 {
 	t_map_infos	*map;
-	double fov;
+	double		fov;
 
 	map = infos->map_infos;
 	fov = 63.0 * M_PI / 180.0;
