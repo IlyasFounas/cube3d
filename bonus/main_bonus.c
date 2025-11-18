@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 13:47:13 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/05 14:10:36 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/18 10:35:09 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,17 @@
 
 void	malloc_error(t_global_infos *infos)
 {
-	write(2, "malloc error\n", ft_strlen("malloc error\n"));
+	write(2, MSG_ERR_ML_ER, ft_strlen(MSG_ERR_ML_ER));
+	free_rendering(infos);
+	exit(MALLOC_FAILED);
+}
+
+void	mlx_error(t_global_infos *infos)
+{
+	char	*error;
+
+	error = "Error\nCub3d: mlx failed";
+	write(2, error, ft_strlen(error));
 	free_rendering(infos);
 	exit(MALLOC_FAILED);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 13:47:10 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/13 16:28:19 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/18 10:55:39 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	raycasting_bonus(void *param)
 	update_player_rotation(infos);
 	update_player_position(infos);
 	straf_position(infos);
+	// check if the player reached the hidden cell
 	while (i < infos->map_infos->width)
 	{
 		calculs_of_vectors(infos, i);
