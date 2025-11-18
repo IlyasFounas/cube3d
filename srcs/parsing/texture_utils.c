@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 17:13:24 by aboumall          #+#    #+#             */
-/*   Updated: 2025/11/18 17:06:56 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/18 17:32:20 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,13 @@ void	fill_cells(t_map_infos *map, int **f_map, int x, int y)
 		f_map[x][y] = 0;
 	else
 		f_map[x][y] = map->tmp_map[x][y] - '0';
+}
+
+void	check_copy_error(bool cnd, t_map_infos *map, char **line, char *msg)
+{
+	if (cnd)
+	{
+		free(*line);
+		exit_if(true, map, msg, EXIT_FAILURE);
+	}
 }

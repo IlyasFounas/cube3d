@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:56:42 by aboumall          #+#    #+#             */
-/*   Updated: 2025/11/18 16:55:45 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/18 17:32:59 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,24 +16,18 @@ void	copy_file(t_map_infos *map)
 {
 	char	*line;
 	int		i;
+	char	**ptr;
 
 	line = NULL;
 	i = 0;
+	ptr = NULL;
 	while (get_next_line(map->fd.fd, &line, &map->err_gnl) >= 0 && line != NULL)
 	{
-		map->tmp_map = ft_realloc(map->tmp_map, i * sizeof(char *), (i + 2)
-				* sizeof(char *));
-		if (!map->tmp_map)
-		{
-			free(line);
-			exit_if(true, map, MSG_ERR_ML_ER, EXIT_FAILURE);
-		}
-		map->tmp_map[i] = append_map(map, line);
-		if (!map->tmp_map[i])
-		{
-			free(line);
-			exit_if(true, map, NULL, EXIT_FAILURE);
-		}
+		ptr = ft_realloc(ptr, i * sizeof(char *), (i + 2) * sizeof(char *));
+		check_copy_error(!ptr, map, &line, MSG_ERR_ML_ER);
+		map->tmp_map = ptr;
+		ptr[i] = append_map(map, line);
+		check_copy_error(!ptr[i], map, &line, NULL);
 		i++;
 		free(line);
 	}
