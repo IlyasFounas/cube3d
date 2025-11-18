@@ -25,8 +25,12 @@ void	create_image(t_global_infos *infos, t_data *img)
 {
 	img->img = mlx_new_image(infos->mlx, infos->map_infos->width,
 			infos->map_infos->height);
+	if (!img->img)
+		mlx_error(infos);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
+	if (!img->addr)
+		mlx_error(infos);
 }
 
 int	close_window(t_global_infos *infos)

@@ -20,11 +20,11 @@ void	init_textures(t_global_infos *infos, t_textures *textures)
 	img->img = mlx_xpm_file_to_image(infos->mlx, textures->name_texture,
 			&textures->t_width, &textures->t_height);
 	if (!img->img)
-		malloc_error(infos);
+		mlx_error(infos);
 	img->addr = mlx_get_data_addr(img->img, &img->bits_per_pixel,
 			&img->line_length, &img->endian);
 	if (!img->addr)
-		malloc_error(infos);
+		mlx_error(infos);
 }
 
 void	set_dirs(t_global_infos *infos)

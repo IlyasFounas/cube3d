@@ -331,6 +331,7 @@ int						digit_len(int n);
 
 /*____________________________MAIN_______________________________*/
 void					malloc_error(t_global_infos *infos);
+void					mlx_error(t_global_infos *infos);
 
 /*____________________________BONUS PART_______________________________*/
 int						raycasting_bonus(void *param);
