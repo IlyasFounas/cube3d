@@ -23,7 +23,7 @@ void	mlx_error(t_global_infos *infos)
 {
 	char	*error;
 
-	error = "Error\nCub3d: mlx malloc failed";
+	error = "Error\nCub3d: mlx failed";
 	write(2, error, ft_strlen(error));
 	free_rendering(infos);
 	exit(MALLOC_FAILED);

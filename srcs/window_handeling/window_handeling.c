@@ -44,11 +44,11 @@ void	window_handeling(t_global_infos *infos)
 {
 	infos->mlx = mlx_init();
 	if (!infos->mlx)
-		malloc_error(infos);
+		mlx_error(infos);
 	infos->mlx_win = mlx_new_window(infos->mlx, infos->map_infos->width,
 			infos->map_infos->height, "cub3D");
 	if (!infos->mlx_win)
-		malloc_error(infos);
+		mlx_error(infos);
 	create_textures(infos);
 	create_image(infos, &infos->img);
 	mlx_hook(infos->mlx_win, 2, 1L << 0, keys_pressed, infos);
