@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:47:50 by aboumall          #+#    #+#             */
-/*   Updated: 2025/11/05 16:34:49 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/18 17:06:50 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	get_map_width(t_map_infos *map)
 	width = 0;
 	if (!safe_open(map->fd.name, &map->fd.fd))
 		return (false);
-	while (get_next_line(map->fd.fd, &line) > 0 && line != NULL)
+	while (get_next_line(map->fd.fd, &line, &map->err_gnl) > 0 && line != NULL)
 	{
 		width = ft_line_len(line);
 		if (width > map->width)
@@ -29,6 +29,7 @@ bool	get_map_width(t_map_infos *map)
 		free(line);
 	}
 	free(line);
+	exit_if(map->err_gnl, map, MSG_ERR_ML_ER, EXIT_FAILURE);
 	close(map->fd.fd);
 	return (true);
 }
@@ -68,21 +69,18 @@ int	**fill_map(t_map_infos *map)
 	int	y;
 
 	f_map = malloc(map->height * sizeof(int *));
-	exit_if(!f_map, map, MSG_ERR_ML_ER, EXIT_FAILURE);
+	if (!f_map)
+		return (NULL);
 	x = 0;
 	while (x < map->height)
 	{
 		y = 0;
 		f_map[x] = malloc(map->width * sizeof(int));
-		exit_if(!f_map[x], map, MSG_ERR_ML_ER, EXIT_FAILURE);
+		if (!f_map[x])
+			return (free_tab(f_map, x));
 		while (y < map->width)
 		{
-			if (is_space(map->tmp_map[x][y]))
-				f_map[x][y] = 8;
-			else if (is_player(map->tmp_map[x][y]))
-				f_map[x][y] = 0;
-			else
-				f_map[x][y] = map->tmp_map[x][y] - '0';
+			fill_cells(map, f_map, x, y);
 			y++;
 		}
 		x++;
@@ -107,6 +105,7 @@ void	free_map(t_map_infos *map)
 void	init_map(t_map_infos *map, char *filename)
 {
 	map->tmp_map = NULL;
+	map->err_gnl = 0;
 	map->height = 0;
 	map->width = 0;
 	map->start_angle = 0;

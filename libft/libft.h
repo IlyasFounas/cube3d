@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 11:19:35 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/23 16:57:20 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/18 16:43:33 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,6 @@ void				ft_lstiter(t_list *lst, void (*f)(void *));
 t_list				*ft_lstmap(t_list *lst, void *(*f)(void *),
 						void (*del)(void *));
 
-int					get_next_line(int fd, char **line);
+int					get_next_line(int fd, char **line, int *err);
 
 #endif

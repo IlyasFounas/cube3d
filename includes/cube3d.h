@@ -172,6 +172,7 @@ typedef struct s_map_infos
 	int					x;
 	int					y;
 	char				**tmp_map;
+	int					err_gnl;
 	int					start_angle;
 	t_fd				fd;
 	t_fd				no_path;
@@ -297,6 +298,8 @@ bool					check_xpm_file(t_map_infos *map);
 
 char					found_last(char *line);
 char					found_first(char *line);
+void					*free_tab(int **tab, int i);
+void					fill_cells(t_map_infos *map, int **f_map, int x, int y);
 int						**fill_map(t_map_infos *map);
 char					*append_map(t_map_infos *map, char *line);
 void					init_map(t_map_infos *map, char *filename);
