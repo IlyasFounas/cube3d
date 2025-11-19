@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
+/*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:56:42 by aboumall          #+#    #+#             */
-/*   Updated: 2025/11/07 15:06:18 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/18 17:32:59 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,29 +16,23 @@ void	copy_file(t_map_infos *map)
 {
 	char	*line;
 	int		i;
+	char	**ptr;
 
-	map->tmp_map = NULL;
 	line = NULL;
 	i = 0;
-	while (get_next_line(map->fd.fd, &line) >= 0 && line != NULL)
+	ptr = NULL;
+	while (get_next_line(map->fd.fd, &line, &map->err_gnl) >= 0 && line != NULL)
 	{
-		map->tmp_map = ft_realloc(map->tmp_map, i * sizeof(char *), (i + 2)
-				* sizeof(char *));
-		if (!map->tmp_map)
-		{
-			free(line);
-			exit_if(true, map, MSG_ERR_ML_ER, EXIT_FAILURE);
-		}
-		map->tmp_map[i] = append_map(map, line);
-		if (!map->tmp_map[i])
-		{
-			free(line);
-			exit_if(true, map, NULL, EXIT_FAILURE);
-		}
+		ptr = ft_realloc(ptr, i * sizeof(char *), (i + 2) * sizeof(char *));
+		check_copy_error(!ptr, map, &line, MSG_ERR_ML_ER);
+		map->tmp_map = ptr;
+		ptr[i] = append_map(map, line);
+		check_copy_error(!ptr[i], map, &line, NULL);
 		i++;
 		free(line);
 	}
 	free(line);
+	exit_if(map->err_gnl, map, MSG_ERR_ML_ER, EXIT_FAILURE);
 }
 
 void	new_tmp_map(t_map_infos *map, char **truncated_map, int start, int end)

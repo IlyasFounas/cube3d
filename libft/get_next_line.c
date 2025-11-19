@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 11:05:16 by sgoffaux          #+#    #+#             */
-/*   Updated: 2025/10/23 16:57:25 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/18 16:56:51 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@
 
 static char	*ft_malloc_size(char **line, char *buf)
 {
-	char	*ret;
-	int		line_len;
-	int		buf_len;
+	char		*ret;
+	int			line_len;
+	int			buf_len;
 
 	line_len = 0;
 	while (*line && (*line)[line_len] && (*line)[line_len] != '\n')
@@ -61,38 +61,50 @@ static int	ft_add_to_line(char **line, char *buf)
 	return (i);
 }
 
-static int	ft_get_next_line(int fd, char **line)
+static int	ft_check_errors(int ret, int *eof, int **err, char ***line)
 {
-	static char		buf[1024][10 + 1];
-	int				ret;
-	static int		eof;
+	if (ret < 1)
+	{
+		if (ret < 0 || *eof)
+		{
+			if (ret < 0)
+				*(*err) = 1;
+			free(*(*line));
+			*(*line) = NULL;
+		}
+		*eof = 1;
+		return (0);
+	}
+	return (1);
+}
+
+static int	ft_get_next_line(int fd, char **line, int *err)
+{
+	static char	buf[1024][10 + 1];
+	int			ret;
+	static int	eof;
 
 	*line = NULL;
 	ret = ft_add_to_line(line, buf[fd]);
 	while (ret != -1 && (*line)[ret] != '\n')
 	{
 		ret = read(fd, buf[fd], 10);
-		if (ret < 1)
-		{
-			if (ret < 0 || eof)
-			{
-				free(*line);
-				*line = NULL;
-			}
-			eof = 1;
+		if (!ft_check_errors(ret, &eof, &err, &line))
 			return (ret);
-		}
 		eof = 0;
 		buf[fd][ret] = '\0';
 		ret = ft_add_to_line(line, buf[fd]);
 	}
-	(*line)[ret] = '\0';
+	if (ret == -1)
+		*err = 1;
+	if (*line)
+		(*line)[ret] = '\0';
 	return (1);
 }
 
-int	get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line, int *err)
 {
 	if (fd < 0 || fd > 1024 || !line || 10 < 1)
 		return (-1);
-	return (ft_get_next_line(fd, line));
+	return (ft_get_next_line(fd, line, err));
 }

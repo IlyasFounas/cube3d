@@ -49,6 +49,8 @@ void	init_structs(t_global_infos *infos)
 	infos->py = (double)map->y + 0.5;
 	set_dirs(infos);
 	infos->map = fill_map(infos->map_infos);
+	if (!infos->map)
+		malloc_error(infos);
 	infos->map_infos->x = map->width;
 	infos->map_infos->y = map->height;
 	infos->map_infos->width = 1920;

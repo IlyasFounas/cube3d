@@ -26,9 +26,6 @@
 # define MALLOC_FAILED 1
 # define SUCCESS 0
 # define M_PI 3.14159265358979323846
-# define EMPTY_SPACE '0'
-# define WALL '1'
-# define PLAYER_START "NSEW"
 
 # define MSG_ERR_MP_EX "Error\nCub3d: invalid file extension `.cub'\
  file expected\n"
@@ -36,40 +33,25 @@
 # define MSG_ERR_MP_MP "Error\nCub3d: multiple player start positions\
  found\n"
 # define MSG_ERR_MP_IC "Error\nCub3d: invalid character in map\n"
-# define MSG_ERR_MP_WL "Error\nCub3d: map is not surrounded by walls"
-# define MSG_ERR_MP_MC "Error\nCub3d: missing map configuration"
+# define MSG_ERR_MP_WL "Error\nCub3d: map is not surrounded by walls\n"
+# define MSG_ERR_MP_MC "Error\nCub3d: missing map configuration\n"
 
-# define MSG_ERR_ML_ER "Error\nCub3d: malloc error"
+# define MSG_ERR_ML_ER "Error\nCub3d: malloc error\n"
 
-# define MSG_ERR_TX_NO "Error\nCub3d: multiple NO texture definition"
-# define MSG_ERR_TX_SO "Error\nCub3d: multiple SO texture definition"
-# define MSG_ERR_TX_WE "Error\nCub3d: multiple WE texture definition"
-# define MSG_ERR_TX_EA "Error\nCub3d: multiple EA texture definition"
-# define MSG_ERR_TX_MS "Error\nCub3d: missing texture files"
+# define MSG_ERR_TX_NO "Error\nCub3d: multiple NO texture definition\n"
+# define MSG_ERR_TX_SO "Error\nCub3d: multiple SO texture definition\n"
+# define MSG_ERR_TX_WE "Error\nCub3d: multiple WE texture definition\n"
+# define MSG_ERR_TX_EA "Error\nCub3d: multiple EA texture definition\n"
+# define MSG_ERR_TX_MS "Error\nCub3d: missing texture files\n"
 
-# define MSG_ERR_CR_MF "Error\nCub3d: multiple floor color definition"
-# define MSG_ERR_CR_MC "Error\nCub3d: multiple ceiling color definition"
-# define MSG_ERR_CR_IF "Error\nCub3d: invalid floor color"
-# define MSG_ERR_CR_IC "Error\nCub3d: invalid ceiling color"
-# define MSG_ERR_CR_MS "Error\nCub3d: missing color configuration"
+# define MSG_ERR_CR_MF "Error\nCub3d: multiple floor color definition\n"
+# define MSG_ERR_CR_MC "Error\nCub3d: multiple ceiling color definition\n"
+# define MSG_ERR_CR_IF "Error\nCub3d: invalid floor color\n"
+# define MSG_ERR_CR_IC "Error\nCub3d: invalid ceiling color\n"
+# define MSG_ERR_CR_MS "Error\nCub3d: missing color configuration\n"
 
 # define MSG_ERR_MAP_L "Error\nCub3d: wrong file configuration map\
- should be last"
-
-# define FNT_0_XPM "textures/digits/0.xpm"
-# define FNT_1_XPM "textures/digits/1.xpm"
-# define FNT_2_XPM "textures/digits/2.xpm"
-# define FNT_3_XPM "textures/digits/3.xpm"
-# define FNT_4_XPM "textures/digits/4.xpm"
-# define FNT_5_XPM "textures/digits/5.xpm"
-# define FNT_6_XPM "textures/digits/6.xpm"
-# define FNT_7_XPM "textures/digits/7.xpm"
-# define FNT_8_XPM "textures/digits/8.xpm"
-# define FNT_9_XPM "textures/digits/9.xpm"
-# define FNT_F_XPM "textures/digits/F.xpm"
-# define FNT_P_XPM "textures/digits/P.xpm"
-# define FNT_S_XPM "textures/digits/S.xpm"
-# define FNT_CLN_XPM "textures/digits/colon.xpm"
+ should be last\n"
 
 # define MINIMAP_X 16.0
 # define MINIMAP_Y 9.0
@@ -172,6 +154,7 @@ typedef struct s_map_infos
 	int					x;
 	int					y;
 	char				**tmp_map;
+	int					err_gnl;
 	int					start_angle;
 	t_fd				fd;
 	t_fd				no_path;
@@ -288,6 +271,7 @@ bool					get_map_width(t_map_infos *map);
 bool					is_surr_by_wall(t_map_infos *map);
 bool					check_map_validity(t_map_infos *map);
 
+void					check_copy_error(bool cnd, t_map_infos *map, char **line, char *msg);
 void					copy_file(t_map_infos *map);
 void					add_tab(char *line, int *i);
 bool					parse_scene(t_map_infos *map);
@@ -297,6 +281,8 @@ bool					check_xpm_file(t_map_infos *map);
 
 char					found_last(char *line);
 char					found_first(char *line);
+void					*free_tab(int **tab, int i);
+void					fill_cells(t_map_infos *map, int **f_map, int x, int y);
 int						**fill_map(t_map_infos *map);
 char					*append_map(t_map_infos *map, char *line);
 void					init_map(t_map_infos *map, char *filename);
