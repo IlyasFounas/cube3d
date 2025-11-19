@@ -271,7 +271,8 @@ bool					get_map_width(t_map_infos *map);
 bool					is_surr_by_wall(t_map_infos *map);
 bool					check_map_validity(t_map_infos *map);
 
-void					check_copy_error(bool cnd, t_map_infos *map, char **line, char *msg);
+void					check_copy_error(bool cnd, t_map_infos *map,
+							char **line, char *msg);
 void					copy_file(t_map_infos *map);
 void					add_tab(char *line, int *i);
 bool					parse_scene(t_map_infos *map);
