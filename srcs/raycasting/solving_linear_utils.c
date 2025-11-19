@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:42:13 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/14 09:42:15 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/19 15:27:33 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ void	setting_the_right_texture(t_global_infos *infos,
 	{
 		infos->tex_x = (linear_ray->iy - floor(linear_ray->iy))
 			* infos->textures->t_width;
-		if (infos->ray_infos->ray_dir_x < 0)
+		if (infos->ray_infos->ray_dir_x > 0)
 			infos->actual_orientation = WEST;
-		else if (infos->ray_infos->ray_dir_x > 0)
+		else if (infos->ray_infos->ray_dir_x < 0)
 			infos->actual_orientation = EAST;
 	}
 	else
