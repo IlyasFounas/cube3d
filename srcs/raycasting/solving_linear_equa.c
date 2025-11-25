@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/29 17:32:09 by ifounas           #+#    #+#             */
-/*   Updated: 2025/10/23 10:33:02 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/25 14:20:04 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,8 @@ static double	vertical_linear_equa(t_global_infos *infos,
 		if (t > 0)
 		{
 			linear_ray->iy = infos->py + (infos->ray_infos->ray_dir_y * t);
-			if (linear_ray->iy >= 0 && linear_ray->iy < infos->map_infos->y)
+			if (linear_ray->iy >= 0 && linear_ray->iy < infos->map_infos->y
+				&& linear_ray->x >= 0 && linear_ray->x < infos->map_infos->x)
 			{
 				linear_ray->map_y = floor(linear_ray->iy);
 				if (infos->ray_infos->ray_dir_x > 0)
@@ -63,7 +64,8 @@ static double	horizontal_linear_equa(t_global_infos *infos,
 		if (t > 0)
 		{
 			linear_ray->ix = infos->px + (infos->ray_infos->ray_dir_x * t);
-			if (linear_ray->ix >= 0 && linear_ray->ix < infos->map_infos->x)
+			if (linear_ray->ix >= 0 && linear_ray->ix < infos->map_infos->x
+				&& linear_ray->y >= 0 && linear_ray->y < infos->map_infos->y)
 			{
 				linear_ray->map_x = floor(linear_ray->ix);
 				if (infos->ray_infos->ray_dir_y > 0)
