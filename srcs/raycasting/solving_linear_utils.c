@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:42:13 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/19 15:27:33 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/25 15:39:46 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,10 @@ void	setting_the_right_texture(t_global_infos *infos,
 		if (infos->ray_infos->ray_dir_x > 0)
 			infos->actual_orientation = WEST;
 		else if (infos->ray_infos->ray_dir_x < 0)
+		{
 			infos->actual_orientation = EAST;
+			infos->tex_x = infos->textures->t_width - infos->tex_x - 1;
+		}
 	}
 	else
 	{
@@ -60,6 +63,10 @@ void	setting_the_right_texture(t_global_infos *infos,
 		if (infos->ray_infos->ray_dir_y < 0)
 			infos->actual_orientation = SOUTH;
 		else if (infos->ray_infos->ray_dir_y > 0)
+		{
 			infos->actual_orientation = NORTH;
+			infos->tex_x = infos->textures->t_width - infos->tex_x - 1;
+		}
+			
 	}
 }

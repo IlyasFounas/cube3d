@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   graphic_rendering.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
+/*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/24 14:01:59 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/13 17:18:19 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/25 14:35:17 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	calcul_the_fps(t_global_infos *infos)
 		else
 			infos->fps = frame_count;
 		if (infos->draw_fps)
-			printf("fps: %d\n", infos->fps);
+			printf("fps: %d\n", frame_count);
 		last_time = current_time;
 		elapsed_seconds = 0;
 		frame_count = 0;
