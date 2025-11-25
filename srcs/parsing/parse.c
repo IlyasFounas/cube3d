@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:56:42 by aboumall          #+#    #+#             */
-/*   Updated: 2025/11/18 17:32:59 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/25 16:14:44 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,27 @@ void	parse_map(t_map_infos *map)
 		map->start_angle = 180;
 }
 
+bool	check_invalid(t_map_infos *map)
+{
+	int	i;
+
+	i = 0;
+	while (map->tmp_map[i])
+	{
+		if (!is_texture(map->tmp_map[i]) && !is_map(map->tmp_map[i])
+			&& ((map->tmp_map[i][0] == 'F' || map->tmp_map[i][0] == 'C')
+				&& !is_color(map->tmp_map[i])))
+			return (false);
+		i++;
+	}
+	return (true);
+}
+
 bool	parse_scene(t_map_infos *map)
 {
 	if (!is_cub_file(map->fd.name))
 	{
-		printf(MSG_ERR_MP_EX);
+		ft_putstr_fd(MSG_ERR_MP_EX, stderr);
 		return (false);
 	}
 	if (!get_map_width(map))
@@ -116,6 +132,7 @@ bool	parse_scene(t_map_infos *map)
 	if (!safe_open(map->fd.name, &map->fd.fd))
 		return (false);
 	copy_file(map);
+	exit_if(check_invalid(map), map, MSG_ERR_WR_CF, EXIT_FAILURE);
 	parse_textures(map);
 	parse_colors(map);
 	parse_map(map);
