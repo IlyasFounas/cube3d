@@ -28,30 +28,30 @@
 # define M_PI 3.14159265358979323846
 
 # define MSG_ERR_MP_EX "Error\nCub3d: invalid file extension `.cub'\
- file expected\n"
-# define MSG_ERR_MP_PF "Error\nCub3d: no player start position found\n"
+ file expected"
+# define MSG_ERR_MP_PF "Error\nCub3d: no player start position found"
 # define MSG_ERR_MP_MP "Error\nCub3d: multiple player start positions\
- found\n"
-# define MSG_ERR_MP_IC "Error\nCub3d: invalid character in map\n"
-# define MSG_ERR_MP_WL "Error\nCub3d: map is not surrounded by walls\n"
-# define MSG_ERR_MP_MC "Error\nCub3d: missing map configuration\n"
+ found"
+# define MSG_ERR_MP_IC "Error\nCub3d: invalid character in map"
+# define MSG_ERR_MP_WL "Error\nCub3d: map is not surrounded by walls"
+# define MSG_ERR_MP_MC "Error\nCub3d: missing map configuration"
 
-# define MSG_ERR_ML_ER "Error\nCub3d: malloc error\n"
+# define MSG_ERR_ML_ER "Error\nCub3d: malloc error"
 
-# define MSG_ERR_TX_NO "Error\nCub3d: multiple NO texture definition\n"
-# define MSG_ERR_TX_SO "Error\nCub3d: multiple SO texture definition\n"
-# define MSG_ERR_TX_WE "Error\nCub3d: multiple WE texture definition\n"
-# define MSG_ERR_TX_EA "Error\nCub3d: multiple EA texture definition\n"
-# define MSG_ERR_TX_MS "Error\nCub3d: missing texture files\n"
+# define MSG_ERR_TX_NO "Error\nCub3d: multiple NO texture definition"
+# define MSG_ERR_TX_SO "Error\nCub3d: multiple SO texture definition"
+# define MSG_ERR_TX_WE "Error\nCub3d: multiple WE texture definition"
+# define MSG_ERR_TX_EA "Error\nCub3d: multiple EA texture definition"
+# define MSG_ERR_TX_MS "Error\nCub3d: missing texture files"
 
-# define MSG_ERR_CR_MF "Error\nCub3d: multiple floor color definition\n"
-# define MSG_ERR_CR_MC "Error\nCub3d: multiple ceiling color definition\n"
-# define MSG_ERR_CR_IF "Error\nCub3d: invalid floor color\n"
-# define MSG_ERR_CR_IC "Error\nCub3d: invalid ceiling color\n"
-# define MSG_ERR_CR_MS "Error\nCub3d: missing color configuration\n"
+# define MSG_ERR_CR_MF "Error\nCub3d: multiple floor color definition"
+# define MSG_ERR_CR_MC "Error\nCub3d: multiple ceiling color definition"
+# define MSG_ERR_CR_IF "Error\nCub3d: invalid floor color"
+# define MSG_ERR_CR_IC "Error\nCub3d: invalid ceiling color"
+# define MSG_ERR_CR_MS "Error\nCub3d: missing color configuration"
 
 # define MSG_ERR_MAP_L "Error\nCub3d: wrong file configuration map\
- should be last\n"
+ should be last"
 
 # define MINIMAP_X 16.0
 # define MINIMAP_Y 9.0

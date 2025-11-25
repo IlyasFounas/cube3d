@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 04:33:18 by aboumall          #+#    #+#             */
-/*   Updated: 2025/10/22 16:46:03 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/25 12:18:07 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ bool	check_color(t_map_infos *map, char *str)
 	{
 		if (is_good_color(map->floor_color))
 		{
-			printf("Error\nCub3d: invalid floor color\n");
+			printf(MSG_ERR_CR_IF);
 			return (false);
 		}
 	}
@@ -51,7 +51,7 @@ bool	check_color(t_map_infos *map, char *str)
 	{
 		if (is_good_color(map->ceiling_color))
 		{
-			printf("Error\nCub3d: invalid ceiling color\n");
+			printf(MSG_ERR_CR_IC);
 			return (false);
 		}
 	}
@@ -64,6 +64,7 @@ static void	trait_colors(t_map_infos *map, char *line)
 	{
 		exit_if(!is_null_color(map->floor_color), map, MSG_ERR_CR_MF,
 			EXIT_FAILURE);
+		exit_if(!is_color(line), map, MSG_ERR_CR_IF, EXIT_FAILURE);
 		exit_if(!parse_color(line + 1, &map->floor_color), map, MSG_ERR_CR_IF,
 			EXIT_FAILURE);
 	}
@@ -71,6 +72,7 @@ static void	trait_colors(t_map_infos *map, char *line)
 	{
 		exit_if(!is_null_color(map->ceiling_color), map, MSG_ERR_CR_MC,
 			EXIT_FAILURE);
+		exit_if(!is_color(line), map, MSG_ERR_CR_IC, EXIT_FAILURE);
 		exit_if(!parse_color(line + 1, &map->ceiling_color), map, MSG_ERR_CR_IC,
 			EXIT_FAILURE);
 	}
@@ -88,7 +90,7 @@ void	parse_colors(t_map_infos *map)
 	{
 		exit_if(is_map(map->tmp_map[i]) && colors_found < 2, map, MSG_ERR_MAP_L,
 			EXIT_FAILURE);
-		if (is_color(map->tmp_map[i]))
+		if (map->tmp_map[i][0] == 'F' || map->tmp_map[i][0] == 'C')
 		{
 			colors_found++;
 			trait_colors(map, map->tmp_map[i]);
