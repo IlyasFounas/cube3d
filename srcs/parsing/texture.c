@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 04:32:55 by aboumall          #+#    #+#             */
-/*   Updated: 2025/10/28 17:13:40 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/25 15:44:27 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,6 @@ bool	is_texture(char *s)
 	int	i;
 
 	i = 0;
-	while (s[i] && is_space(s[i]))
-		i++;
-	if (s[i] == '\0')
-		return (false);
 	if (is_content(s[0]) && s[0] != '1' && s[0] != '0')
 	{
 		i++;
@@ -29,9 +25,7 @@ bool	is_texture(char *s)
 		i++;
 		if (!is_space(s[i]))
 			return (false);
-		while (s[i] && is_space(s[i]))
-			i++;
-		return (!(s[i] == '\0'));
+		return (true);
 	}
 	return (false);
 }
