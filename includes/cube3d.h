@@ -52,6 +52,7 @@
 
 # define MSG_ERR_MAP_L "Error\nCub3d: wrong file configuration map\
  should be last"
+# define MSG_ERR_WR_CF "Error\nCub3d: wrong file configuration"
 
 # define MINIMAP_X 16.0
 # define MINIMAP_Y 9.0
@@ -276,6 +277,7 @@ void					check_copy_error(bool cnd, t_map_infos *map,
 void					copy_file(t_map_infos *map);
 void					add_tab(char *line, int *i);
 bool					parse_scene(t_map_infos *map);
+bool					check_invalid(t_map_infos *map);
 void					parse_colors(t_map_infos *map);
 void					parse_textures(t_map_infos *map);
 bool					check_xpm_file(t_map_infos *map);
@@ -300,6 +302,7 @@ bool					is_player(char c);
 bool					is_content(char c);
 bool					is_texture(char *s);
 bool					is_color(char *str);
+bool					is_spacestr(char *line);
 bool					is_rgb_format(char *str);
 bool					is_xpm_file(char *filename);
 bool					is_cub_file(char *filename);
