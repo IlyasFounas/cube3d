@@ -6,11 +6,26 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 04:33:18 by aboumall          #+#    #+#             */
-/*   Updated: 2025/11/25 12:18:07 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/25 13:55:18 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cube3d.h"
+
+bool	is_color(char *str)
+{
+	int	i;
+
+	i = 0;
+	i++;
+	if (!is_space(str[i]))
+		return (false);
+	while (str[i] && is_space(str[i]))
+		i++;
+	if (!is_rgb_format(str + i))
+		return (false);
+	return (true);
+}
 
 bool	parse_color(char *str, t_color *color)
 {

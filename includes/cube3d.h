@@ -300,6 +300,7 @@ bool					is_player(char c);
 bool					is_content(char c);
 bool					is_texture(char *s);
 bool					is_color(char *str);
+bool					is_rgb_format(char *str);
 bool					is_xpm_file(char *filename);
 bool					is_cub_file(char *filename);
 bool					is_null_color(t_color color);
