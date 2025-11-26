@@ -6,7 +6,7 @@
 /*   By: ifounas <ifounas@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/14 09:42:13 by ifounas           #+#    #+#             */
-/*   Updated: 2025/11/25 15:39:46 by ifounas          ###   ########.fr       */
+/*   Updated: 2025/11/26 09:58:30 by ifounas          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,5 @@ void	setting_the_right_texture(t_global_infos *infos,
 			infos->actual_orientation = NORTH;
 			infos->tex_x = infos->textures->t_width - infos->tex_x - 1;
 		}
-			
 	}
 }
