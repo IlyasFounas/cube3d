@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 16:45:30 by aboumall          #+#    #+#             */
-/*   Updated: 2025/11/26 16:22:18 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/26 16:46:02 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ bool	is_rgb_format(char *str)
 	commas = 0;
 	rgb = 0;
 	end = full_size(str) - 1;
-	while (str[i] && i < end)
+	while (str[i] && i < end + 1)
 	{
 		if (!check_digits(str, &i, &rgb))
 			return (false);

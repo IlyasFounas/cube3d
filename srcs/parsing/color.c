@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 04:33:18 by aboumall          #+#    #+#             */
-/*   Updated: 2025/11/26 16:11:00 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/26 16:44:35 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ bool	is_color(char *str)
 	while (str[i] && is_space(str[i]))
 		i++;
 	if (!str[i])
+		return (false);
+	if (!check_wrong_char(str + i))
 		return (false);
 	if (!is_rgb_format(str + i))
 		return (false);

@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/28 17:12:10 by aboumall          #+#    #+#             */
-/*   Updated: 2025/11/05 16:34:54 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/26 16:45:56 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,19 @@ void	free_fd(t_fd *fd)
 	if (fd->fd >= 0)
 		close(fd->fd);
 	fd->fd = -1;
+}
+
+bool	check_wrong_char(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]) && str[i] != ','
+			&& !is_space(str[i]))
+			return (false);
+		i++;
+	}
+	return (true);
 }

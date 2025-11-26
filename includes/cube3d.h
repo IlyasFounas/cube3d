@@ -308,6 +308,7 @@ bool					is_xpm_file(char *filename);
 bool					is_cub_file(char *filename);
 bool					is_null_color(t_color color);
 bool					is_good_color(t_color color);
+bool					check_wrong_char(char *str);
 
 bool					error_text(char *err);
 int						ft_strlen_trim(const char *tab);
