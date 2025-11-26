@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 16:45:30 by aboumall          #+#    #+#             */
-/*   Updated: 2025/11/25 14:41:25 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/26 16:22:18 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ static int	full_size(char *rgb)
 	len = ft_strlen(rgb) - 1;
 	while (len > 0 && is_space(rgb[len]))
 		len--;
-	return (len);
+	return (len + 1);
 }
 
-static bool	check_digits(char *str, int *i)
+static bool	check_digits(char *str, int *i, int *rgb)
 {
 	int	digits;
 
@@ -39,27 +39,30 @@ static bool	check_digits(char *str, int *i)
 		digits++;
 		(*i)++;
 	}
-	if (digits > 3)
+	if (digits > 3 || digits == 0)
 		return (false);
+	(*rgb)++;
 	return (true);
 }
 
 bool	is_rgb_format(char *str)
 {
 	int	i;
+	int	rgb;
 	int	commas;
 	int	end;
 
 	i = 0;
 	commas = 0;
+	rgb = 0;
 	end = full_size(str) - 1;
-	while (str[i] && i < end - 2)
+	while (str[i] && i < end)
 	{
-		if (!check_digits(str, &i))
+		if (!check_digits(str, &i, &rgb))
 			return (false);
-		if (str[i] && str[i] != ',')
+		if (str[i] && str[i] != ',' && commas < 2)
 			return (false);
-		else
+		else if (str[i] == ',')
 			commas++;
 		if (commas > 2)
 			return (false);
@@ -67,7 +70,7 @@ bool	is_rgb_format(char *str)
 		if (str[i] == ',')
 			return (false);
 	}
-	return (true);
+	return (rgb == 3);
 }
 
 bool	is_good_color(t_color color)
