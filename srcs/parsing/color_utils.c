@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/22 16:45:30 by aboumall          #+#    #+#             */
-/*   Updated: 2025/11/26 16:46:02 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/12/04 17:31:41 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,8 @@ bool	is_rgb_format(char *str)
 			commas++;
 		if (commas > 2)
 			return (false);
-		i++;
+		if (str[i])
+			i++;
 		if (str[i] == ',')
 			return (false);
 	}

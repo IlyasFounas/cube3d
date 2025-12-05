@@ -6,7 +6,7 @@
 /*   By: aboumall <aboumall42@gmail.com>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/18 22:56:42 by aboumall          #+#    #+#             */
-/*   Updated: 2025/11/25 17:44:42 by aboumall         ###   ########.fr       */
+/*   Updated: 2025/11/27 14:52:57 by aboumall         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,8 @@ bool	parse_scene(t_map_infos *map)
 	if (!safe_open(map->fd.name, &map->fd.fd))
 		return (false);
 	copy_file(map);
+	exit_if(!map->tmp_map, map, "Error\nConfiguration file empty",
+		EXIT_FAILURE);
 	exit_if(!check_invalid(map), map, NULL, EXIT_FAILURE);
 	parse_textures(map);
 	parse_colors(map);
